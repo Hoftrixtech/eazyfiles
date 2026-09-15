@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { APP_NAME } from "@/lib/constants";
+import { APP_NAME, SITE_URL } from "@/lib/constants";
 import type { Tool, ToolCategory } from "@/types/tools";
 
 /** Default Open Graph / social preview image (brand mark). */
@@ -18,19 +18,13 @@ export const PUBLIC_SITEMAP_PATHS = [
   "/disclaimer",
 ] as const;
 
-const PRODUCTION_SITE_URL = "https://eazyfiles.com";
-
 export function getSiteUrl(): string {
   const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
   if (fromEnv) {
     return fromEnv;
   }
 
-  if (process.env.NODE_ENV === "production") {
-    return PRODUCTION_SITE_URL;
-  }
-
-  return "http://localhost:3000";
+  return SITE_URL;
 }
 
 export function absoluteUrl(path: string): string {
