@@ -75,7 +75,7 @@ export async function Hero() {
               className="mt-8 text-[2.5rem] font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl lg:text-[3.75rem]"
             >
               Compress images{" "}
-              <span className="text-gradient">without the hassle.</span>
+              <span className="text-gradient">without the.</span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
               EazyFiles is a simple online platform for everyday image tasks — target file size, resize, crop, and
