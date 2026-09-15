@@ -23,12 +23,17 @@ export function HowItWorks() {
   return (
     <section id="how-it-works" className="section-padding section-surface scroll-mt-24 bg-background">
       <Container>
-        <SectionHeader title="How it works" description="Three steps from upload to download." />
-        <ol className="mt-14 grid gap-8 md:grid-cols-3">
+        <SectionHeader eyebrow="Workflow" title="How it works" description="Three steps from upload to download." />
+        <ol className="mt-14 grid gap-5 md:grid-cols-3">
           {steps.map((step) => (
-            <li key={step.number} className="pt-6">
-              <p className="text-4xl font-semibold tracking-tight text-foreground/15">{step.number}</p>
-              <h3 className="mt-4 text-xl font-semibold tracking-tight">{step.title}</h3>
+            <li
+              key={step.number}
+              className="relative rounded-xl border border-border/80 bg-card/50 p-8 ring-1 ring-white/[0.03] transition-colors hover:border-white/10 hover:bg-card/70"
+            >
+              <span className="inline-flex size-10 items-center justify-center rounded-lg bg-muted/80 text-xs font-semibold tracking-widest text-muted-foreground">
+                {step.number}
+              </span>
+              <h3 className="mt-6 text-xl font-semibold tracking-tight">{step.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
             </li>
           ))}

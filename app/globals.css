@@ -23,9 +23,20 @@
   --destructive-soft: rgba(248, 113, 113, 0.12);
   --warning: #fbbf24;
   --warning-soft: rgba(251, 191, 36, 0.12);
-  --radius: 0.5rem;
-  --section-y: 5.5rem;
-  --shadow-elevated: 0 16px 48px rgba(0, 0, 0, 0.45);
+  --radius: 0.75rem;
+  --section-y: 6rem;
+  --shadow-elevated: 0 24px 64px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 80px rgba(255, 255, 255, 0.04);
+  --glass: rgba(15, 15, 17, 0.72);
+}
+
+.site-canvas {
+  background-color: var(--background);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 255, 255, 0.06), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(255, 255, 255, 0.03), transparent),
+    radial-gradient(ellipse 50% 30% at 0% 100%, rgba(255, 255, 255, 0.02), transparent);
+  background-attachment: fixed;
 }
 
 @theme inline {
@@ -82,7 +93,40 @@ body {
 }
 
 .section-surface {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--card) 40%, transparent), transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--card) 55%, transparent) 0%,
+    transparent 100%
+  );
+}
+
+.glass-panel {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-elevated), var(--shadow-glow);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 80%, transparent);
+  padding: 0.375rem 1rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
 }
 
 @keyframes fade-up {

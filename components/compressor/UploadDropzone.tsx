@@ -71,8 +71,10 @@ export function UploadDropzone({
       }}
       onDrop={handleDrop}
       className={cn(
-        "min-h-52 rounded-sm border-2 border-dashed px-4 py-12 text-center transition-colors sm:px-8",
-        isDragging ? "border-white/20 bg-muted" : "border-border bg-muted/20 hover:bg-muted/40",
+        "min-h-52 rounded-xl border-2 border-dashed px-4 py-12 text-center transition-all duration-200 sm:px-8",
+        isDragging
+          ? "border-white/25 bg-muted/80 ring-2 ring-white/10"
+          : "border-border/80 bg-muted/15 hover:border-white/15 hover:bg-muted/30",
         disabled && "pointer-events-none opacity-60"
       )}
     >
@@ -91,7 +93,7 @@ export function UploadDropzone({
           event.currentTarget.value = "";
         }}
       />
-      <span className="mx-auto mb-4 flex size-12 items-center justify-center rounded-md bg-card/80 text-foreground">
+      <span className="mx-auto mb-4 flex size-12 items-center justify-center rounded-xl bg-card/90 text-foreground ring-1 ring-white/[0.06]">
         <Upload className="size-5" aria-hidden="true" />
       </span>
       <p className="text-base font-medium">
@@ -103,7 +105,7 @@ export function UploadDropzone({
         disabled={disabled}
         onClick={() => inputRef.current?.click()}
         aria-label="Choose JPG, PNG or WebP images"
-        className="mt-4 inline-flex h-11 items-center rounded-sm bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/88 disabled:opacity-60"
+        className="mt-4 inline-flex h-11 items-center rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/88 disabled:opacity-60"
       >
         {multiple ? "Choose Images" : "Choose an Image"}
       </button>

@@ -23,7 +23,11 @@ export async function Hero() {
           sizes="100vw"
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/92 from-0% via-background/78 via-[38%] to-background/25 to-100%"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/95 from-0% via-background/80 via-[40%] to-background/20 to-100%"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute -left-32 top-1/4 size-[28rem] rounded-full bg-white/[0.04] blur-3xl"
           aria-hidden="true"
         />
 
@@ -62,17 +66,16 @@ export async function Hero() {
 
         <div className="relative z-10 flex w-full flex-1 flex-col px-5 pb-14 pt-8 sm:px-8 sm:pb-16 sm:pt-10 lg:px-12 xl:px-16">
           <div className="max-w-3xl">
-            <p
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-white/5 px-4 py-1.5 text-xs font-medium tracking-[0.18em] text-foreground uppercase backdrop-blur-md"
-            >
-              <Sparkles className="size-3.5" aria-hidden="true" />
+            <p className="eyebrow-pill text-foreground/90">
+              <Sparkles className="size-3.5 text-foreground/70" aria-hidden="true" />
               Free online file tools
             </p>
             <h1
               id="home-hero-title"
               className="mt-8 text-[2.5rem] font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl lg:text-[3.75rem]"
             >
-              We help you compress images without the hassle.
+              Compress images{" "}
+              <span className="text-gradient">without the hassle.</span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
               EazyFiles is a simple online platform for everyday image tasks — target file size, resize, crop, and
@@ -81,7 +84,7 @@ export async function Hero() {
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
                 href="#image-tools"
-                className="inline-flex h-12 items-center justify-center rounded-full border border-border bg-white/5 px-7 text-sm font-medium text-foreground backdrop-blur-sm transition-colors hover:bg-white/10"
+                className="inline-flex h-12 items-center justify-center rounded-full border border-white/10 bg-white/5 px-7 text-sm font-medium text-foreground backdrop-blur-md transition-all hover:border-white/20 hover:bg-white/10"
               >
                 Explore Image Tools
               </Link>

@@ -54,7 +54,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: stripExtensionAttrsScript }} />
       </head>
-      <body className="min-h-screen bg-background font-sans text-foreground antialiased" suppressHydrationWarning>
+      <body className="site-canvas min-h-screen font-sans text-foreground antialiased" suppressHydrationWarning>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-card focus:px-4 focus:py-2 focus:shadow-sm"
