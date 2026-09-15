@@ -1,0 +1,68 @@
+import type { ToolCategory } from "@/types/tools";
+
+export const TOOL_CATEGORIES: readonly ToolCategory[] = [
+  {
+    id: "image-tools",
+    slug: "image-tools",
+    name: "Image Tools",
+    shortDescription: "Compress, resize, crop and convert images in the browser-friendly workflow you already use.",
+    seoTitle: "Image Tools",
+    seoDescription:
+      "Free online image tools to compress, resize, crop and convert JPG, PNG and WebP files.",
+    icon: "images",
+  },
+  {
+    id: "pdf-tools",
+    slug: "pdf-tools",
+    name: "PDF Tools",
+    shortDescription: "Compress, merge and prepare PDF files without installing extra software.",
+    seoTitle: "PDF Tools",
+    seoDescription: "Online PDF tools are on the way, including compress and merge.",
+    icon: "file-text",
+  },
+  {
+    id: "text-tools",
+    slug: "text-tools",
+    name: "Text Tools",
+    shortDescription: "Count words, format JSON and clean up text when you need a quick utility.",
+    seoTitle: "Text Tools",
+    seoDescription: "Online text tools such as a word counter and JSON formatter are coming soon.",
+    icon: "type",
+  },
+  {
+    id: "calculator-tools",
+    slug: "calculator-tools",
+    name: "Calculator Tools",
+    shortDescription: "Simple calculators for percentages, EMI and everyday number checks.",
+    seoTitle: "Calculator Tools",
+    seoDescription: "Online calculators including percentage and EMI tools are coming soon.",
+    icon: "calculator",
+  },
+  {
+    id: "developer-tools",
+    slug: "developer-tools",
+    name: "Developer Tools",
+    shortDescription: "Small utilities for encoding, formatting and inspecting data.",
+    seoTitle: "Developer Tools",
+    seoDescription: "Developer utilities will be added to this directory without changing the current compressor.",
+    icon: "code",
+  },
+  {
+    id: "qr-generator-tools",
+    slug: "qr-generator-tools",
+    name: "QR & Generator Tools",
+    shortDescription: "Create QR codes and other lightweight generated files.",
+    seoTitle: "QR and Generator Tools",
+    seoDescription: "QR code and generator tools are planned for this category.",
+    icon: "qr-code",
+  },
+  {
+    id: "ai-tools",
+    slug: "ai-tools",
+    name: "AI Tools",
+    shortDescription: "Optional AI helpers that can sit alongside the existing file tools later.",
+    seoTitle: "AI Tools",
+    seoDescription: "AI tools are not available yet. This category is reserved for future utilities.",
+    icon: "sparkles",
+  },
+] as const;

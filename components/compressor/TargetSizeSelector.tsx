@@ -1,0 +1,96 @@
+"use client";
+
+import { TARGET_PRESETS } from "@/lib/constants";
+import { cn } from "@/lib/utils";
+
+interface TargetSizeSelectorProps {
+  presetBytes: number | null;
+  customValue: string;
+  customUnit: "KB" | "MB";
+  disabled?: boolean;
+  onPresetChange: (bytes: number) => void;
+  onCustomValueChange: (value: string) => void;
+  onCustomUnitChange: (unit: "KB" | "MB") => void;
+  onCustomSelect?: () => void;
+}
+
+export function TargetSizeSelector({
+  presetBytes,
+  customValue,
+  customUnit,
+  disabled,
+  onPresetChange,
+  onCustomValueChange,
+  onCustomUnitChange,
+  onCustomSelect,
+}: TargetSizeSelectorProps) {
+  return (
+    <fieldset disabled={disabled} className="space-y-4">
+      <legend className="text-sm font-medium">Target Size</legend>
+      <p className="text-sm text-muted-foreground">
+        We compress to this size or smaller. The result is not always an exact byte count.
+      </p>
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+        {TARGET_PRESETS.map((preset) => {
+          const selected = presetBytes === preset.bytes;
+          return (
+            <button
+              key={preset.label}
+              type="button"
+              aria-pressed={selected}
+              onClick={() => onPresetChange(preset.bytes)}
+              className={cn(
+                "h-11 rounded-sm border text-sm font-medium transition-colors disabled:opacity-60",
+                selected
+                  ? "border-foreground bg-foreground text-primary-foreground"
+                  : "border-border bg-card text-foreground hover:bg-muted"
+              )}
+            >
+              {preset.label}
+            </button>
+          );
+        })}
+        <button
+          type="button"
+          aria-pressed={presetBytes === null}
+          onClick={() => onCustomSelect?.()}
+          className={cn(
+            "h-11 rounded-sm border text-sm font-medium transition-colors disabled:opacity-60",
+            presetBytes === null
+              ? "border-foreground bg-foreground text-primary-foreground"
+              : "border-border bg-card text-foreground hover:bg-muted"
+          )}
+        >
+          Custom
+        </button>
+      </div>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+        <label className="flex min-w-0 flex-1 flex-col gap-2 text-sm font-medium" htmlFor="custom-target">
+          Custom size
+          <input
+            id="custom-target"
+            type="number"
+            min={1}
+            step={1}
+            inputMode="numeric"
+            value={customValue}
+            onChange={(event) => onCustomValueChange(event.target.value)}
+            className="h-11 w-full rounded-sm border border-border bg-card px-3 text-sm disabled:opacity-60"
+          />
+        </label>
+        <label className="flex w-full flex-col gap-2 text-sm font-medium sm:w-28" htmlFor="custom-unit">
+          Unit
+          <select
+            id="custom-unit"
+            value={customUnit}
+            onChange={(event) => onCustomUnitChange(event.target.value === "MB" ? "MB" : "KB")}
+            className="h-11 w-full rounded-sm border border-border bg-card px-3 text-sm disabled:opacity-60"
+          >
+            <option value="KB">KB</option>
+            <option value="MB">MB</option>
+          </select>
+        </label>
+      </div>
+    </fieldset>
+  );
+}
