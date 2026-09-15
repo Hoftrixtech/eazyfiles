@@ -8,7 +8,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   primary:
     "bg-primary text-primary-foreground hover:bg-primary/88 active:bg-primary disabled:bg-primary/50",
   secondary:
-    "border border-border bg-card text-foreground hover:bg-muted active:bg-muted/80",
+    "border border-border bg-card/80 text-foreground hover:bg-muted active:bg-muted/80",
   ghost: "bg-transparent text-foreground hover:bg-muted",
   danger: "bg-destructive-soft text-destructive hover:opacity-90",
   inverse:

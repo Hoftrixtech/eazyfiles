@@ -21,12 +21,12 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="section-padding scroll-mt-24 border-t border-border bg-background">
+    <section id="how-it-works" className="section-padding section-surface scroll-mt-24 bg-background">
       <Container>
         <SectionHeader title="How it works" description="Three steps from upload to download." />
         <ol className="mt-14 grid gap-8 md:grid-cols-3">
           {steps.map((step) => (
-            <li key={step.number} className="border-t border-border pt-6">
+            <li key={step.number} className="pt-6">
               <p className="text-4xl font-semibold tracking-tight text-foreground/15">{step.number}</p>
               <h3 className="mt-4 text-xl font-semibold tracking-tight">{step.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>

@@ -19,7 +19,7 @@ export function BrandLogo({
       alt="EazyFiles"
       width={196}
       height={40}
-      className={cn(height, "w-auto max-w-[min(100%,11rem)]", className)}
+      className={cn(height, "w-auto max-w-[min(100%,11rem)] brightness-0 invert", className)}
       decoding="async"
     />
   );

@@ -40,25 +40,25 @@ export function ResultCard({ result, onDownload, onReset }: ResultCardProps) {
   const savedPercent = result.savedPercent;
 
   return (
-    <div className="animate-fade-up space-y-6 rounded-sm border border-border bg-muted/40 p-6 sm:p-8">
+    <div className="animate-fade-up space-y-6 rounded-md bg-muted/30 p-6 sm:p-8">
       <div>
         <h3 className="text-lg font-semibold tracking-tight">{result.skipped ? "Already within target" : "Your image is ready"}</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{statusMessage(result)}</p>
       </div>
       <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-sm border border-border bg-card p-4">
+        <div className="rounded-md bg-card/80 p-4">
           <dt className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Original Size</dt>
           <dd className="mt-2 text-lg font-semibold tracking-tight">{formatBytes(result.originalSize)}</dd>
         </div>
-        <div className="rounded-sm border border-border bg-card p-4">
+        <div className="rounded-md bg-card/80 p-4">
           <dt className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Compressed Size</dt>
           <dd className="mt-2 text-lg font-semibold tracking-tight">{formatBytes(result.compressedSize)}</dd>
         </div>
-        <div className="rounded-sm border border-border bg-card p-4">
+        <div className="rounded-md bg-card/80 p-4">
           <dt className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Saved %</dt>
           <dd className="mt-2 text-lg font-semibold tracking-tight">{savedPercent}%</dd>
         </div>
-        <div className="rounded-sm border border-border bg-card p-4">
+        <div className="rounded-md bg-card/80 p-4">
           <dt className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Output Format</dt>
           <dd className="mt-2 text-lg font-semibold tracking-tight">{formatLabel(result.outputFormat)}</dd>
         </div>

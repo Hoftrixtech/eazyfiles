@@ -26,12 +26,12 @@ const benefits = [
 
 export function WhyUseThisTool() {
   return (
-    <section className="section-padding border-t border-border bg-card">
+    <section className="section-padding bg-card/40">
       <Container>
         <SectionHeader title="Why EazyFiles" description="Built for everyday image tasks without desktop software." />
-        <div className="mt-14 grid gap-px overflow-hidden rounded-sm border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((item) => (
-            <article key={item.title} className="bg-card p-6 sm:p-8">
+            <article key={item.title} className="rounded-md bg-card/80 p-6 sm:p-8">
               <h3 className="text-base font-semibold tracking-tight">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
             </article>

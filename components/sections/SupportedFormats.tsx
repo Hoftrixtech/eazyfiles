@@ -18,7 +18,7 @@ const formats = [
 
 export function SupportedFormats() {
   return (
-    <section className="section-padding border-t border-border bg-card">
+    <section className="section-padding bg-card/30">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Supported formats</h2>
@@ -29,7 +29,7 @@ export function SupportedFormats() {
         </div>
         <div className="mx-auto mt-10 grid max-w-4xl gap-4 md:grid-cols-3">
           {formats.map((format) => (
-            <article key={format.name} className="rounded-sm border border-border bg-background p-6">
+            <article key={format.name} className="rounded-md bg-background/80 p-6">
               <h3 className="font-medium">{format.name}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{format.body}</p>
             </article>

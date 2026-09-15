@@ -11,8 +11,8 @@ export function LegalPageLayout({
   children?: ReactNode;
 }) {
   return (
-    <main className="border-t border-border">
-      <section className="border-b border-border bg-card">
+    <main>
+      <section className="section-surface bg-card/40">
         <Container className="max-w-3xl py-12 sm:py-16">
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h1>
           {intro ? <p className="mt-4 text-base leading-relaxed text-muted-foreground">{intro}</p> : null}

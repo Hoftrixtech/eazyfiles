@@ -15,7 +15,7 @@ interface SelectedFilesListProps {
   disabled?: boolean;
   onRemove: (id: string) => void;
   onClearAll: () => void;
-  onAddMore: () => void;
+  onAddMore?: () => void;
 }
 
 export function SelectedFilesList({ entries, disabled, onRemove, onClearAll, onAddMore }: SelectedFilesListProps) {
@@ -30,19 +30,21 @@ export function SelectedFilesList({ entries, disabled, onRemove, onClearAll, onA
           {entries.length} image{entries.length === 1 ? "" : "s"} selected
         </p>
         <div className="flex gap-2">
-          <Button type="button" variant="secondary" size="sm" disabled={disabled} onClick={onAddMore}>
-            Add more
-          </Button>
+          {onAddMore ? (
+            <Button type="button" variant="secondary" size="sm" disabled={disabled} onClick={onAddMore}>
+              Add more
+            </Button>
+          ) : null}
           <Button type="button" variant="secondary" size="sm" disabled={disabled} onClick={onClearAll}>
             Clear all
           </Button>
         </div>
       </div>
-      <ul className="max-h-72 space-y-2 overflow-y-auto rounded-sm border border-border bg-muted/30 p-2">
+      <ul className="max-h-72 space-y-2 overflow-y-auto rounded-md bg-muted/30 p-2">
         {entries.map((entry) => (
           <li
             key={entry.id}
-            className="flex items-center gap-3 rounded-sm border border-border bg-card p-2 sm:p-3"
+            className="flex items-center gap-3 rounded-md bg-card/80 p-2 sm:p-3"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

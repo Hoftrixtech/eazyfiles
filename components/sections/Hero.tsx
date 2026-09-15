@@ -1,56 +1,100 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Container } from "@/components/ui/Container";
+import { ArrowUpRight, Sparkles } from "lucide-react";
+import { logoutAction } from "@/app/auth-actions";
+import { BrandLogo } from "@/components/brand/BrandLogo";
+import { getSessionUser } from "@/lib/access/identity";
 
-export function Hero() {
+const navLinkClass =
+  "rounded-full px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground";
+
+export async function Hero() {
+  const user = await getSessionUser();
+
   return (
-    <section className="relative overflow-hidden border-b border-border bg-card">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
-        aria-hidden="true"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #e4e4e7 1px, transparent 1px), linear-gradient(to bottom, #e4e4e7 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
-      />
-      <Container className="relative grid gap-12 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-center md:py-20 lg:py-24">
-        <div>
-          <p className="text-xs font-medium tracking-[0.22em] text-muted-foreground uppercase">
-            Free online file tools
-          </p>
-          <h1
-            id="home-hero-title"
-            className="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-[3.25rem] lg:leading-[1.08]"
-          >
-            Compress Images Online
-            <span className="block text-muted-foreground">Without the Hassle.</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Reduce image file size quickly with EazyFiles. Choose your target size, compress your image and download the
-            optimized file in seconds.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link
-              href="#compressor"
-              className="inline-flex h-12 w-full items-center justify-center rounded-sm bg-primary px-6 text-sm font-medium tracking-tight text-primary-foreground transition-colors hover:bg-primary/88 sm:w-auto"
+    <section className="w-full bg-background">
+      <div className="relative flex min-h-[min(88vh,760px)] w-full flex-col overflow-hidden">
+        <Image
+          src="/brand/hero-banner.png"
+          alt=""
+          fill
+          priority
+          className="object-cover object-center opacity-90"
+          sizes="100vw"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/92 from-0% via-background/78 via-[38%] to-background/25 to-100%"
+          aria-hidden="true"
+        />
+
+        <header className="relative z-10 flex w-full flex-col gap-4 px-5 py-5 sm:px-8 lg:px-12 xl:px-16 md:flex-row md:items-center md:justify-between md:gap-6 md:py-6">
+          <nav aria-label="Primary" className="flex flex-wrap items-center gap-1 sm:gap-2">
+            <Link href="/" className={navLinkClass}>Home</Link>
+            <Link href="/tools" className={navLinkClass}>Tools</Link>
+            <Link href="/#how-it-works" className={navLinkClass}>How It Works</Link>
+            <Link href="/about" className={navLinkClass}>About</Link>
+          </nav>
+          <div className="flex justify-center md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
+            <BrandLogo />
+          </div>
+          <div className="flex items-center justify-end gap-2">
+            {user ? (
+              <>
+                <Link href="/account" className={navLinkClass}>Account</Link>
+                <form action={logoutAction}>
+                  <button type="submit" className={navLinkClass}>Logout</button>
+                </form>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className={navLinkClass}>Login</Link>
+                <Link
+                  href="/signup"
+                  className="inline-flex h-10 items-center gap-1.5 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                >
+                  Sign Up
+                  <ArrowUpRight className="size-4" aria-hidden="true" />
+                </Link>
+              </>
+            )}
+          </div>
+        </header>
+
+        <div className="relative z-10 flex w-full flex-1 flex-col px-5 pb-14 pt-8 sm:px-8 sm:pb-16 sm:pt-10 lg:px-12 xl:px-16">
+          <div className="max-w-3xl">
+            <p
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-white/5 px-4 py-1.5 text-xs font-medium tracking-[0.18em] text-foreground uppercase backdrop-blur-md"
             >
-              Compress an Image
-            </Link>
-            <Link
-              href="#image-tools"
-              className="inline-flex h-12 w-full items-center justify-center rounded-sm border border-border bg-card px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted sm:w-auto"
+              <Sparkles className="size-3.5" aria-hidden="true" />
+              Free online file tools
+            </p>
+            <h1
+              id="home-hero-title"
+              className="mt-8 text-[2.5rem] font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl lg:text-[3.75rem]"
             >
-              Explore Image Tools
-            </Link>
+              We help you compress images without the hassle.
+            </h1>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+              EazyFiles is a simple online platform for everyday image tasks — target file size, resize, crop, and
+              convert in your browser.
+            </p>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Link
+                href="#image-tools"
+                className="inline-flex h-12 items-center justify-center rounded-full border border-border bg-white/5 px-7 text-sm font-medium text-foreground backdrop-blur-sm transition-colors hover:bg-white/10"
+              >
+                Explore Image Tools
+              </Link>
+              <Link
+                href="#compressor"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              >
+                Compress an Image
+              </Link>
+            </div>
           </div>
         </div>
-        <div className="relative hidden min-h-[280px] md:block" aria-hidden="true">
-          <div className="absolute inset-4 rounded-sm border border-border bg-background" />
-          <div className="absolute top-10 right-8 h-28 w-28 rounded-sm border border-border bg-muted" />
-          <div className="absolute bottom-12 left-10 h-36 w-44 rounded-sm border border-foreground/20 bg-foreground/[0.03]" />
-          <div className="absolute top-1/2 left-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-sm border-2 border-foreground bg-card shadow-sm" />
-        </div>
-      </Container>
+      </div>
     </section>
   );
 }

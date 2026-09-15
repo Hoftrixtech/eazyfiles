@@ -31,13 +31,14 @@ interface BatchResultsPanelProps {
   items: BatchResultItem[];
   failedCount?: number;
   onReset: () => void;
+  onCompressAgain?: () => void;
 }
 
-export function BatchResultsPanel({ items, failedCount = 0, onReset }: BatchResultsPanelProps) {
+export function BatchResultsPanel({ items, failedCount = 0, onReset, onCompressAgain }: BatchResultsPanelProps) {
   const totalSaved = items.reduce((sum, item) => sum + item.result.originalSize - item.result.compressedSize, 0);
 
   return (
-    <div className="animate-fade-up space-y-5 rounded-sm border border-border bg-muted/40 p-6 sm:p-8">
+    <div className="animate-fade-up space-y-5 rounded-md bg-muted/30 p-6 sm:p-8">
       <div>
         <h3 className="text-lg font-semibold tracking-tight">
           {items.length === 1 ? "Your image is ready" : `${items.length} images compressed`}
@@ -50,7 +51,7 @@ export function BatchResultsPanel({ items, failedCount = 0, onReset }: BatchResu
         ) : null}
       </div>
 
-      <ul className="divide-y divide-border rounded-sm border border-border bg-card">
+      <ul className="divide-y divide-border rounded-md bg-card/80">
         {items.map((item) => (
           <li key={item.result.objectUrl} className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
@@ -105,9 +106,14 @@ export function BatchResultsPanel({ items, failedCount = 0, onReset }: BatchResu
         </Button>
       ) : null}
 
-      <Button variant="secondary" onClick={onReset} size="lg" className="w-full">
-        <RotateCcw className="size-4" aria-hidden="true" />
-        Compress more images
+      {onCompressAgain ? (
+        <Button variant="secondary" onClick={onCompressAgain} size="lg" className="w-full">
+          <RotateCcw className="size-4" aria-hidden="true" />
+          Compress again with same files
+        </Button>
+      ) : null}
+      <Button variant="ghost" onClick={onReset} size="lg" className="w-full">
+        Start over with new images
       </Button>
     </div>
   );

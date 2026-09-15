@@ -37,10 +37,10 @@ export function OutputFormatSelector({
               aria-pressed={selected}
               onClick={() => onChange(option.value)}
               className={cn(
-                "h-10 rounded-sm border text-sm font-medium transition-colors disabled:opacity-60",
+                "h-10 rounded-md border border-transparent text-sm font-medium transition-colors disabled:opacity-60",
                 selected
-                  ? "border-foreground bg-foreground text-primary-foreground"
-                  : "border-border bg-card hover:bg-muted"
+                  ? "bg-primary text-primary-foreground"
+                  : "border-transparent bg-muted hover:bg-muted/80"
               )}
             >
               {option.label}

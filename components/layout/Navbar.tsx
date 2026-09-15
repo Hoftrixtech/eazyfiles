@@ -48,7 +48,7 @@ export async function Navbar() {
   const user = await getSessionUser();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl">
       <Container className="flex h-16 items-center justify-between gap-4">
         <BrandLogo />
         <nav aria-label="Primary" className="hidden items-center gap-0.5 md:flex">
@@ -56,7 +56,7 @@ export async function Navbar() {
         </nav>
         <details className="group relative md:hidden">
           <summary
-            className="flex size-10 cursor-pointer list-none items-center justify-center rounded-sm border border-border bg-card text-foreground transition-colors hover:bg-muted"
+            className="flex size-10 cursor-pointer list-none items-center justify-center rounded-md bg-card/80 text-foreground transition-colors hover:bg-muted"
             aria-label="Open menu"
           >
             <svg viewBox="0 0 16 16" className="size-4 group-open:hidden" aria-hidden="true">
@@ -68,7 +68,7 @@ export async function Navbar() {
           </summary>
           <nav
             aria-label="Mobile"
-            className="absolute right-0 mt-2 flex w-56 flex-col gap-0.5 rounded-sm border border-border bg-card p-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)]"
+            className="absolute right-0 mt-2 flex w-56 flex-col gap-0.5 rounded-md border border-border bg-card p-2 shadow-[var(--shadow-elevated)]"
           >
             <NavLinks authenticated={Boolean(user)} />
           </nav>

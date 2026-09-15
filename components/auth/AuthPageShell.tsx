@@ -13,7 +13,7 @@ export function AuthPageShell({
 }) {
   return (
     <AuthSplitLayout title={title} description={description}>
-      <Card className="border-0 bg-transparent p-0 shadow-none sm:border sm:border-border sm:bg-card sm:p-7 sm:shadow-sm">
+      <Card className="border-0 bg-transparent p-0 shadow-none sm:bg-card/80 sm:p-7 sm:shadow-[var(--shadow-elevated)]">
         {children}
       </Card>
     </AuthSplitLayout>

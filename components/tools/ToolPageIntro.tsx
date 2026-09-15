@@ -13,7 +13,7 @@ export function ToolPageIntro({
   eyebrow?: string;
 }) {
   return (
-    <section className="border-b border-border bg-card">
+    <section className="section-surface bg-card/40">
       <Container className="max-w-3xl py-10 sm:py-12">
         <Breadcrumb items={breadcrumb} />
         {eyebrow ? (

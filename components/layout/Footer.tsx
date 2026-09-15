@@ -32,7 +32,7 @@ const columns = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-card">
+    <footer className="bg-card/50">
       <Container className="section-padding !py-14">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_repeat(3,minmax(0,1fr))]">
           <div>
@@ -57,7 +57,7 @@ export function Footer() {
             </nav>
           ))}
         </div>
-        <p className="mt-14 border-t border-border pt-8 text-sm text-muted-foreground">
+        <p className="mt-14 pt-8 text-sm text-muted-foreground">
           © {new Date().getFullYear()} {APP_NAME}
         </p>
       </Container>

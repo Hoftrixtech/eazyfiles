@@ -13,7 +13,9 @@ import { UploadDropzone } from "@/components/compressor/UploadDropzone";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ApiRequestError } from "@/lib/client/api-error";
+import type { ClientAccessStatus } from "@/lib/client/access";
 import { compressImageRequest } from "@/lib/client/compress-request";
 import { isGenericUploadMime } from "@/lib/compression/formats";
 import {
@@ -59,6 +61,16 @@ function revokeResults(items: BatchResultItem[]) {
   }
 }
 
+function maxSelectableFiles(status: ClientAccessStatus | null): number {
+  if (!status) {
+    return MAX_COMPRESSOR_BATCH_FILES;
+  }
+  if (!status.compressor.allowed) {
+    return 0;
+  }
+  return Math.min(MAX_COMPRESSOR_BATCH_FILES, Math.max(0, status.compressor.remaining));
+}
+
 export function ImageCompressor({ id = "compressor" }: { id?: string }) {
   const { status, refresh } = useAccessStatus();
   const [entries, setEntries] = useState<SelectedFileEntry[]>([]);
@@ -72,6 +84,7 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
   const [batchIndex, setBatchIndex] = useState(0);
   const [batchTotal, setBatchTotal] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [warning, setWarning] = useState<string | null>(null);
   const [batchResults, setBatchResults] = useState<BatchResultItem[]>([]);
   const [failedCount, setFailedCount] = useState(0);
   const processingRef = useRef(false);
@@ -96,6 +109,8 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
     };
   }, []);
 
+  const selectionLimit = maxSelectableFiles(status);
+
   const targetBytes = useMemo(() => {
     if (presetBytes !== null) {
       return presetBytes;
@@ -115,6 +130,7 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
       return [];
     });
     setFailedCount(0);
+    setWarning(null);
   }, []);
 
   const clearEntries = useCallback(() => {
@@ -128,6 +144,11 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
     (incoming: File[]) => {
       setError(null);
       resetResults();
+
+      if (compressorLocked || selectionLimit === 0) {
+        setError("Compression limit reached. Log in to continue.");
+        return;
+      }
 
       const rejected: string[] = [];
       const accepted: SelectedFileEntry[] = [];
@@ -155,20 +176,32 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
 
       setEntries((current) => {
         const merged = [...current, ...accepted];
+        const cap = selectionLimit;
+        if (merged.length > cap) {
+          const kept = merged.slice(0, cap);
+          const dropped = merged.slice(cap);
+          revokeEntries(dropped);
+          setWarning(
+            cap === 1
+              ? "Only 1 image can be compressed with your remaining free uses."
+              : `Only the first ${cap} images were added based on your remaining compressions.`
+          );
+          return kept;
+        }
         if (merged.length > MAX_COMPRESSOR_BATCH_FILES) {
           const kept = merged.slice(0, MAX_COMPRESSOR_BATCH_FILES);
           const dropped = merged.slice(MAX_COMPRESSOR_BATCH_FILES);
           revokeEntries(dropped);
-          setError(`Only the first ${MAX_COMPRESSOR_BATCH_FILES} images are kept per batch.`);
+          setWarning(`Only the first ${MAX_COMPRESSOR_BATCH_FILES} images are kept per batch.`);
           return kept;
         }
         if (rejected.length > 0) {
-          setError(`Some files were skipped: ${rejected.slice(0, 3).join("; ")}${rejected.length > 3 ? "…" : ""}`);
+          setWarning(`Some files were skipped: ${rejected.slice(0, 2).join("; ")}${rejected.length > 2 ? "…" : ""}`);
         }
         return merged;
       });
     },
-    [resetResults]
+    [compressorLocked, resetResults, selectionLimit]
   );
 
   function handleRemoveEntry(entryId: string) {
@@ -186,6 +219,7 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
   function handleClearAll() {
     clearEntries();
     setError(null);
+    setWarning(null);
     resetResults();
   }
 
@@ -214,6 +248,7 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
   function handleFullReset() {
     clearEntries();
     setError(null);
+    setWarning(null);
     resetResults();
   }
 
@@ -237,17 +272,24 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
       return;
     }
 
+    const limit = maxSelectableFiles(status);
+    const queue = limit > 0 ? entries.slice(0, limit) : entries;
+    if (queue.length === 0) {
+      setError("No compressions remaining. Log in or try again tomorrow.");
+      return;
+    }
+
     processingRef.current = true;
     setIsProcessing(true);
     setCompressProgress(0);
     setBatchIndex(0);
-    setBatchTotal(entries.length);
+    setBatchTotal(queue.length);
     setError(null);
+    setWarning(null);
     resetResults();
 
-    const queue = [...entries];
     const completed: BatchResultItem[] = [];
-    let failures = 0;
+    const failureMessages: string[] = [];
     let stoppedForLimit = false;
 
     try {
@@ -274,25 +316,30 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
           if (caught instanceof ApiRequestError && caught.code === "ANONYMOUS_LIMIT_REACHED") {
             stoppedForLimit = true;
             await refresh();
-            failures += queue.length - index;
-            setError(caught.message);
+            failureMessages.push(
+              caught.message || "Free compression limit reached."
+            );
             break;
           }
-          failures += 1;
           const message = caught instanceof Error ? caught.message : "Compression failed.";
-          setError(
-            queue.length > 1
-              ? `${entry.file.name}: ${message}`
-              : message
-          );
+          failureMessages.push(`${entry.file.name}: ${message}`);
         }
       }
 
-      setFailedCount(failures);
+      setFailedCount(failureMessages.length);
       if (completed.length > 0) {
         setBatchResults(completed);
-      } else if (!stoppedForLimit && failures > 0) {
-        setError("No images were compressed. Check your files and try again.");
+        if (failureMessages.length > 0) {
+          setWarning(
+            failureMessages.length === 1
+              ? (failureMessages[0] ?? "One image could not be compressed.")
+              : `${failureMessages.length} image(s) could not be compressed. Successful downloads are below.`
+          );
+        }
+      } else if (!stoppedForLimit) {
+        setError(failureMessages[0] ?? "No images were compressed. Check your files and try again.");
+      } else {
+        setError(failureMessages[0] ?? "Compression limit reached.");
       }
     } finally {
       processingRef.current = false;
@@ -306,72 +353,98 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
   const showDropzone = entries.length === 0;
   const hasResults = batchResults.length > 0;
   const compressLabel =
-    entries.length > 1 ? `Compress ${entries.length} Images` : entries.length === 1 ? "Compress Image" : "Compress Image";
+    entries.length > 1 ? `Compress ${entries.length} Images` : "Compress Image";
+  const canAddMore = !compressorLocked && selectionLimit > entries.length;
 
   return (
-    <section id={id} className="section-padding scroll-mt-24 border-b border-border bg-background pt-10 sm:pt-12" aria-labelledby={`${id}-title`}>
-      <Container>
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 id={`${id}-title`} className="text-2xl font-semibold tracking-tight sm:text-3xl">Image Compressor</h2>
-          <p className="mt-2 text-muted-foreground">Reduce your images to the size you need. Add one or many at once.</p>
-        </div>
-        <Card className="mx-auto mt-8 max-w-3xl p-5 sm:p-8 lg:p-10" aria-busy={isProcessing}>
-          <div className="space-y-8">
-            {showDropzone ? (
-              <UploadDropzone
-                disabled={isProcessing}
-                onFiles={handleIncomingFiles}
-                isDragging={isDragging}
-                onDraggingChange={setIsDragging}
-              />
-            ) : (
-              <>
-                <SelectedFilesList
-                  entries={entries}
+    <section
+      id={id}
+      className="section-padding section-surface scroll-mt-24 bg-background"
+      aria-labelledby={`${id}-title`}
+    >
+      <Container className="max-w-5xl">
+        <SectionHeader
+          eyebrow="Free tool"
+          title="Image Compressor"
+          description="Upload one or many images, choose your target size and format, then download optimized files. Each successful compression counts toward your limit."
+        />
+
+        <Card className="mt-10 border-transparent p-0 sm:p-0" aria-busy={isProcessing}>
+          <div className="grid gap-0 lg:grid-cols-2 lg:gap-0">
+            <div className="border-border p-5 sm:p-8 lg:border-r lg:p-10">
+              <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">1. Upload</p>
+              <p className="mt-1 text-sm text-muted-foreground">JPG, PNG or WebP · up to {formatBytes(MAX_UPLOAD_BYTES)} each</p>
+              <div className="mt-6">
+                {showDropzone ? (
+                  <UploadDropzone
+                    disabled={isProcessing || compressorLocked}
+                    onFiles={handleIncomingFiles}
+                    isDragging={isDragging}
+                    onDraggingChange={setIsDragging}
+                  />
+                ) : (
+                  <>
+                    <SelectedFilesList
+                      entries={entries}
+                      disabled={isProcessing}
+                      onRemove={handleRemoveEntry}
+                      onClearAll={handleClearAll}
+                      onAddMore={canAddMore ? () => addMoreInputRef.current?.click() : undefined}
+                    />
+                    <input
+                      ref={addMoreInputRef}
+                      type="file"
+                      accept={ACCEPTED_FILE_INPUT}
+                      multiple
+                      className="sr-only"
+                      tabIndex={-1}
+                      disabled={isProcessing || !canAddMore}
+                      onChange={(event) => {
+                        const list = event.target.files;
+                        if (list?.length) {
+                          handleIncomingFiles(Array.from(list));
+                        }
+                        event.currentTarget.value = "";
+                      }}
+                    />
+                  </>
+                )}
+              </div>
+            </div>
+
+            <div className="bg-muted/25 p-5 sm:p-8 lg:p-10">
+              <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">2. Settings</p>
+              <p className="mt-1 text-sm text-muted-foreground">We compress to your target size or smaller.</p>
+              <div className="mt-6 space-y-8">
+                <TargetSizeSelector
+                  presetBytes={presetBytes}
+                  customValue={customValue}
+                  customUnit={customUnit}
                   disabled={isProcessing}
-                  onRemove={handleRemoveEntry}
-                  onClearAll={handleClearAll}
-                  onAddMore={() => addMoreInputRef.current?.click()}
+                  onPresetChange={handlePresetChange}
+                  onCustomValueChange={handleCustomValueChange}
+                  onCustomUnitChange={handleCustomUnitChange}
+                  onCustomSelect={() => setPresetBytes(null)}
                 />
-                <input
-                  ref={addMoreInputRef}
-                  type="file"
-                  accept={ACCEPTED_FILE_INPUT}
-                  multiple
-                  className="sr-only"
-                  tabIndex={-1}
-                  disabled={isProcessing}
-                  onChange={(event) => {
-                    const list = event.target.files;
-                    if (list?.length) {
-                      handleIncomingFiles(Array.from(list));
-                    }
-                    event.currentTarget.value = "";
-                  }}
-                />
-              </>
-            )}
 
-            <TargetSizeSelector
-              presetBytes={presetBytes}
-              customValue={customValue}
-              customUnit={customUnit}
-              disabled={isProcessing}
-              onPresetChange={handlePresetChange}
-              onCustomValueChange={handleCustomValueChange}
-              onCustomUnitChange={handleCustomUnitChange}
-              onCustomSelect={() => setPresetBytes(null)}
-            />
+                <OutputFormatSelector value={outputFormat} disabled={isProcessing} onChange={setOutputFormat} />
 
-            <OutputFormatSelector value={outputFormat} disabled={isProcessing} onChange={setOutputFormat} />
+                {status?.compressor.mode === "anonymous" ? (
+                  <p className="rounded-md bg-card/60 px-4 py-3 text-sm text-muted-foreground">
+                    {status.compressor.allowed
+                      ? `${status.compressor.remaining} of ${status.compressor.limit} free compressions left · each image uses one`
+                      : "No free compressions left — create a free account to continue."}
+                  </p>
+                ) : status?.compressor.mode === "authenticated" ? (
+                  <p className="text-sm text-muted-foreground">
+                    {status.compressor.remaining} of {status.compressor.limit} compressions remaining today.
+                  </p>
+                ) : null}
+              </div>
+            </div>
+          </div>
 
-            {status?.compressor.mode === "anonymous" && status.compressor.allowed ? (
-              <p className="text-sm text-muted-foreground">
-                {status.compressor.remaining} of {status.compressor.limit} free compressions remaining. Each image in a
-                batch uses one compression.
-              </p>
-            ) : null}
-
+          <div className="space-y-4 border-t border-border p-5 sm:p-8 lg:px-10 lg:pb-10">
             {isProcessing ? (
               <ProcessingState
                 message={
@@ -383,24 +456,37 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
                 detail={batchTotal > 1 ? "Images are processed one at a time." : undefined}
               />
             ) : null}
-            {compressorLocked ? <CompressorLimitNotice /> : null}
-            {error && !compressorLocked ? <ErrorAlert message={error} /> : null}
-            {hasResults ? <BatchResultsPanel items={batchResults} failedCount={failedCount} onReset={handleFullReset} /> : null}
 
-            {compressorLocked || hasResults ? null : (
+            {compressorLocked ? <CompressorLimitNotice /> : null}
+            {warning && !compressorLocked ? (
+              <p className="rounded-md bg-warning-soft px-4 py-3 text-sm text-warning" role="status">{warning}</p>
+            ) : null}
+            {error && !compressorLocked ? <ErrorAlert message={error} /> : null}
+
+            {hasResults ? (
+              <BatchResultsPanel
+                items={batchResults}
+                failedCount={failedCount}
+                onReset={handleFullReset}
+                onCompressAgain={() => {
+                  void handleCompress();
+                }}
+              />
+            ) : null}
+
+            {!compressorLocked && !hasResults ? (
               <Button
                 type="button"
                 size="lg"
-                className="w-full"
+                className="w-full rounded-md"
                 disabled={entries.length === 0 || isProcessing}
-                aria-disabled={entries.length === 0 || isProcessing}
                 onClick={() => {
                   void handleCompress();
                 }}
               >
                 {isProcessing ? "Compressing…" : compressLabel}
               </Button>
-            )}
+            ) : null}
           </div>
         </Card>
       </Container>

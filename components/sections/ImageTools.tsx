@@ -30,7 +30,7 @@ export function ImageToolsSection() {
   const tools = getToolsByCategory("image-tools").filter((tool) => tool.status === "live");
 
   return (
-    <section id="image-tools" className="section-padding scroll-mt-24 border-t border-border bg-background">
+    <section id="image-tools" className="section-padding scroll-mt-24 bg-background">
       <Container>
         <SectionHeader
           title="Everything You Need for Your Images"
@@ -43,9 +43,9 @@ export function ImageToolsSection() {
             const available = access?.detail === "Available";
             return (
               <Link key={tool.slug} href={copy?.href ?? "/"} className="group block rounded-sm focus-visible:outline-none">
-                <Card className="h-full p-6 transition-[border-color,box-shadow] duration-150 hover:border-foreground/20 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] sm:p-8">
+                <Card className="h-full border-transparent p-6 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] sm:p-8">
                   <div className="flex items-start justify-between gap-4">
-                    <span className="flex size-11 items-center justify-center rounded-sm border border-border bg-muted text-foreground">
+                    <span className="flex size-11 items-center justify-center rounded-md bg-muted text-foreground">
                       <ToolIcon name={tool.icon} className="size-5" />
                     </span>
                     <span

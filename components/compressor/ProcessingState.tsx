@@ -13,7 +13,7 @@ export function ProcessingState({
   const pending = 100 - completed;
 
   return (
-    <div className="rounded-sm border border-border bg-muted/50 px-4 py-4" role="status" aria-live="polite" aria-busy="true">
+    <div className="rounded-md bg-muted/40 px-4 py-4" role="status" aria-live="polite" aria-busy="true">
       <div className="flex items-start gap-3">
         <span
           className="mt-0.5 size-5 shrink-0 animate-spin rounded-full border-2 border-muted-foreground/25 border-t-foreground"

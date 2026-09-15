@@ -40,10 +40,10 @@ export function TargetSizeSelector({
               aria-pressed={selected}
               onClick={() => onPresetChange(preset.bytes)}
               className={cn(
-                "h-11 rounded-sm border text-sm font-medium transition-colors disabled:opacity-60",
+                "h-11 rounded-md border border-transparent text-sm font-medium transition-colors disabled:opacity-60",
                 selected
-                  ? "border-foreground bg-foreground text-primary-foreground"
-                  : "border-border bg-card text-foreground hover:bg-muted"
+                  ? "bg-primary text-primary-foreground"
+                  : "border-transparent bg-muted text-foreground hover:bg-muted/80"
               )}
             >
               {preset.label}
@@ -55,10 +55,10 @@ export function TargetSizeSelector({
           aria-pressed={presetBytes === null}
           onClick={() => onCustomSelect?.()}
           className={cn(
-            "h-11 rounded-sm border text-sm font-medium transition-colors disabled:opacity-60",
+            "h-11 rounded-md border border-transparent text-sm font-medium transition-colors disabled:opacity-60",
             presetBytes === null
-              ? "border-foreground bg-foreground text-primary-foreground"
-              : "border-border bg-card text-foreground hover:bg-muted"
+              ? "bg-primary text-primary-foreground"
+              : "bg-muted text-foreground hover:bg-muted/80"
           )}
         >
           Custom
@@ -75,7 +75,7 @@ export function TargetSizeSelector({
             inputMode="numeric"
             value={customValue}
             onChange={(event) => onCustomValueChange(event.target.value)}
-            className="h-11 w-full rounded-sm border border-border bg-card px-3 text-sm disabled:opacity-60"
+            className="h-11 w-full rounded-md border border-border bg-muted/50 px-3 text-sm disabled:opacity-60"
           />
         </label>
         <label className="flex w-full flex-col gap-2 text-sm font-medium sm:w-28" htmlFor="custom-unit">
@@ -84,7 +84,7 @@ export function TargetSizeSelector({
             id="custom-unit"
             value={customUnit}
             onChange={(event) => onCustomUnitChange(event.target.value === "MB" ? "MB" : "KB")}
-            className="h-11 w-full rounded-sm border border-border bg-card px-3 text-sm disabled:opacity-60"
+            className="h-11 w-full rounded-md border border-border bg-muted/50 px-3 text-sm disabled:opacity-60"
           >
             <option value="KB">KB</option>
             <option value="MB">MB</option>

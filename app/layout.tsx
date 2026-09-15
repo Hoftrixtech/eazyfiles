@@ -1,17 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
+import { ShowNavbarExceptHome } from "@/components/layout/ShowNavbarExceptHome";
 import { APP_NAME } from "@/lib/constants";
 import { DEFAULT_OG_IMAGE_PATH, HOME_PAGE_SEO, absoluteUrl, getSiteUrl } from "@/lib/seo";
 import { stripExtensionAttrsScript } from "@/lib/strip-extension-attrs-script";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-sans-family",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -45,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f7f4",
+  themeColor: "#0a0a0a",
   width: "device-width",
   initialScale: 1,
 };
@@ -56,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: stripExtensionAttrsScript }} />
       </head>
@@ -67,7 +61,9 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <Navbar />
+        <ShowNavbarExceptHome>
+          <Navbar />
+        </ShowNavbarExceptHome>
         <div id="main">{children}</div>
         <Footer />
       </body>
