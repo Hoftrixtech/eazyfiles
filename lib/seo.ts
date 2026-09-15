@@ -18,14 +18,16 @@ export const PUBLIC_SITEMAP_PATHS = [
   "/disclaimer",
 ] as const;
 
+const PRODUCTION_SITE_URL = "https://eazyfiles.com";
+
 export function getSiteUrl(): string {
   const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
   if (fromEnv) {
     return fromEnv;
   }
 
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
+  if (process.env.NODE_ENV === "production") {
+    return PRODUCTION_SITE_URL;
   }
 
   return "http://localhost:3000";
