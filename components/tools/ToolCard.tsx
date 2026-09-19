@@ -5,8 +5,8 @@ import { getPublicToolAccessCopy } from "@/lib/plans";
 import { cn } from "@/lib/utils";
 import type { Tool } from "@/types/tools";
 
-function StatusBadge({ tool }: { tool: Tool }) {
-  const access = tool.status === "live" ? getPublicToolAccessCopy(tool.slug) : null;
+function StatusBadge({ tool, authenticated }: { tool: Tool; authenticated: boolean }) {
+  const access = tool.status === "live" ? getPublicToolAccessCopy(tool.slug, { authenticated }) : null;
   const available = access?.detail === "Available";
   return (
     <span
@@ -20,16 +20,16 @@ function StatusBadge({ tool }: { tool: Tool }) {
   );
 }
 
-export function ToolCard({ tool }: { tool: Tool }) {
+export function ToolCard({ tool, authenticated = false }: { tool: Tool; authenticated?: boolean }) {
   const href = getPublicToolHref(tool);
-  const access = tool.status === "live" ? getPublicToolAccessCopy(tool.slug) : null;
+  const access = tool.status === "live" ? getPublicToolAccessCopy(tool.slug, { authenticated }) : null;
   const content = (
     <>
       <div className="flex items-start justify-between gap-3">
         <span className="flex size-10 items-center justify-center rounded-md bg-muted text-foreground">
           <ToolIcon name={tool.icon} className="size-4" />
         </span>
-        <StatusBadge tool={tool} />
+        <StatusBadge tool={tool} authenticated={authenticated} />
       </div>
       <h3 className="mt-4 font-medium">{tool.name}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tool.shortDescription}</p>

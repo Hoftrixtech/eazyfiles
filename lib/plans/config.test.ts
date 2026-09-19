@@ -22,4 +22,11 @@ describe("launch access configuration", () => {
     });
     expect(getPublicToolAccessCopy("pdf-compressor")).toBeNull();
   });
+
+  it("shows available for login-gated tools when the viewer is authenticated", () => {
+    expect(getPublicToolAccessCopy("image-resizer", { authenticated: true })).toEqual({
+      tier: "FREE",
+      detail: "Available",
+    });
+  });
 });

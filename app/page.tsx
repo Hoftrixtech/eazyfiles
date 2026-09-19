@@ -22,6 +22,8 @@ function requireCompressor() {
 
 const compressor = requireCompressor();
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = createPageMetadata({
   title: HOME_PAGE_SEO.title,
   description: HOME_PAGE_SEO.description,

@@ -5,6 +5,8 @@ import { Container } from "@/components/ui/Container";
 import { TOOL_CATEGORIES, getToolsByCategory } from "@/lib/tools";
 import { createPageMetadata } from "@/lib/seo";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = createPageMetadata({
   title: "All Tools",
   description:

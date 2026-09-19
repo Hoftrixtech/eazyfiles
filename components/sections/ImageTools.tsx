@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getSessionUser } from "@/lib/access/identity";
 import { ToolIcon } from "@/lib/tools";
 import { getPublicToolAccessCopy } from "@/lib/plans";
 import { Container } from "@/components/ui/Container";
@@ -26,7 +27,9 @@ const TOOL_COPY: Record<string, { description: string; href: string }> = {
   },
 };
 
-export function ImageToolsSection() {
+export async function ImageToolsSection() {
+  const user = await getSessionUser();
+  const authenticated = Boolean(user);
   const tools = getToolsByCategory("image-tools").filter((tool) => tool.status === "live");
 
   return (
@@ -39,7 +42,7 @@ export function ImageToolsSection() {
         />
         <div className="mt-14 grid gap-4 sm:grid-cols-2">
           {tools.map((tool) => {
-            const access = getPublicToolAccessCopy(tool.slug);
+            const access = getPublicToolAccessCopy(tool.slug, { authenticated });
             const copy = TOOL_COPY[tool.slug];
             const available = access?.detail === "Available";
             return (

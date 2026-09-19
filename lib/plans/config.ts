@@ -10,11 +10,17 @@ export const LAUNCH_ACCESS = {
 
 export type PlanId = "free" | "premium";
 
-export function getPublicToolAccessCopy(slug: string): { tier: "FREE"; detail: string } | null {
+export function getPublicToolAccessCopy(
+  slug: string,
+  options?: { authenticated?: boolean }
+): { tier: "FREE"; detail: string } | null {
   if (slug === "image-compressor") {
     return { tier: "FREE", detail: "Available" };
   }
   if (slug === "image-resizer" || slug === "image-cropper" || slug === "image-converter") {
+    if (options?.authenticated) {
+      return { tier: "FREE", detail: "Available" };
+    }
     return { tier: "FREE", detail: "Login Required" };
   }
   return null;
