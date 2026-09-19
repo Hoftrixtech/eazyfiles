@@ -28,17 +28,18 @@ export const HOW_IT_WORKS_PAGE_SEO = {
 
 export const CONTACT_PAGE_SEO = {
   title: "Contact EazyFiles – Get in Touch",
-  description: "Send a message to the EazyFiles team about our online image tools, your account, or general questions.",
+  description:
+    "Questions about EazyFiles, our image tools, or your account? Send us a message below. We read submissions as we expand support channels for launch.",
 };
 
 export const PRIVACY_PAGE_SEO = {
   title: "EazyFiles Privacy Policy",
-  description: "How EazyFiles collects, uses, and protects information when you use our website and image tools.",
+  description: "How EazyFiles handles information when you use our website and image tools.",
 };
 
 export const TERMS_PAGE_SEO = {
   title: "EazyFiles Terms of Service",
-  description: "Terms that govern your use of the EazyFiles website and online file utilities.",
+  description: "Terms that govern your use of the EazyFiles website and online tools.",
 };
 
 export const DISCLAIMER_PAGE_SEO = {

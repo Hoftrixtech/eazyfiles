@@ -12,6 +12,7 @@ export const metadata: Metadata = createLegalPageMetadata({
 export default function PrivacyPage() {
   return (
     <LegalPageLayout
+      eyebrow="Legal"
       title="Privacy Policy"
       intro="How EazyFiles handles information when you use our website and image tools."
     >

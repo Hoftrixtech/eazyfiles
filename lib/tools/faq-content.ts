@@ -173,6 +173,51 @@ const TOOL_FAQ_CONTENT: Partial<Record<string, FaqContent>> = {
       },
     ],
   },
+  "image-to-pdf": {
+    title: "Frequently Asked Questions About Image to PDF",
+    description:
+      "Find answers about converting images to PDF online, supported formats, page layouts, multi-image PDFs, and using EazyFiles Image to PDF.",
+    items: [
+      {
+        question: "What is the EazyFiles Image to PDF tool?",
+        answer:
+          "EazyFiles Image to PDF lets you convert JPG, PNG, and WebP images into a single downloadable PDF. You can add multiple images, choose a page layout, and create a multi-page PDF.",
+      },
+      {
+        question: "Can I combine multiple images into one PDF?",
+        answer:
+          "Yes. You can upload up to 20 JPG, PNG, or WebP images and combine them into one PDF. Each image becomes a separate page in the order you add them.",
+      },
+      {
+        question: "Which image formats are supported?",
+        answer: "The Image to PDF tool supports JPG, PNG, and WebP images.",
+      },
+      {
+        question: "What page layout options are available?",
+        answer:
+          "You can choose between Match Image Size and Fit on A4. Match Image Size uses the image dimensions for the PDF page, while Fit on A4 places each image on a standard A4 page with margins.",
+      },
+      {
+        question: "Do I need an account?",
+        answer:
+          "Yes. You need to create or sign in to a free EazyFiles account to use the Image to PDF converter.",
+      },
+      {
+        question: "What is the file size limit?",
+        answer: "Each image can be up to 10 MB. You can upload up to 20 images for one PDF conversion.",
+      },
+      {
+        question: "Are my images stored?",
+        answer:
+          "Uploaded images are processed on the server for PDF creation. Image files are processed temporarily and are not stored as permanent files in the database.",
+      },
+      {
+        question: "Is Image to PDF free?",
+        answer:
+          "The Image to PDF tool is available with a free EazyFiles account. You can create an account or sign in with Google to use the converter.",
+      },
+    ],
+  },
   "image-cropper": {
     title: "Frequently Asked Questions About Image Cropping",
     description:

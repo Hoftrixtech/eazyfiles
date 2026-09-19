@@ -20,6 +20,10 @@ describe("launch access configuration", () => {
       tier: "FREE",
       detail: "Login Required",
     });
+    expect(getPublicToolAccessCopy("image-to-pdf")).toEqual({
+      tier: "FREE",
+      detail: "Login Required",
+    });
     expect(getPublicToolAccessCopy("pdf-compressor")).toBeNull();
   });
 

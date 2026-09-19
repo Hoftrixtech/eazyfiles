@@ -1,4 +1,4 @@
-import { FileImage } from "lucide-react";
+import { FileImage, FileText } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { EyebrowPill } from "@/components/ui/EyebrowPill";
 import {
@@ -27,7 +27,11 @@ function FormatCard({
         className={cn("flex size-11 items-center justify-center rounded-xl", iconClassName)}
         aria-hidden="true"
       >
-        <FileImage className="size-5" strokeWidth={1.75} />
+        {name === "PDF" ? (
+          <FileText className="size-5" strokeWidth={1.75} />
+        ) : (
+          <FileImage className="size-5" strokeWidth={1.75} />
+        )}
       </span>
       <h3 className="mt-5 text-lg font-semibold tracking-tight text-foreground">{name}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-[0.9375rem]">{body}</p>
@@ -57,7 +61,7 @@ export function HowItWorksSupportedFormatsSection({ toolSlug }: { toolSlug?: str
             <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">{content.description}</p>
           </header>
 
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-5">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-4">
             {content.formats.map((format) => (
               <FormatCard key={format.name} {...format} />
             ))}

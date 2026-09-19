@@ -5,7 +5,7 @@ export const LAUNCH_ACCESS = {
   anonymousCompressorLimit: 5,
   /** Soft abuse ceiling for authenticated compressor (not a paid plan limit). */
   authenticatedCompressorDailyLimit: 50,
-  loginRequiredTools: ["image-resizer", "image-cropper", "image-converter"] as const satisfies readonly ProcessingTool[],
+  loginRequiredTools: ["image-resizer", "image-cropper", "image-converter", "image-to-pdf"] as const satisfies readonly ProcessingTool[],
 } as const;
 
 export type PlanId = "free" | "premium";
@@ -17,7 +17,12 @@ export function getPublicToolAccessCopy(
   if (slug === "image-compressor") {
     return { tier: "FREE", detail: "Available" };
   }
-  if (slug === "image-resizer" || slug === "image-cropper" || slug === "image-converter") {
+  if (
+    slug === "image-resizer" ||
+    slug === "image-cropper" ||
+    slug === "image-converter" ||
+    slug === "image-to-pdf"
+  ) {
     if (options?.authenticated) {
       return { tier: "FREE", detail: "Available" };
     }

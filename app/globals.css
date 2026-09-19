@@ -107,6 +107,16 @@ h6 {
   padding-bottom: var(--section-y);
 }
 
+/* Privacy, Terms, Disclaimer — extra breathing room above footer */
+.legal-page-body {
+  padding-bottom: calc(var(--section-y) + 3rem);
+}
+
+/* Divider between legal sections: gap below the line before the next heading */
+main .legal-prose > section + section {
+  padding-top: 2.5rem;
+}
+
 /* Light divider between stacked sections (all pages) */
 main > section + section,
 main section + section {

@@ -10,6 +10,7 @@ describe("SEO sitemap paths", () => {
       "/tools/image-resizer",
       "/tools/image-cropper",
       "/tools/image-converter",
+      "/tools/image-to-pdf",
       "/about",
       "/how-it-works",
       "/contact",

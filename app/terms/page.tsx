@@ -12,6 +12,7 @@ export const metadata: Metadata = createLegalPageMetadata({
 export default function TermsPage() {
   return (
     <LegalPageLayout
+      eyebrow="Legal"
       title="Terms of Service"
       intro="Terms that govern your use of the EazyFiles website and online tools."
     >

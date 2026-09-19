@@ -1,27 +1,30 @@
 import { Container } from "@/components/ui/Container";
 import { EyebrowPill } from "@/components/ui/EyebrowPill";
-import { APP_NAME } from "@/lib/constants";
 
 const steps = [
   {
     step: "01",
-    title: "We read every message",
-    body: "Submissions are reviewed as we build out official support channels for launch.",
+    title: "We Review Your Message",
+    body:
+      "Your submission is reviewed so we can understand your question, feedback, or issue and determine the appropriate next step.",
   },
   {
     step: "02",
-    title: "We ask for clarity when needed",
-    body: "Account or tool issues are easier to resolve when you include relevant details up front.",
+    title: "We May Need More Details",
+    body:
+      "For account or tool-related issues, providing relevant details such as the tool, file format, browser, or steps to reproduce can help us understand the problem.",
   },
   {
     step: "03",
-    title: "We point you to the right place",
-    body: "Many answers live in How It Works, tool pages, or the Privacy Policy — we will link you there when it helps.",
+    title: "We Point You to the Right Resource",
+    body:
+      "Some questions may already be covered in our How It Works, tool pages, Privacy Policy, or other EazyFiles resources. We may direct you to the most relevant information.",
   },
   {
     step: "04",
-    title: "You stay in control",
-    body: "Only share what you are comfortable sending. Uploaded images are not stored via this form.",
+    title: "You Stay in Control",
+    body:
+      "Only share information that is relevant to your request. Do not include passwords, payment information, or other sensitive personal information in your message.",
   },
 ] as const;
 
@@ -32,10 +35,11 @@ export function ContactExpectSection() {
         <header className="max-w-2xl">
           <EyebrowPill className="w-fit">What to expect</EyebrowPill>
           <h2 id="contact-expect-heading" className="section-heading mt-6 text-foreground">
-            After you reach out.
+            After You Reach Out.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            {APP_NAME} is still expanding hands-on support. Here is how we handle contact submissions today.
+            We review contact submissions and use the information you provide to understand your request and direct you
+            to the right support or information.
           </p>
         </header>
 

@@ -152,6 +152,50 @@ const TOOL_WHY_USE_CONTENT: Partial<Record<string, WhyUseThisToolContent>> = {
       href: "/tools?category=image-tools",
     },
   },
+  "image-to-pdf": {
+    eyebrow: "Benefits",
+    title: "Simple Image to PDF Conversion for",
+    accent: "Everyday Tasks.",
+    description:
+      "Combine JPG, PNG, and WebP images into one downloadable PDF with flexible page layouts.",
+    benefits: [
+      {
+        title: "Multiple Images, One PDF",
+        body: "Add several images and download a single multi-page PDF in upload order.",
+        href: "#image-to-pdf",
+        cta: "Try Image to PDF →",
+      },
+      {
+        title: "Flexible Page Layout",
+        body: "Use image-sized pages or fit each image on A4 with margins.",
+        href: "#image-to-pdf",
+        cta: "Choose Layout →",
+      },
+      {
+        title: "Popular Input Formats",
+        body: "Upload JPG, PNG, or WebP images — the formats you already use.",
+        href: "#supported-formats",
+        cta: "See Formats →",
+      },
+      {
+        title: "Browser-Based",
+        body: "Works on desktop and mobile without installing desktop software.",
+        href: "#image-to-pdf",
+        cta: "Create a PDF →",
+      },
+      {
+        title: "Temporary Processing",
+        body:
+          "Images are processed on the server for PDF creation and are not stored as permanent files in our database.",
+        href: "/privacy",
+        cta: "Read Our Privacy Policy →",
+      },
+    ],
+    bottomCta: {
+      label: "Explore All Image Tools →",
+      href: "/tools?category=image-tools",
+    },
+  },
   "image-cropper": {
     eyebrow: "Benefits",
     title: "Simple Online Image Cropping for",

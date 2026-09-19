@@ -1,149 +1,402 @@
 import Link from "next/link";
-import { APP_NAME } from "@/lib/constants";
-import { LegalList, LegalProse, LegalSection } from "@/components/legal/LegalProse";
+import { APP_NAME, SITE_URL } from "@/lib/constants";
+import { LegalList, LegalProse, LegalSection, LegalSubsection } from "@/components/legal/LegalProse";
+
+const linkClass = "text-foreground underline-offset-4 hover:underline";
 
 export function PrivacyPolicyContent() {
-  const updated = "September 15, 2026";
+  const updated = "September 19, 2026";
 
   return (
     <LegalProse>
-      <p className="text-sm text-muted-foreground">Last updated: {updated}</p>
+      <p className="text-sm text-muted-foreground">
+        <strong className="font-medium text-foreground">Last Updated:</strong> {updated}
+      </p>
 
-      <LegalSection title="Overview">
+      <div className="space-y-4">
         <p>
-          This Privacy Policy describes how {APP_NAME} (&quot;we&quot;, &quot;us&quot;) handles information when you visit{" "}
-          {APP_NAME}.com and use our online tools. We aim to be clear about what we collect, why we collect it, and what we
-          do not do (for example, we do not store your uploaded image files in our database).
+          {APP_NAME} (&quot;{APP_NAME}&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) operates the {APP_NAME}{" "}
+          website and online file tools available at{" "}
+          <Link href={SITE_URL} className={linkClass}>{SITE_URL}</Link>.
+        </p>
+        <p>
+          This Privacy Policy explains how we collect, use, process, store, and protect information when you visit our
+          website, create an account, or use our online image tools.
+        </p>
+        <p>By using {APP_NAME}, you acknowledge the practices described in this Privacy Policy.</p>
+      </div>
+
+      <LegalSection title="1. Information We Collect">
+        <p>We collect information that is necessary to provide and improve {APP_NAME} and its services.</p>
+        <LegalSubsection title="1.1 Account Information">
+          <p>When you create or access an {APP_NAME} account, we may collect information such as:</p>
+          <LegalList
+            items={[
+              "Name",
+              "Email address",
+              "Google account information used for authentication",
+              "User account identifiers",
+              "Account creation and authentication information",
+            ]}
+          />
+          <p>{APP_NAME} currently supports Google sign-in for account authentication.</p>
+          <p>
+            We use this information to create and maintain your account, authenticate you, provide access to
+            account-based features, and communicate with you when necessary.
+          </p>
+        </LegalSubsection>
+      </LegalSection>
+
+      <LegalSection title="2. Uploaded Image Files">
+        <p>{APP_NAME} provides online image tools including:</p>
+        <LegalList items={["Image Compressor", "Image Resizer", "Image Cropper", "Image Converter"]} />
+        <p>When you upload an image, the file is transmitted to our server for processing where required by the tool.</p>
+        <p>Uploaded image files are processed for the specific task you request.</p>
+        <LegalSubsection title="Temporary Processing">
+          <p>Uploaded image files are processed temporarily and removed after processing.</p>
+          <p>Image files are not stored in our database.</p>
+          <p>We do not use uploaded images as a permanent file-storage service.</p>
+          <p>
+            You should avoid uploading files containing sensitive or confidential information unless you are comfortable
+            with the processing described in this Privacy Policy.
+          </p>
+        </LegalSubsection>
+      </LegalSection>
+
+      <LegalSection title="3. How We Use Your Information">
+        <p>We may use information we collect to:</p>
+        <LegalList
+          items={[
+            "Provide and operate EazyFiles tools",
+            "Process uploaded images",
+            "Create and manage user accounts",
+            "Authenticate users",
+            "Track applicable tool usage limits",
+            "Maintain the security and reliability of the service",
+            "Detect and prevent abuse or unauthorized activity",
+            "Troubleshoot technical problems",
+            "Improve website functionality and user experience",
+            "Understand how visitors use our website",
+            "Communicate with users when necessary",
+            "Comply with applicable legal obligations",
+          ]}
+        />
+        <p>
+          We use information only for legitimate purposes related to operating, maintaining, improving, and protecting{" "}
+          {APP_NAME}.
         </p>
       </LegalSection>
 
-      <LegalSection title="Information we collect">
-        <p>Depending on how you use the site, we may process:</p>
+      <LegalSection title="4. Google Sign-In">
+        <p>{APP_NAME} uses Google authentication to allow users to create or access an account.</p>
+        <p>
+          When you choose to sign in with Google, Google may provide us with information associated with your Google
+          account, such as your name, email address, profile information, and authentication identifiers, depending on
+          the permissions and configuration of the Google authentication service.
+        </p>
+        <p>We use this information to:</p>
         <LegalList
           items={[
-            "Account information you provide when you register (such as name and email address) or receive from Google when you sign in with Google.",
-            "Authentication and session data needed to keep you signed in and to enforce tool access rules.",
-            "Technical usage information such as compression counts tied to your session or account, tool job metadata, and standard server logs.",
-            "Information you submit through our contact form (name, email, subject, and message) when you choose to contact us.",
+            "Authenticate your account",
+            "Create or maintain your EazyFiles account",
+            "Associate your Google account with your EazyFiles account",
+            "Provide account-based access to EazyFiles services",
+            "Maintain account security",
+          ]}
+        />
+        <p>{APP_NAME} does not receive your Google password.</p>
+        <p>
+          Your use of Google services is also subject to Google&apos;s own privacy policies and terms.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="5. Cookies and Similar Technologies">
+        <p>
+          {APP_NAME} may use cookies, local storage, session technologies, and similar technologies to operate the
+          website and provide certain functionality.
+        </p>
+        <p>These technologies may be used for purposes such as:</p>
+        <LegalList
+          items={[
+            "Maintaining login sessions",
+            "Remembering necessary settings",
+            "Security and authentication",
+            "Measuring website usage",
+            "Understanding website performance",
+            "Preventing abuse and fraudulent activity",
+            "Supporting advertising and analytics, where applicable",
+          ]}
+        />
+        <p>
+          Some cookies may be placed by third-party service providers that support functionality, analytics,
+          authentication, or advertising.
+        </p>
+        <p>
+          You can control or disable cookies through your browser settings. However, disabling certain cookies may
+          affect some {APP_NAME} features, including authentication or other functionality.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="6. Analytics and Usage Information">
+        <p>We may use analytics and similar technologies to understand how visitors interact with {APP_NAME}.</p>
+        <p>This information may include:</p>
+        <LegalList
+          items={[
+            "Pages visited",
+            "Tool usage",
+            "Browser type",
+            "Device type",
+            "Approximate geographic information",
+            "Referring pages",
+            "Website interactions",
+            "Date and time of visits",
+            "General technical information",
+          ]}
+        />
+        <p>
+          Analytics information helps us understand website performance, identify problems, improve our tools, and develop
+          the {APP_NAME} platform.
+        </p>
+        <p>
+          Where third-party analytics services are used, those providers may process information according to their own
+          privacy policies.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="7. Advertising">
+        <p>
+          {APP_NAME} may display advertising provided by third-party advertising partners, including Google, if
+          advertising services are enabled on the website.
+        </p>
+        <p>
+          Third-party advertising providers may use cookies, web beacons, IP addresses, or similar technologies to
+          provide, measure, personalize, or improve advertisements.
+        </p>
+        <p>
+          If Google advertising services are used, Google and its partners may use advertising cookies to serve ads based
+          on a user&apos;s visit to {APP_NAME} or other websites, subject to applicable settings and policies.
+        </p>
+        <p>
+          Users may have options to control personalized advertising through Google&apos;s advertising settings and other
+          applicable privacy controls.
+        </p>
+        <p>
+          For users in regions where consent is legally required, {APP_NAME} may use an appropriate consent mechanism
+          before certain advertising cookies or personalized advertising technologies are used.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="8. Third-Party Services">
+        <p>{APP_NAME} may use third-party services to operate and improve the website.</p>
+        <p>These services may include providers for:</p>
+        <LegalList
+          items={[
+            "Authentication",
+            "Cloud hosting",
+            "Database services",
+            "Analytics",
+            "Security",
+            "Error monitoring",
+            "Advertising",
+            "Website infrastructure",
+          ]}
+        />
+        <p>Third-party providers may process information on our behalf where necessary to provide their services.</p>
+        <p>Examples of third-party services may include Google authentication and Google advertising services.</p>
+        <p>Third-party services are governed by their respective privacy policies and terms.</p>
+      </LegalSection>
+
+      <LegalSection title="9. Database and Account Data">
+        <p>{APP_NAME} stores certain account and service-related information in its database.</p>
+        <p>This may include:</p>
+        <LegalList
+          items={[
+            "Account information",
+            "Email address",
+            "Authentication information",
+            "Account identifiers",
+            "Tool usage information",
+            "Service-related records",
+          ]}
+        />
+        <p>
+          Uploaded image files are separate from account database records and are not stored in the database as permanent
+          user files.
+        </p>
+        <p>
+          We retain account and service information for as long as reasonably necessary to provide the service, maintain
+          security, comply with legal obligations, resolve disputes, and enforce our agreements.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="10. Data Security">
+        <p>We take reasonable technical and organizational measures to protect information handled through {APP_NAME}.</p>
+        <p>These measures may include:</p>
+        <LegalList
+          items={[
+            "Secure connections using HTTPS",
+            "Authentication controls",
+            "Access controls",
+            "Server-side security measures",
+            "Protection of account information",
+            "Monitoring for unauthorized activity",
+          ]}
+        />
+        <p>
+          However, no website, online service, or method of electronic transmission can be guaranteed to be completely
+          secure.
+        </p>
+        <p>
+          You are responsible for maintaining the security of your account credentials and for using appropriate caution
+          when uploading files to online services.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="11. Data Retention">
+        <p>We retain information only for as long as reasonably necessary for the purposes described in this Privacy Policy.</p>
+        <p>
+          Account-related information may be retained while your account remains active or as necessary to provide{" "}
+          {APP_NAME} services.
+        </p>
+        <p>
+          Uploaded image files are processed temporarily and removed after processing. They are not stored as permanent
+          files in our database.
+        </p>
+        <p>Certain information may be retained for longer where necessary for:</p>
+        <LegalList
+          items={[
+            "Legal compliance",
+            "Security",
+            "Fraud prevention",
+            "Dispute resolution",
+            "Enforcement of our agreements",
+            "Technical or operational requirements",
           ]}
         />
       </LegalSection>
 
-      <LegalSection title="Account information">
+      <LegalSection title="12. Your Privacy Rights">
         <p>
-          If you create an account, we store your name and email address in our database. If you register with a
-          password, we store a hashed version of your password — not the plain text password. If you use Google sign-in,
-          we receive profile information from Google (such as your name and email) according to your Google account
-          settings and link it to your {APP_NAME} account.
+          Depending on where you live and the laws that apply to you, you may have rights relating to your personal
+          information.
+        </p>
+        <p>These rights may include:</p>
+        <LegalList
+          items={[
+            "Requesting access to personal information we hold about you",
+            "Requesting correction of inaccurate information",
+            "Requesting deletion of certain personal information",
+            "Requesting restriction of certain processing",
+            "Objecting to certain processing",
+            "Withdrawing consent where processing is based on consent",
+            "Requesting information about how your data is processed",
+          ]}
+        />
+        <p>The availability of these rights depends on applicable law and the circumstances of the request.</p>
+        <p>To make a privacy-related request, contact us using the contact information provided below.</p>
+        <p>We may need to verify your identity before completing certain requests.</p>
+      </LegalSection>
+
+      <LegalSection title="13. Account Deletion">
+        <p>
+          If you want to request deletion of your {APP_NAME} account or account-related information, contact us using the
+          contact details provided below.
+        </p>
+        <p>
+          When legally and technically appropriate, we will process the request and delete or anonymize applicable
+          information.
+        </p>
+        <p>
+          Some information may need to be retained where required by law, necessary for security, fraud prevention,
+          dispute resolution, or other legitimate purposes.
         </p>
       </LegalSection>
 
-      <LegalSection title="Uploaded files">
+      <LegalSection title="14. Children's Privacy">
+        <p>{APP_NAME} is a general-purpose online tool platform.</p>
         <p>
-          When you use an image tool, you upload a file so we can process it on our servers. Image bytes are written to a
-          temporary folder on the server for processing and are removed when that operation finishes. We do not store the
-          contents of your uploaded images in our application database.
+          {APP_NAME} does not knowingly collect personal information from children in violation of applicable law.
         </p>
         <p>
-          We do store limited metadata about processing jobs (for example original file name, formats, file sizes, target
-          size, compression percentage, session identifier, and status) to operate the service, enforce usage limits,
-          and troubleshoot issues.
+          If you believe that a child has provided personal information to {APP_NAME} without appropriate authorization,
+          please contact us so that we can review and take appropriate action.
         </p>
       </LegalSection>
 
-      <LegalSection title="How files are processed">
+      <LegalSection title="15. International Users">
+        <p>{APP_NAME} may be accessed by users around the world.</p>
         <p>
-          Processing happens on {APP_NAME} servers using server-side image libraries. The optimized file is returned to
-          your browser for download. Temporary working files are deleted as part of the processing workflow; we do not
-          design the service to keep copies of your images after processing completes.
+          Depending on where you are located and where our service providers operate, information may be processed or
+          stored in countries other than your country of residence.
+        </p>
+        <p>
+          Where applicable, we take reasonable steps to handle personal information in accordance with applicable privacy
+          and data protection requirements.
+        </p>
+        <p>For users in jurisdictions with specific privacy laws, additional rights or protections may apply.</p>
+      </LegalSection>
+
+      <LegalSection title="16. Legal Basis for Processing">
+        <p>
+          Where applicable law requires a legal basis for processing personal information, we may process information
+          based on one or more of the following:
+        </p>
+        <LegalList
+          items={[
+            "Your consent",
+            "Performance of a contract or provision of requested services",
+            "Compliance with legal obligations",
+            "Legitimate interests, where permitted by applicable law",
+            "Protection of our services, users, and systems",
+          ]}
+        />
+        <p>
+          Where processing is based on consent, you may have the right to withdraw that consent, subject to applicable
+          law.
         </p>
       </LegalSection>
 
-      <LegalSection title="Usage and technical information">
+      <LegalSection title="17. Changes to This Privacy Policy">
+        <p>We may update this Privacy Policy from time to time to reflect changes to:</p>
+        <LegalList
+          items={[
+            "EazyFiles services",
+            "Website functionality",
+            "Data processing practices",
+            "Third-party services",
+            "Advertising or analytics technologies",
+            "Applicable legal requirements",
+          ]}
+        />
         <p>
-          To operate free access rules (such as anonymous compression limits and signed-in daily limits), we record usage
-          counters linked to a session identifier or your account. We may also process basic technical data such as IP
-          address, browser type, and request timestamps in server logs for security, abuse prevention, and reliability.
+          When we make changes, we will update the Last Updated date at the beginning of this Privacy Policy.
+        </p>
+        <p>We encourage you to review this page periodically to stay informed about how {APP_NAME} handles information.</p>
+      </LegalSection>
+
+      <LegalSection title="18. Contact Us">
+        <p>
+          If you have questions about this Privacy Policy, our data practices, or your privacy rights, please contact us.
+        </p>
+        <p>
+          <strong className="font-medium text-foreground">Website:</strong> {APP_NAME}
+        </p>
+        <p>
+          <strong className="font-medium text-foreground">Website URL:</strong>{" "}
+          <Link href={SITE_URL} className={linkClass}>{SITE_URL}</Link>
+        </p>
+        <p>
+          <strong className="font-medium text-foreground">Email:</strong>{" "}
+          <Link href="/contact" className={linkClass}>Contact form</Link> — choose &quot;Privacy or data request&quot; for
+          privacy-related messages.
         </p>
       </LegalSection>
 
-      <LegalSection title="Cookies and similar technologies">
+      <LegalSection title="19. Important Notice">
         <p>
-          We use cookies and similar storage to run the site. This includes an HttpOnly session cookie (and related
-          session identifiers) used to recognize your browser session, apply usage limits, and maintain sign-in state.
-          Anonymous session identifiers may also be stored in your browser&apos;s local storage so the site can continue
-          counting usage across visits.
-        </p>
-        <p>Auth.js / NextAuth session cookies apply when you log in or use Google sign-in.</p>
-      </LegalSection>
-
-      <LegalSection title="Analytics">
-        <p>
-          We do not currently use third-party analytics products (such as Google Analytics) on {APP_NAME}. If we add
-          analytics in the future, we will update this policy to describe what is collected and how you can control it.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Advertising">
-        <p>
-          {APP_NAME} does not currently display third-party advertising on the site. If we introduce advertising in the
-          future, we will update this policy to explain what data may be used for ads and any choices available to you.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Google services">
-        <p>
-          If you choose &quot;Continue with Google&quot;, Google&apos;s privacy policy and terms apply to information Google
-          processes. {APP_NAME} receives limited account details from Google to create or sign you in to your account.
-          Google OAuth credentials are used only to enable that sign-in flow.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Data retention">
-        <p>
-          Account data is kept while your account is active and as needed to provide the service. Usage records and job
-          metadata are retained for operational, security, and limit-enforcement purposes. Server logs are kept for a
-          limited period appropriate for security and troubleshooting. Uploaded image files are not retained in our
-          database; temporary server files are removed after processing.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Security">
-        <p>
-          We use reasonable technical and organizational measures to protect information we process, including encrypted
-          transport (HTTPS), hashed passwords, and access controls on infrastructure. No method of transmission or
-          storage is completely secure; we cannot guarantee absolute security.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Your rights and choices">
-        <p>
-          Depending on where you live, you may have rights to access, correct, or delete personal information we hold
-          about you. You can update account details by signing in. You may request account deletion or other privacy
-          requests by contacting us through the{" "}
-          <Link href="/contact" className="text-foreground underline-offset-4 hover:underline">contact page</Link>.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Children's privacy">
-        <p>
-          {APP_NAME} is not directed at children under 13, and we do not knowingly collect personal information from
-          children. If you believe a child has provided us information, contact us and we will take appropriate steps.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Changes to this policy">
-        <p>
-          We may update this Privacy Policy from time to time. We will post the revised version on this page and update
-          the &quot;Last updated&quot; date. Continued use of the site after changes means you accept the updated policy.
-        </p>
-      </LegalSection>
-
-      <LegalSection title="Contact">
-        <p>
-          For privacy questions, use our{" "}
-          <Link href="/contact" className="text-foreground underline-offset-4 hover:underline">contact form</Link>. We
-          do not list a public support inbox until one is officially published on this site.
+          This Privacy Policy is intended to explain {APP_NAME}&apos; data practices in clear language. It does not
+          replace legal advice and should be reviewed against the laws and regulations applicable to the business and
+          the locations in which {APP_NAME} operates.
         </p>
       </LegalSection>
     </LegalProse>

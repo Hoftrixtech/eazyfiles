@@ -12,6 +12,7 @@ export const metadata: Metadata = createLegalPageMetadata({
 export default function DisclaimerPage() {
   return (
     <LegalPageLayout
+      eyebrow="Legal"
       title="Disclaimer"
       intro="Important limitations and responsibilities when using EazyFiles online utility tools."
     >

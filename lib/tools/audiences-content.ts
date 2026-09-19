@@ -121,6 +121,38 @@ const TOOL_AUDIENCES_CONTENT: Partial<Record<string, AudiencesSectionContent>> =
       },
     ],
   },
+  "image-to-pdf": {
+    eyebrow: "Built for everyday use",
+    heading: "Turn Images Into PDFs for Everyday Work",
+    description:
+      `${APP_NAME} helps you combine JPG, PNG, and WebP images into a single PDF for sharing, printing, and documentation.`,
+    audiences: [
+      {
+        title: "Office & Admin Work",
+        body:
+          "Bundle scanned photos, receipts, or screenshots into one PDF for email, records, or documentation.",
+      },
+      {
+        title: "Students",
+        body:
+          "Combine assignment photos, scanned pages, or project images into a single PDF for submission.",
+      },
+      {
+        title: "Freelancers",
+        body:
+          "Combine client proofs, reference images, or project visuals into one PDF instead of sending multiple image attachments.",
+      },
+      {
+        title: "Small Businesses",
+        body:
+          "Create simple PDF documents from product photos, receipts, records, or marketing graphics.",
+      },
+      {
+        title: "Anyone Sharing Photos",
+        body: "Combine a set of images into a single PDF that is easy to share, download, and organize.",
+      },
+    ],
+  },
   "image-cropper": {
     eyebrow: "Built for everyday use",
     heading: "Online Image Cropping for Everyday Work",

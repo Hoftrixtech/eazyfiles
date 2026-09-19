@@ -38,6 +38,8 @@ async function ensureIndexes(): Promise<void> {
     const { LoginAttempt } = await import("@/models/LoginAttempt");
     const { Entitlement } = await import("@/models/Entitlement");
     const { OAuthAccount } = await import("@/models/OAuthAccount");
+    const { Contact } = await import("@/models/Contact");
+    const { ContactRateLimit } = await import("@/models/ContactRateLimit");
     await Promise.all([
       CompressionJob.createIndexes(),
       Usage.createIndexes(),
@@ -47,6 +49,8 @@ async function ensureIndexes(): Promise<void> {
       LoginAttempt.createIndexes(),
       Entitlement.createIndexes(),
       OAuthAccount.createIndexes(),
+      Contact.createIndexes(),
+      ContactRateLimit.createIndexes(),
     ]);
     cache.indexesEnsured = true;
   } catch {

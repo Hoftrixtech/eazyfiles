@@ -6,31 +6,35 @@ import { cn } from "@/lib/utils";
 const paths = [
   {
     tag: "Account",
-    title: "Account & sign-in help",
-    body: "Questions about logging in, your dashboard, or continuing after the free compression limit.",
+    title: "Account & Sign-In Help",
+    body:
+      "Questions about signing in, your account, or continuing to use EazyFiles after reaching the anonymous compression limit.",
     href: "/login",
-    cta: "Sign in →",
+    cta: "Sign In →",
   },
   {
     tag: "How it works",
-    title: "Learn the workflow",
-    body: "See how upload, settings, and download work across EazyFiles image tools before you write in.",
+    title: "Learn How EazyFiles Works",
+    body:
+      "See how uploading, choosing settings, processing, and downloading work across EazyFiles image tools.",
     href: "/how-it-works",
-    cta: "How it works →",
+    cta: "How It Works →",
   },
   {
     tag: "Tools",
-    title: "Browse image tools",
-    body: "Jump straight to the compressor, resizer, cropper, or converter if you already know what you need.",
+    title: "Browse Image Tools",
+    body:
+      "Explore the Image Compressor, Image Resizer, Image Cropper, and Image Converter to find the tool you need.",
     href: "/tools?category=image-tools",
-    cta: "Explore tools →",
+    cta: "Explore Tools →",
   },
   {
     tag: "Privacy",
-    title: "Privacy & data",
-    body: "Read how uploaded files and account information are handled before sending a privacy-related request.",
+    title: "Privacy & Data",
+    body:
+      "Learn how EazyFiles handles uploaded images, account information, and other data before sending a privacy-related request.",
     href: "/privacy",
-    cta: "Privacy policy →",
+    cta: "Privacy Policy →",
   },
 ] as const;
 
@@ -41,10 +45,10 @@ export function ContactOtherPathsSection() {
         <header className="max-w-2xl">
           <EyebrowPill className="w-fit">Other ways in</EyebrowPill>
           <h2 id="contact-paths-heading" className="section-heading mt-6 text-foreground">
-            Pick the path that fits.
+            Pick the Path That Fits.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            Not everything needs a form. These pages may answer your question faster.
+            Not every question needs a message. Explore these options to find the information you need faster.
           </p>
         </header>
 

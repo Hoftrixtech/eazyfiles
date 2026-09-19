@@ -4,10 +4,11 @@ import { createPageMetadata } from "@/lib/seo";
 
 const LEGAL_DESCRIPTIONS: Record<string, string> = {
   About: "Learn about EazyFiles and our mission to provide simple online image tools.",
-  Contact: "Contact EazyFiles for support and general inquiries about our online image tools.",
-  "Privacy Policy": "Read how EazyFiles handles data and privacy when you use our online image tools.",
-  Terms: "Terms of use for EazyFiles online image tools and website.",
-  Disclaimer: "Disclaimer for EazyFiles online image tools and website content.",
+  Contact:
+    "Questions about EazyFiles, our image tools, or your account? Send us a message below. We read submissions as we expand support channels for launch.",
+  "Privacy Policy": "How EazyFiles handles information when you use our website and image tools.",
+  Terms: "Terms that govern your use of the EazyFiles website and online tools.",
+  Disclaimer: "Important limitations and responsibilities when using EazyFiles online utility tools.",
 };
 
 export function legalPageMetadata(title: string, path: string): Metadata {

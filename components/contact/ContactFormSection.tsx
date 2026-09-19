@@ -5,10 +5,10 @@ import { EyebrowPill } from "@/components/ui/EyebrowPill";
 import { APP_NAME } from "@/lib/constants";
 
 const highlights = [
-  "Messages are read by our team as we expand support.",
+  "We review messages and respond when support is available.",
   "Include your sign-in email for account-related requests.",
-  "Tool issues are easier to solve with format, browser, and steps to reproduce.",
-  "We do not publish a public inbox until support is officially announced.",
+  "For tool issues, mention the file format, browser, and steps that caused the problem.",
+  "Please do not include passwords or sensitive personal information in your message.",
 ] as const;
 
 export function ContactFormSection() {
@@ -22,8 +22,9 @@ export function ContactFormSection() {
               Tell us what you need.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Use the form to reach {APP_NAME} about image tools, your account, privacy questions, or general feedback.
-              Choosing a topic helps us route your message.
+              Use the form to contact {APP_NAME} about our image tools, your account, privacy questions, technical
+              issues, or general feedback. Choose a topic and provide a few details so we can better understand your
+              request.
             </p>
             <ul className="mt-8 space-y-3">
               {highlights.map((item) => (

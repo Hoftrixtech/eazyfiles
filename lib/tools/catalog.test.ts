@@ -17,18 +17,20 @@ describe("tool catalog", () => {
     expect(new Set(slugs).size).toBe(slugs.length);
   });
 
-  it("marks the four image tools as live", () => {
+  it("marks the five image tools as live", () => {
     const live = getLiveTools();
     expect(live.map((tool) => tool.slug)).toEqual([
       "image-compressor",
       "image-resizer",
       "image-cropper",
       "image-converter",
+      "image-to-pdf",
     ]);
     expect(getPublicToolHref(getToolBySlug("image-compressor")!)).toBe("/");
     expect(getPublicToolHref(getToolBySlug("image-resizer")!)).toBe("/tools/image-resizer");
     expect(getPublicToolHref(getToolBySlug("image-cropper")!)).toBe("/tools/image-cropper");
     expect(getPublicToolHref(getToolBySlug("image-converter")!)).toBe("/tools/image-converter");
+    expect(getPublicToolHref(getToolBySlug("image-to-pdf")!)).toBe("/tools/image-to-pdf");
   });
 
   it("keeps coming-soon tools from producing public hrefs", () => {
@@ -42,7 +44,7 @@ describe("tool catalog", () => {
     expect(related.map((tool) => tool.slug)).toEqual([
       "image-resizer",
       "image-converter",
-      "image-cropper",
+      "image-to-pdf",
     ]);
   });
 
@@ -53,6 +55,7 @@ describe("tool catalog", () => {
       "image-resizer",
       "image-cropper",
       "image-converter",
+      "image-to-pdf",
     ]);
     expect(getCategoryBySlug("image-tools")?.name).toBe("Image Tools");
   });

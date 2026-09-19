@@ -7,6 +7,7 @@ const FALLBACK_NAMES: Record<string, string> = {
   "image-resizer": "Image Resizer",
   "image-cropper": "Image Cropper",
   "image-converter": "Image Converter",
+  "image-to-pdf": "Image to PDF",
 };
 
 export function LiveToolLink({ slug }: { slug: Tool["slug"] }) {

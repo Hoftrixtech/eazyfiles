@@ -24,7 +24,7 @@ export function LegalPageLayout({
         title={title}
         description={intro}
       />
-      <section className="section-padding">
+      <section className="section-padding legal-page-body">
         <Container className="max-w-3xl">
           {children ?? (
             <div className="space-y-4 rounded-sm border border-dashed border-border bg-muted/30 p-6 text-sm leading-relaxed text-muted-foreground">

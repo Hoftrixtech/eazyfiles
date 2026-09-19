@@ -13,6 +13,7 @@ const toolLinks = [
   { href: "/tools/image-resizer", label: "Image Resizer" },
   { href: "/tools/image-cropper", label: "Image Cropper" },
   { href: "/tools/image-converter", label: "Image Converter" },
+  { href: "/tools/image-to-pdf", label: "Image to PDF" },
 ] as const;
 
 const companyLinks = [

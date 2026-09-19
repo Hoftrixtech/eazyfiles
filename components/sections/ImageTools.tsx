@@ -32,6 +32,11 @@ const TOOL_CARD_COPY: Record<
       "Convert images online between JPG, PNG, and WebP formats. Choose the format you need for websites, social media, documents, and digital projects.",
     cta: "Convert Images Online →",
   },
+  "image-to-pdf": {
+    description:
+      "Turn JPG, PNG, and WebP images into a single PDF. Add multiple images to create a multi-page document for sharing or printing.",
+    cta: "Convert Images to PDF →",
+  },
 };
 
 export async function ImageToolsSection() {

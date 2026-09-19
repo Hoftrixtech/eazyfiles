@@ -14,7 +14,7 @@ export const TOOLS: readonly Tool[] = [
     route: "/",
     keywords: ["compress image", "reduce image size", "jpg compressor", "png compressor", "webp compressor"],
     supportedFormats: ["JPG", "JPEG", "PNG", "WebP"],
-    relatedTools: ["image-resizer", "image-converter", "image-cropper"],
+    relatedTools: ["image-resizer", "image-converter", "image-to-pdf"],
     seoTitle: "Free Image Compressor Online – Reduce Image Size | EazyFiles",
     seoDescription:
       "Compress JPG, PNG and WebP images online for free. Reduce image file size to a target size quickly without installing software.",
@@ -31,7 +31,7 @@ export const TOOLS: readonly Tool[] = [
     route: "/tools/image-resizer",
     keywords: ["resize image", "change image dimensions", "image resizer"],
     supportedFormats: ["JPG", "JPEG", "PNG", "WebP"],
-    relatedTools: ["image-compressor", "image-cropper", "image-converter"],
+    relatedTools: ["image-compressor", "image-cropper", "image-to-pdf"],
     seoTitle: "Image Resizer Online – Resize JPG, PNG & WebP | EazyFiles",
     seoDescription:
       "Resize JPG, PNG and WebP images online with custom dimensions, presets and aspect-ratio control. Fast, simple and free with EazyFiles.",
@@ -48,7 +48,7 @@ export const TOOLS: readonly Tool[] = [
     route: "/tools/image-cropper",
     keywords: ["crop image", "trim image", "crop jpg", "crop png", "crop webp"],
     supportedFormats: ["JPG", "JPEG", "PNG", "WebP"],
-    relatedTools: ["image-resizer", "image-compressor", "image-converter"],
+    relatedTools: ["image-resizer", "image-compressor", "image-to-pdf"],
     seoTitle: "Image Cropper Online – Crop JPG, PNG & WebP | EazyFiles",
     seoDescription:
       "Crop JPG, PNG and WebP images online with flexible aspect ratios. Quickly crop and download your image for free with EazyFiles.",
@@ -65,10 +65,27 @@ export const TOOLS: readonly Tool[] = [
     route: "/tools/image-converter",
     keywords: ["convert image", "jpg to webp", "png to jpg", "webp to png", "image converter"],
     supportedFormats: ["JPG", "JPEG", "PNG", "WebP"],
-    relatedTools: ["image-compressor", "image-resizer", "image-cropper"],
+    relatedTools: ["image-compressor", "image-resizer", "image-to-pdf"],
     seoTitle: "Image Converter Online – Convert JPG, PNG & WebP | EazyFiles",
     seoDescription:
       "Convert JPG, PNG and WebP images online with high-quality output. Quickly convert image formats for free with EazyFiles.",
+  },
+  {
+    slug: "image-to-pdf",
+    name: "Image to PDF",
+    shortDescription: "Combine JPG, PNG and WebP images into one downloadable PDF.",
+    longDescription:
+      "Upload one or more images and download a PDF. Each image becomes a page in order. Choose image-sized pages or fit each image on A4.",
+    category: "image-tools",
+    icon: "file-text",
+    status: "live",
+    route: "/tools/image-to-pdf",
+    keywords: ["image to pdf", "jpg to pdf", "png to pdf", "convert image to pdf", "photos to pdf"],
+    supportedFormats: ["JPG", "JPEG", "PNG", "WebP", "PDF"],
+    relatedTools: ["image-compressor", "image-converter", "image-resizer"],
+    seoTitle: "Image to PDF Online – Convert JPG, PNG & WebP to PDF | EazyFiles",
+    seoDescription:
+      "Convert JPG, PNG and WebP images to PDF online. Combine multiple images into one PDF and download instantly with EazyFiles.",
   },
   {
     slug: "pdf-compressor",

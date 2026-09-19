@@ -36,6 +36,11 @@ const TOOL_PRESENTATION: Record<
     cta: "Use Converter →",
     iconClassName: "bg-amber-500/15 text-amber-600",
   },
+  "image-to-pdf": {
+    description: "Combine one or more images into a downloadable PDF with image-sized or A4 page layouts.",
+    cta: "Use Image to PDF →",
+    iconClassName: "bg-rose-500/15 text-rose-600",
+  },
 };
 
 function ChooseToolCard({ tool }: { tool: Tool }) {

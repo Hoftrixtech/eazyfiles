@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Crop, ImageDown, Repeat, Scaling } from "lucide-react";
+import { Crop, FileText, ImageDown, Repeat, Scaling } from "lucide-react";
 import { AccountSummaryCard } from "@/components/dashboard/AccountSummaryCard";
 import { ActivityList } from "@/components/dashboard/ActivityList";
 import { QuickToolCard } from "@/components/dashboard/QuickToolCard";
@@ -44,6 +44,12 @@ const QUICK_TOOLS = [
     description: "Convert images between supported formats.",
     href: "/tools/image-converter",
     icon: Repeat,
+  },
+  {
+    title: "Image to PDF",
+    description: "Combine images into a downloadable PDF.",
+    href: "/tools/image-to-pdf",
+    icon: FileText,
   },
 ] as const;
 

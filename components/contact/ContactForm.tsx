@@ -2,18 +2,9 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
-import { ArrowRight } from "lucide-react";
 import { brandCtaClass } from "@/lib/brand-styles";
+import { CONTACT_TOPIC_OPTIONS } from "@/lib/contact/topics";
 import { cn } from "@/lib/utils";
-
-const SUBJECT_OPTIONS = [
-  { value: "", label: "Choose one to help us route your message" },
-  { value: "general", label: "General question" },
-  { value: "account", label: "Account or sign-in help" },
-  { value: "tools", label: "Image tools or technical issue" },
-  { value: "privacy", label: "Privacy or data request" },
-  { value: "feedback", label: "Feedback or suggestion" },
-] as const;
 
 function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -31,6 +22,7 @@ export function ContactForm() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [formError, setFormError] = useState<string | null>(null);
   const [status, setStatus] = useState<FormStatus>("idle");
 
   function validate() {
@@ -44,7 +36,7 @@ export function ContactForm() {
       next.email = "Enter a valid email address.";
     }
     if (!subject) {
-      next.subject = "Choose what your message is about.";
+      next.subject = "Choose a topic.";
     }
     if (!message.trim()) {
       next.message = "Enter a message.";
@@ -63,9 +55,45 @@ export function ContactForm() {
 
     setStatus("submitting");
     setErrors({});
+    setFormError(null);
 
-    await new Promise((resolve) => setTimeout(resolve, 400));
-    setStatus("success");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          subject,
+          message: message.trim(),
+        }),
+      });
+
+      const data = (await response.json()) as {
+        success?: boolean;
+        error?: { message?: string; fields?: Record<string, string> };
+      };
+
+      if (!response.ok) {
+        if (data.error?.fields) {
+          setErrors(data.error.fields);
+        }
+        setFormError(data.error?.message ?? "Something went wrong. Please try again.");
+        setStatus("error");
+        return;
+      }
+
+      if (!data.success) {
+        setFormError("Something went wrong. Please try again.");
+        setStatus("error");
+        return;
+      }
+
+      setStatus("success");
+    } catch {
+      setFormError("Something went wrong. Please try again.");
+      setStatus("error");
+    }
   }
 
   if (status === "success") {
@@ -73,8 +101,7 @@ export function ContactForm() {
       <div className="btn-radius border border-border bg-muted/40 p-6 sm:p-8" role="status">
         <p className="text-lg font-semibold text-foreground">Thank you for your message.</p>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          We have recorded your submission. Email delivery is not connected yet — please keep a copy if your request is
-          urgent. We will use this channel as we finalize support for launch.
+          We have received your message and will get back to you as soon as we can.
         </p>
         <button
           type="button"
@@ -84,6 +111,7 @@ export function ContactForm() {
             setEmail("");
             setSubject("");
             setMessage("");
+            setFormError(null);
             setStatus("idle");
           }}
         >
@@ -95,12 +123,12 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-      {status === "error" ? (
+      {status === "error" && formError ? (
         <p
           className="btn-radius border border-destructive/20 bg-destructive-soft px-3 py-2 text-sm text-destructive"
           role="alert"
         >
-          Something went wrong. Please try again.
+          {formError}
         </p>
       ) : null}
 
@@ -116,7 +144,7 @@ export function ContactForm() {
           aria-invalid={Boolean(errors.subject)}
           aria-describedby={errors.subject ? "contact-subject-error" : undefined}
         >
-          {SUBJECT_OPTIONS.map((option) => (
+          {CONTACT_TOPIC_OPTIONS.map((option) => (
             <option key={option.value || "placeholder"} value={option.value} disabled={option.value === ""}>
               {option.label}
             </option>
@@ -174,7 +202,7 @@ export function ContactForm() {
           id="contact-message"
           name="message"
           rows={5}
-          placeholder="Share enough detail for us to help — one short paragraph is fine."
+          placeholder="Tell us how we can help. Please include enough detail for us to understand your request."
           value={message}
           disabled={status === "submitting"}
           onChange={(e) => setMessage(e.target.value)}
@@ -192,8 +220,7 @@ export function ContactForm() {
         disabled={status === "submitting"}
         className={cn(brandCtaClass, "h-12 w-full text-sm disabled:opacity-60")}
       >
-        {status === "submitting" ? "Sending…" : "Send message"}
-        <ArrowRight className="size-4" aria-hidden="true" />
+        {status === "submitting" ? "Sending…" : "Send message →"}
       </button>
 
       <p className="text-center text-xs leading-relaxed text-muted-foreground">

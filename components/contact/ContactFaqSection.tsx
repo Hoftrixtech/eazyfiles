@@ -6,26 +6,27 @@ const faqs = [
   {
     question: "How quickly will I hear back?",
     answer:
-      "We review contact submissions as we expand support. Email delivery is not live yet, so keep a copy of urgent requests and check back for updates on official support channels.",
+      "We review contact submissions and respond when support is available. Response times may vary while we continue to expand official support channels for launch.",
   },
   {
     question: "What should I include for account help?",
     answer:
-      "Use the email address you sign in with and describe what you tried (browser, sign-in method, and any error messages). That helps us troubleshoot faster.",
+      "Choose “Account & Sign-In” as the topic. Include the email address you use to sign in, your sign-in method (such as Google), your browser, and any error messages you see.",
   },
   {
     question: "Can I report a problem with an image tool?",
     answer:
-      "Yes. Choose “Image tools or technical issue,” note which tool you used, the file format, and what happened. Do not attach sensitive images in the message if you can describe the issue instead.",
+      "Yes. Select “Image Tool Support” or “Technical Issue” and tell us which tool you used, the file format, your browser, and the steps that caused the problem. Do not include passwords or sensitive personal information.",
   },
   {
     question: "Is there a public support email?",
-    answer: `${APP_NAME} does not publish a public support inbox on this site until it is officially announced. Use this form for now.`,
+    answer:
+      `${APP_NAME} does not publish a public support email on this site until one is officially announced. Please use the contact form on this page for now.`,
   },
   {
     question: "How do privacy requests work?",
     answer:
-      "Select “Privacy or data request” and explain your request. You can also read the Privacy Policy for how we handle information and uploaded files.",
+      "Select “Privacy Question,” describe your request, and include the email address associated with your account if relevant. You can also read our Privacy Policy for how we handle information and uploaded files.",
   },
 ] as const;
 
@@ -36,7 +37,7 @@ export function ContactFaqSection() {
         <header className="text-center lg:text-left">
           <EyebrowPill className="mx-auto w-fit lg:mx-0">FAQ</EyebrowPill>
           <h2 id="contact-faq-heading" className="section-heading mt-6 text-foreground">
-            Common questions.
+            Common Questions.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             Quick answers before you send a message.

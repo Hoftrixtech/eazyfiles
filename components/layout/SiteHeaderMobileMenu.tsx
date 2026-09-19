@@ -5,15 +5,19 @@ import { ArrowUpRight, LayoutDashboard, Settings } from "lucide-react";
 import { LogoutMenuItem } from "@/components/account/LogoutMenuItem";
 import type { UserMenuUser } from "@/components/account/UserMenu";
 import { brandCtaClass, brandOutlineCtaClass } from "@/lib/brand-styles";
+import type { ImageToolNavItem } from "@/lib/nav/image-tools-nav";
+import { ToolIcon } from "@/lib/tools/icons";
 
 const linkClass =
   "rounded-lg px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-muted";
 
 export function SiteHeaderMobileMenu({
   links,
+  imageTools,
   user,
 }: {
   links: readonly { href: string; label: string }[];
+  imageTools: ImageToolNavItem[];
   user: UserMenuUser | null;
 }) {
   return (
@@ -37,13 +41,27 @@ export function SiteHeaderMobileMenu({
       </summary>
       <nav
         aria-label="Mobile"
-        className="absolute right-0 z-50 mt-2 flex w-56 flex-col gap-1 rounded-xl border border-border bg-card p-2 shadow-[var(--shadow-elevated)]"
+        className="absolute right-0 z-50 mt-2 flex max-h-[min(32rem,calc(100vh-6rem))] w-72 flex-col gap-1 overflow-y-auto rounded-xl border border-border bg-card p-2 shadow-[var(--shadow-elevated)]"
       >
         {links.map((link) => (
           <Link key={link.href} href={link.href} className={linkClass}>
             {link.label}
           </Link>
         ))}
+        <details className="group/tools px-1">
+          <summary className={`${linkClass} cursor-pointer list-none font-medium`}>Tools</summary>
+          <div className="mt-1 ml-2 space-y-0.5 border-l border-border pl-2">
+            {imageTools.map((tool) => (
+              <Link key={tool.slug} href={tool.href} className={`${linkClass} flex items-center gap-2 py-2`}>
+                <ToolIcon name={tool.icon} className="size-4 shrink-0 text-primary" />
+                <span>{tool.name}</span>
+              </Link>
+            ))}
+            <Link href="/tools?category=image-tools" className={`${linkClass} text-primary`}>
+              All image tools →
+            </Link>
+          </div>
+        </details>
         <div className="my-1 space-y-0.5 border-t border-border pt-1">
           {user ? (
             <>

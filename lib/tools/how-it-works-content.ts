@@ -122,6 +122,27 @@ const TOOL_HOW_IT_WORKS_CONTENT: Partial<Record<string, HowItWorksContent>> = {
       },
     ],
   },
+  "image-to-pdf": {
+    eyebrow: "How It Works",
+    title: "How It Works",
+    accent: "Create a PDF in 3 Simple Steps",
+    description:
+      "Upload your images, choose a page layout, and download a PDF. Each image becomes its own page in the order you add them.",
+    steps: [
+      {
+        title: "Upload Your Images",
+        body: "Select one or more JPG, PNG, or WebP images from your device.",
+      },
+      {
+        title: "Choose Page Layout",
+        body: "Choose image-sized pages or fit each image on a standard A4 page with margins.",
+      },
+      {
+        title: "Download Your PDF",
+        body: "Create the PDF and download it when processing finishes.",
+      },
+    ],
+  },
 };
 
 export function getHowItWorksContent(toolSlug?: string): HowItWorksContent {

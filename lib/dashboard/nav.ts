@@ -2,6 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import {
   CircleHelp,
   Crop,
+  FileText,
   ImageDown,
   LayoutDashboard,
   Repeat,
@@ -39,6 +40,7 @@ export const DASHBOARD_NAV: DashboardNavGroup[] = [
       { href: "/tools/image-resizer", label: "Image Resizer", icon: Scaling },
       { href: "/tools/image-cropper", label: "Image Cropper", icon: Crop },
       { href: "/tools/image-converter", label: "Image Converter", icon: Repeat },
+      { href: "/tools/image-to-pdf", label: "Image to PDF", icon: FileText },
     ],
   },
   {

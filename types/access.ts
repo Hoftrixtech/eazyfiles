@@ -1,6 +1,6 @@
 import type { EntitlementSummary } from "@/types/plans";
 
-export type PremiumImageTool = "image-resizer" | "image-cropper" | "image-converter";
+export type PremiumImageTool = "image-resizer" | "image-cropper" | "image-converter" | "image-to-pdf";
 
 export type ProcessingTool = "compress" | PremiumImageTool;
 

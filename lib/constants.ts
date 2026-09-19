@@ -18,6 +18,8 @@ export const SITE_CONTENT_MAX_WIDTH_CLASS = "max-w-[90rem]";
 export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
 /** Maximum images in one batch compress run (each image still uses one compression slot). */
 export const MAX_COMPRESSOR_BATCH_FILES = 20;
+/** Maximum images combined into one PDF per request. */
+export const MAX_IMAGE_TO_PDF_FILES = 20;
 export const MAX_REQUEST_BYTES = MAX_UPLOAD_BYTES + 1024 * 1024;
 export const MIN_TARGET_BYTES = 10 * 1024;
 export const MAX_TARGET_BYTES = 10 * 1024 * 1024;
