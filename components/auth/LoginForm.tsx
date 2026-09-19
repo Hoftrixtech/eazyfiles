@@ -46,7 +46,7 @@ export function LoginForm({
           </p>
         ) : null}
         <Button type="submit" size="lg" className="w-full" disabled={pending} aria-disabled={pending}>
-          {pending ? "Signing in…" : "Log In"}
+          {pending ? "Signing in…" : "Log in"}
         </Button>
       </form>
 

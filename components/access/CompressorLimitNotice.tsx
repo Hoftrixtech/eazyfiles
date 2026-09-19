@@ -9,7 +9,7 @@ export function CompressorLimitNotice() {
       <div className="mt-4 flex flex-col gap-2 sm:flex-row">
         <Link
           href={withNextParam("/login", "/")}
-          className="inline-flex h-11 flex-1 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          className="btn-radius brand-gradient-bg inline-flex h-11 flex-1 items-center justify-center px-4 text-sm font-medium text-primary-foreground shadow-sm transition-[filter] hover:brightness-[1.06]"
         >
           Log In
         </Link>

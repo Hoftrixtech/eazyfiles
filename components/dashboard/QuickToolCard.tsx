@@ -22,7 +22,7 @@ export function QuickToolCard({
       <h3 className="mt-4 text-base font-semibold tracking-tight">{title}</h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p>
       <Link href={href} className="mt-5 inline-block w-full sm:w-auto">
-        <Button variant="secondary" size="sm" className="w-full sm:w-auto">
+        <Button variant="primary" size="sm" className="w-full sm:w-auto">
           Open tool
         </Button>
       </Link>

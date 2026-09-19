@@ -13,6 +13,7 @@ import { ResizeResultCard } from "@/components/resizer/ResizeResultCard";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { isOversizedImageFile, isSupportedImageFile, readImageDimensions } from "@/lib/client/image-file";
 import { ApiRequestError } from "@/lib/client/api-error";
 import { resizeImageRequest, type ResizeClientResult } from "@/lib/client/resize-request";
@@ -267,28 +268,47 @@ export function ImageResizer() {
   }
 
   return (
-    <section id="resizer" className="pb-6">
-      <Container>
-        <Card className="mx-auto max-w-3xl p-4 sm:p-6 lg:p-8" aria-busy={isProcessing}>
-          <div className="space-y-6">
-            {!file || !previewUrl ? (
-              <UploadDropzone
-                disabled={isProcessing}
-                onFile={(nextFile) => {
-                  void handleFile(nextFile);
-                }}
-                isDragging={isDragging}
-                onDraggingChange={setIsDragging}
-              />
-            ) : (
-              <SelectedFileCard
-                file={file}
-                previewUrl={previewUrl}
-                disabled={isProcessing}
-                onRemove={handleRemove}
-                meta={originalSize ? `Original dimensions ${formatDimensions(originalSize.width, originalSize.height)}` : undefined}
-              />
-            )}
+    <section id="resizer" className="section-padding section-surface scroll-mt-24 bg-background">
+      <Container className="max-w-5xl">
+        <SectionHeader
+          eyebrow="Free online image resizer"
+          title="Resize Images Online to Your Dimensions"
+          description="Upload a JPG, PNG, or WebP image, set custom width and height, scale by percentage, or choose a common preset. Keep the aspect ratio to maintain the original proportions, then download your resized image."
+        />
+
+        <Card className="glass-panel mx-auto mt-10 max-w-3xl p-5 sm:p-8 lg:p-10" aria-busy={isProcessing}>
+          <div className="min-w-0 space-y-8">
+            <div>
+              <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Upload your image</p>
+              <p className="mt-1 text-sm text-muted-foreground">JPG, PNG or WebP · Up to {formatBytes(MAX_UPLOAD_BYTES)}</p>
+              <div className="mt-5">
+                {!file || !previewUrl ? (
+                  <UploadDropzone
+                    disabled={isProcessing}
+                    onFile={(nextFile) => {
+                      void handleFile(nextFile);
+                    }}
+                    isDragging={isDragging}
+                    onDraggingChange={setIsDragging}
+                    dragLabel="Drag & drop your images here"
+                    chooseButtonLabel="Choose Images"
+                    supportedHint="Supported: JPG · PNG · WebP · Multiple files OK"
+                  />
+                ) : (
+                  <SelectedFileCard
+                    file={file}
+                    previewUrl={previewUrl}
+                    disabled={isProcessing}
+                    onRemove={handleRemove}
+                    meta={
+                      originalSize
+                        ? `Original dimensions ${formatDimensions(originalSize.width, originalSize.height)}`
+                        : undefined
+                    }
+                  />
+                )}
+              </div>
+            </div>
 
             <DimensionControls
               width={width}
@@ -309,15 +329,21 @@ export function ImageResizer() {
               value={outputFormat}
               disabled={isProcessing || !file}
               onChange={setOutputFormat}
-              description="Keep the original format, or convert the resized image to JPG, PNG or WebP."
+              description="Keep the original format, or convert the resized image to JPG, PNG, or WebP."
             />
 
             {isProcessing ? <ProcessingState message="Resizing your image…" /> : null}
-            {toolState === "auth-required" ? <LoginRequiredNotice nextPath="/tools/image-resizer" /> : null}
-            {error && toolState !== "auth-required" ? <ErrorAlert message={error} /> : null}
-            {result ? (
-              <ResizeResultCard result={result} onDownload={handleDownload} onReset={handleRemove} />
+            {toolState === "auth-required" ? (
+              <LoginRequiredNotice
+                nextPath="/tools/image-resizer"
+                useGoogleSignIn
+                title="Sign in to use the Image Resizer"
+                description="Create or sign in to your free EazyFiles account to resize your images."
+                createAccountLabel="Create Account"
+              />
             ) : null}
+            {error && toolState !== "auth-required" ? <ErrorAlert message={error} /> : null}
+            {result ? <ResizeResultCard result={result} onDownload={handleDownload} onReset={handleRemove} /> : null}
 
             {processingLocked ? null : (
               <Button

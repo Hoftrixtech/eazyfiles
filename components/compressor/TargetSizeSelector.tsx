@@ -1,6 +1,7 @@
 "use client";
 
 import { TARGET_PRESETS } from "@/lib/constants";
+import { brandCtaSelectedClass } from "@/lib/brand-styles";
 import { cn } from "@/lib/utils";
 
 interface TargetSizeSelectorProps {
@@ -26,9 +27,10 @@ export function TargetSizeSelector({
 }: TargetSizeSelectorProps) {
   return (
     <fieldset disabled={disabled} className="space-y-4">
-      <legend className="text-sm font-medium">Target Size</legend>
+      <legend className="text-base font-semibold tracking-tight text-foreground">Target File Size</legend>
       <p className="text-sm text-muted-foreground">
-        We compress to this size or smaller. The result is not always an exact byte count.
+        Compress your image to the selected size or smaller. The final result may vary depending on the original image
+        and output format.
       </p>
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
         {TARGET_PRESETS.map((preset) => {
@@ -40,10 +42,8 @@ export function TargetSizeSelector({
               aria-pressed={selected}
               onClick={() => onPresetChange(preset.bytes)}
               className={cn(
-                "h-11 rounded-md border border-transparent text-sm font-medium transition-colors disabled:opacity-60",
-                selected
-                  ? "bg-primary text-primary-foreground"
-                  : "border-transparent bg-muted text-foreground hover:bg-muted/80"
+                "btn-radius h-11 border border-transparent text-sm font-medium transition-colors disabled:opacity-60",
+                selected ? brandCtaSelectedClass : "border-transparent bg-muted text-foreground hover:bg-muted/80"
               )}
             >
               {preset.label}
@@ -55,10 +55,8 @@ export function TargetSizeSelector({
           aria-pressed={presetBytes === null}
           onClick={() => onCustomSelect?.()}
           className={cn(
-            "h-11 rounded-md border border-transparent text-sm font-medium transition-colors disabled:opacity-60",
-            presetBytes === null
-              ? "bg-primary text-primary-foreground"
-              : "bg-muted text-foreground hover:bg-muted/80"
+            "btn-radius h-11 border border-transparent text-sm font-medium transition-colors disabled:opacity-60",
+            presetBytes === null ? brandCtaSelectedClass : "bg-muted text-foreground hover:bg-muted/80"
           )}
         >
           Custom
@@ -66,13 +64,14 @@ export function TargetSizeSelector({
       </div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
         <label className="flex min-w-0 flex-1 flex-col gap-2 text-sm font-medium" htmlFor="custom-target">
-          Custom size
+          Custom Size
           <input
             id="custom-target"
             type="number"
             min={1}
             step={1}
             inputMode="numeric"
+            placeholder="Enter target size"
             value={customValue}
             onChange={(event) => onCustomValueChange(event.target.value)}
             className="h-11 w-full rounded-md border border-border bg-muted/50 px-3 text-sm disabled:opacity-60"

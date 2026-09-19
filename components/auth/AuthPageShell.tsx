@@ -1,21 +1,37 @@
 import type { ReactNode } from "react";
+import { PageHeroBanner } from "@/components/layout/PageHeroBanner";
 import { Card } from "@/components/ui/Card";
-import { AuthSplitLayout } from "@/components/auth/AuthSplitLayout";
+import { Container } from "@/components/ui/Container";
 
 export function AuthPageShell({
+  breadcrumbLabel,
+  eyebrow,
   title,
   description,
   children,
 }: {
+  breadcrumbLabel: string;
+  eyebrow: string;
   title: string;
   description: string;
   children: ReactNode;
 }) {
   return (
-    <AuthSplitLayout title={title} description={description}>
-      <Card className="border-0 bg-transparent p-0 shadow-none sm:bg-card/80 sm:p-7 sm:shadow-[var(--shadow-elevated)]">
-        {children}
-      </Card>
-    </AuthSplitLayout>
+    <main>
+      <PageHeroBanner
+        breadcrumb={[
+          { label: "Home", href: "/" },
+          { label: breadcrumbLabel },
+        ]}
+        eyebrow={eyebrow}
+        title={title}
+        description={description}
+      />
+      <Container className="section-padding">
+        <div className="mx-auto w-full max-w-md">
+          <Card className="border border-border p-6 shadow-[var(--shadow-elevated)] sm:p-8">{children}</Card>
+        </div>
+      </Container>
+    </main>
   );
 }

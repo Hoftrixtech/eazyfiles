@@ -1,6 +1,7 @@
 "use client";
 
 import { RESIZE_DIMENSION_PRESETS, RESIZE_PERCENT_PRESETS } from "@/lib/constants";
+import { brandCtaSelectedClass } from "@/lib/brand-styles";
 import { cn } from "@/lib/utils";
 
 interface DimensionControlsProps {
@@ -33,9 +34,16 @@ export function DimensionControls({
   onPresetChange,
 }: DimensionControlsProps) {
   return (
-    <fieldset disabled={disabled} className="space-y-4">
-      <legend className="text-sm font-medium">Resize options</legend>
-      {originalLabel ? <p className="text-sm text-muted-foreground">Original image {originalLabel}.</p> : null}
+    <fieldset disabled={disabled} className="space-y-5 border-0 p-0">
+      <div>
+        <legend className="text-base font-semibold tracking-tight text-foreground">Resize Options</legend>
+        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+          Set dimensions manually, scale by percentage, or choose a common size preset.
+        </p>
+        {originalLabel ? (
+          <p className="mt-2 text-sm text-muted-foreground">Original image {originalLabel}.</p>
+        ) : null}
+      </div>
 
       <label className="flex items-start gap-3 text-sm">
         <input
@@ -47,7 +55,7 @@ export function DimensionControls({
         <span>
           <span className="font-medium">Maintain aspect ratio</span>
           <span className="mt-1 block text-muted-foreground">
-            When this is on, changing width updates height, and changing height updates width.
+            When enabled, changing width updates height, and changing height updates width.
           </span>
         </span>
       </label>
@@ -82,7 +90,7 @@ export function DimensionControls({
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium">Scale by percent</p>
+        <p className="text-sm font-medium">Scale by Percentage</p>
         <div className="grid grid-cols-4 gap-2">
           {RESIZE_PERCENT_PRESETS.map((percent) => (
             <button
@@ -91,9 +99,9 @@ export function DimensionControls({
               aria-pressed={selectedPercent === percent}
               onClick={() => onPercentChange(percent)}
               className={cn(
-                "h-10 rounded-md border text-sm font-medium transition-colors disabled:opacity-60",
+                "btn-radius h-10 border text-sm font-medium transition-colors disabled:opacity-60",
                 selectedPercent === percent
-                  ? "border-foreground bg-foreground text-primary-foreground"
+                  ? cn(brandCtaSelectedClass, "border-transparent")
                   : "border-border bg-card hover:bg-muted"
               )}
             >
@@ -104,7 +112,7 @@ export function DimensionControls({
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium">Common sizes</p>
+        <p className="text-sm font-medium">Common Sizes</p>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {RESIZE_DIMENSION_PRESETS.map((preset) => (
             <button
@@ -113,9 +121,9 @@ export function DimensionControls({
               aria-pressed={selectedPreset === preset.label}
               onClick={() => onPresetChange(preset.width, preset.height, preset.label)}
               className={cn(
-                "h-11 rounded-md border px-2 text-sm font-medium transition-colors disabled:opacity-60",
+                "btn-radius h-11 border px-2 text-sm font-medium transition-colors disabled:opacity-60",
                 selectedPreset === preset.label
-                  ? "border-foreground bg-foreground text-primary-foreground"
+                  ? cn(brandCtaSelectedClass, "border-transparent")
                   : "border-border bg-card hover:bg-muted"
               )}
             >
@@ -124,7 +132,7 @@ export function DimensionControls({
           ))}
         </div>
         <p className="text-sm text-muted-foreground">
-          Presets are optional. You can still type any custom width and height.
+          Presets are optional. You can still enter any custom width and height.
         </p>
       </div>
     </fieldset>

@@ -44,7 +44,7 @@ export function CropperGuide() {
     <div className="space-y-16 sm:space-y-20">
       <section className="py-16 sm:py-20">
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">What is image cropping?</h2>
+          <h2 className="content-heading">What is image cropping?</h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             Cropping keeps a rectangular part of a photo and discards the rest. It does not stretch the picture the way
             forcing new width and height can. Use a crop when you want to reframe a subject, remove empty edges, or
@@ -55,7 +55,7 @@ export function CropperGuide() {
 
       <section>
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">How to crop an image</h2>
+          <h2 className="content-heading">How to crop an image</h2>
           <ol className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground">
             <li>
               <span className="font-medium text-foreground">1. Upload a JPG, PNG or WebP file.</span> You will see the
@@ -79,7 +79,7 @@ export function CropperGuide() {
 
       <section className="py-16 sm:py-20">
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Aspect ratio</h2>
+          <h2 className="content-heading">Aspect ratio</h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             Aspect ratio is the relationship between width and height. A 1:1 crop is square. 16:9 is a wide landscape.
             9:16 is a tall portrait, useful for stories and phone screens. Locking a ratio keeps that shape while you
@@ -90,7 +90,7 @@ export function CropperGuide() {
 
       <section>
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Common crop ratios</h2>
+          <h2 className="content-heading">Common crop ratios</h2>
           <ul className="mt-6 space-y-3 text-base leading-relaxed text-muted-foreground">
             <li>
               <span className="font-medium text-foreground">1:1</span> — profile photos and product tiles.
@@ -113,7 +113,7 @@ export function CropperGuide() {
 
       <section className="py-16 sm:py-20">
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Supported formats</h2>
+          <h2 className="content-heading">Supported formats</h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             The cropper accepts JPG, PNG and WebP, including files with no extension when the contents are valid. PNG
             transparency is kept when you stay on PNG or WebP. JPEG does not support transparency, so a transparent
@@ -125,7 +125,7 @@ export function CropperGuide() {
       <section id="faq" className="scroll-mt-24 pb-8">
         <Container className="max-w-3xl">
           <div className="text-center">
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">FAQ</h2>
+            <h2 className="content-heading">FAQ</h2>
             <p className="mt-3 text-muted-foreground">Short answers about cropping, ratios and privacy.</p>
           </div>
           <div className="mt-10 divide-y divide-border overflow-hidden rounded-lg border border-border bg-card">

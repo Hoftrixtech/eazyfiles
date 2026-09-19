@@ -1,23 +1,29 @@
 import type { ReactNode } from "react";
+import { PageHeroBanner } from "@/components/layout/PageHeroBanner";
 import { Container } from "@/components/ui/Container";
 
 export function LegalPageLayout({
   title,
   intro,
+  eyebrow = "Legal",
   children,
 }: {
   title: string;
   intro?: string;
+  eyebrow?: string;
   children?: ReactNode;
 }) {
   return (
     <main>
-      <section className="section-surface bg-card/40">
-        <Container className="max-w-3xl py-12 sm:py-16">
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h1>
-          {intro ? <p className="mt-4 text-base leading-relaxed text-muted-foreground">{intro}</p> : null}
-        </Container>
-      </section>
+      <PageHeroBanner
+        breadcrumb={[
+          { label: "Home", href: "/" },
+          { label: title },
+        ]}
+        eyebrow={eyebrow}
+        title={title}
+        description={intro}
+      />
       <section className="section-padding">
         <Container className="max-w-3xl">
           {children ?? (

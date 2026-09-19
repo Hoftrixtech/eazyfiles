@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { PageHeroBanner } from "@/components/layout/PageHeroBanner";
 import { ToolsCategoryTabs } from "@/components/tools/ToolsCategoryTabs";
 import { Container } from "@/components/ui/Container";
 import { getSessionUser } from "@/lib/access/identity";
@@ -44,17 +45,17 @@ export default async function ToolsPage({
   }));
 
   return (
-    <main className="py-12 sm:py-16">
-      <Container className="w-full space-y-10">
-        <header className="max-w-2xl">
-          <p className="mb-3 text-sm font-medium text-muted-foreground">Tool directory</p>
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">All tools</h1>
-          <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            Pick a category below to browse live tools and what&apos;s coming next. Start with Image Tools for the
-            compressor, resizer, cropper and converter.
-          </p>
-        </header>
-
+    <main>
+      <PageHeroBanner
+        breadcrumb={[
+          { label: "Home", href: "/" },
+          { label: "Tools" },
+        ]}
+        eyebrow="Tool directory"
+        title="All Tools"
+        description="Pick a category below to browse live tools and what's coming next. Start with Image Tools for the compressor, resizer, cropper and converter."
+      />
+      <Container className="section-padding w-full space-y-10">
         <Suspense
           fallback={
             <p className="text-sm text-muted-foreground" aria-live="polite">

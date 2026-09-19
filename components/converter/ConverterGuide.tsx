@@ -42,7 +42,7 @@ export function ConverterGuide() {
     <div className="space-y-16 sm:space-y-20">
       <section className="py-16 sm:py-20">
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">What is an image converter?</h2>
+          <h2 className="content-heading">What is an image converter?</h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             An image converter changes a file from one format to another without asking you to pick a new width or a
             target number of kilobytes. That is useful when a site only accepts JPEG, when you want WebP for the web, or
@@ -55,7 +55,7 @@ export function ConverterGuide() {
 
       <section>
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">How to convert an image</h2>
+          <h2 className="content-heading">How to convert an image</h2>
           <ol className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground">
             <li>
               <span className="font-medium text-foreground">1. Upload a JPG, PNG or WebP file.</span> You will see the
@@ -79,7 +79,7 @@ export function ConverterGuide() {
 
       <section className="py-16 sm:py-20">
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">JPG vs PNG vs WebP</h2>
+          <h2 className="content-heading">JPG vs PNG vs WebP</h2>
           <div className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground">
             <p>
               <span className="font-medium text-foreground">JPEG</span> is the usual choice for photographs. It is
@@ -99,7 +99,7 @@ export function ConverterGuide() {
 
       <section>
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Which image format should you use?</h2>
+          <h2 className="content-heading">Which image format should you use?</h2>
           <ul className="mt-6 space-y-3 text-base leading-relaxed text-muted-foreground">
             <li>
               <span className="font-medium text-foreground">Use JPEG</span> for photos going to email, print shops or
@@ -123,7 +123,7 @@ export function ConverterGuide() {
 
       <section className="py-16 sm:py-20">
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Supported formats</h2>
+          <h2 className="content-heading">Supported formats</h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             The converter accepts JPG, PNG and WebP, including files with no extension when the contents are valid. The
             server checks the real image bytes, not only the filename. PNG transparency is kept on PNG and WebP. JPEG
@@ -135,7 +135,7 @@ export function ConverterGuide() {
       <section id="faq" className="scroll-mt-24 pb-8">
         <Container className="max-w-3xl">
           <div className="text-center">
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">FAQ</h2>
+            <h2 className="content-heading">FAQ</h2>
             <p className="mt-3 text-muted-foreground">Short answers about conversion, quality and privacy.</p>
           </div>
           <div className="mt-10 divide-y divide-border overflow-hidden rounded-lg border border-border bg-card">

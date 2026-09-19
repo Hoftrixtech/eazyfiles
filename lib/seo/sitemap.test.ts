@@ -11,6 +11,7 @@ describe("SEO sitemap paths", () => {
       "/tools/image-cropper",
       "/tools/image-converter",
       "/about",
+      "/how-it-works",
       "/contact",
       "/privacy",
       "/terms",

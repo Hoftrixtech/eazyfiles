@@ -21,7 +21,7 @@ export default function NotFound() {
         <p className="mt-3 text-muted-foreground">The page may have moved or the link might be incorrect.</p>
         <Link
           href="/"
-          className="mt-10 inline-flex h-12 items-center justify-center rounded-sm bg-primary px-8 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/88"
+          className="btn-radius brand-gradient-bg mt-10 inline-flex h-12 items-center justify-center px-8 text-sm font-medium text-primary-foreground shadow-sm transition-[filter] hover:brightness-[1.06]"
         >
           Back to EazyFiles
         </Link>

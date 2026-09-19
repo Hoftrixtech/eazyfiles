@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { PageHeroBanner } from "@/components/layout/PageHeroBanner";
 import { RelatedTools } from "@/components/tools/RelatedTools";
 import { ToolGrid } from "@/components/tools/ToolGrid";
 import { Container } from "@/components/ui/Container";
@@ -56,7 +57,7 @@ export default async function ToolDirectorySlugPage({ params }: ToolDirectoryPag
                 All tools
               </Link>
             </p>
-            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{category.name}</h1>
+            <h1 className="page-heading">{category.name}</h1>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">{category.shortDescription}</p>
           </header>
           <ToolGrid tools={tools} />
@@ -75,7 +76,7 @@ export default async function ToolDirectorySlugPage({ params }: ToolDirectoryPag
       <main className="py-12 sm:py-16">
         <Container className="space-y-10">
           <header className="max-w-2xl">
-            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{tool.name}</h1>
+            <h1 className="page-heading">{tool.name}</h1>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">{tool.longDescription}</p>
           </header>
           <RelatedTools slug={tool.slug} />

@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { CropperGuide } from "@/components/cropper/CropperGuide";
 import { ImageCropper } from "@/components/cropper/ImageCropper";
-import { FAQ } from "@/components/sections/FAQ";
 import { ToolJsonLd } from "@/components/seo/ToolJsonLd";
-import { RelatedTools } from "@/components/tools/RelatedTools";
+import { ToolPageMarketingSections } from "@/components/tools/ToolPageMarketingSections";
 import { ToolPageIntro } from "@/components/tools/ToolPageIntro";
-import { Container } from "@/components/ui/Container";
 import { createToolMetadata } from "@/lib/seo";
 import { getToolBySlug } from "@/lib/tools";
 
@@ -31,16 +28,12 @@ export default function ImageCropperPage() {
           { label: "Tools", href: "/tools" },
           { label: "Image Cropper" },
         ]}
-        eyebrow="Free online tool"
-        title="Free Image Cropper Online"
-        description={cropper.longDescription}
+        eyebrow="Free online image cropper"
+        title="Crop Images Online to the Size You Need"
+        description="Upload a JPG, PNG, or WebP image, select the area you want to keep, and crop it online. Use available aspect ratio options such as 1:1 or 16:9, then download your cropped image."
       />
       <ImageCropper />
-      <CropperGuide />
-      <FAQ id="cropper-faq" />
-      <Container className="section-padding border-t border-border">
-        <RelatedTools slug={cropper.slug} />
-      </Container>
+      <ToolPageMarketingSections toolSlug={cropper.slug} faqId="cropper-faq" />
     </main>
   );
 }

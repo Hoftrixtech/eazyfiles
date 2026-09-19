@@ -12,6 +12,7 @@ export const PUBLIC_SITEMAP_PATHS = [
   "/tools/image-cropper",
   "/tools/image-converter",
   "/about",
+  "/how-it-works",
   "/contact",
   "/privacy",
   "/terms",

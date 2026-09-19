@@ -29,6 +29,8 @@ export default async function SignupPage({
 
   return (
     <AuthPageShell
+      breadcrumbLabel="Sign up"
+      eyebrow="Create account"
       title="Create a free account"
       description="Create a free account to use Image Resizer, Cropper and Converter, and to keep compressing after 5 anonymous uses."
     >

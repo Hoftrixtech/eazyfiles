@@ -13,6 +13,7 @@ import { ConvertResultCard } from "@/components/converter/ConvertResultCard";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { convertImageRequest, type ConvertClientResult } from "@/lib/client/convert-request";
 import { ApiRequestError } from "@/lib/client/api-error";
 import {
@@ -209,33 +210,57 @@ export function ImageConverter() {
   ].filter(Boolean);
 
   return (
-    <section id="converter" className="pb-6">
-      <Container>
-        <Card className="mx-auto max-w-3xl p-4 sm:p-6 lg:p-8" aria-busy={isProcessing}>
-          <div className="space-y-6">
-            {!file || !previewUrl ? (
-              <UploadDropzone
-                disabled={isProcessing}
-                onFile={(nextFile) => {
-                  void handleFile(nextFile);
-                }}
-                isDragging={isDragging}
-                onDraggingChange={setIsDragging}
-              />
-            ) : (
-              <SelectedFileCard
-                file={file}
-                previewUrl={previewUrl}
-                disabled={isProcessing}
-                onRemove={handleRemove}
-                meta={metaParts.length > 0 ? metaParts.join(" · ") : undefined}
-              />
-            )}
+    <section id="converter" className="section-padding section-surface scroll-mt-24 bg-background">
+      <Container className="max-w-5xl">
+        <SectionHeader
+          eyebrow="Free online image converter"
+          title="Convert Images Online Between Popular Formats"
+          description="Convert JPG, PNG, and WebP images online by choosing an output format and quality setting. Download the converted image while keeping the original dimensions."
+        />
 
-            <ConvertFormatSelector value={outputFormat} disabled={isProcessing || !file} onChange={setOutputFormat} />
+        <Card className="glass-panel mx-auto mt-10 max-w-3xl p-5 sm:p-8 lg:p-10" aria-busy={isProcessing}>
+          <div className="min-w-0 space-y-8">
+            <div>
+              <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Upload your image</p>
+              <p className="mt-1 text-sm text-muted-foreground">JPG, PNG or WebP · Up to {formatBytes(MAX_UPLOAD_BYTES)}</p>
+              <div className="mt-5">
+                {!file || !previewUrl ? (
+                  <UploadDropzone
+                    disabled={isProcessing}
+                    onFile={(nextFile) => {
+                      void handleFile(nextFile);
+                    }}
+                    isDragging={isDragging}
+                    onDraggingChange={setIsDragging}
+                    multiple={false}
+                    dragLabel="Drag & drop your image here"
+                    chooseButtonLabel="Choose an Image"
+                    supportedHint="Supported: JPG · PNG · WebP"
+                  />
+                ) : (
+                  <SelectedFileCard
+                    file={file}
+                    previewUrl={previewUrl}
+                    disabled={isProcessing}
+                    onRemove={handleRemove}
+                    meta={metaParts.length > 0 ? metaParts.join(" · ") : undefined}
+                  />
+                )}
+              </div>
+            </div>
+
+            <ConvertFormatSelector
+              value={outputFormat}
+              disabled={isProcessing || !file}
+              onChange={setOutputFormat}
+              description="Convert your image to JPG, PNG, or WebP. The downloaded file uses the output format you select."
+            />
 
             {sameFormat ? (
-              <p className="rounded-md border border-border bg-muted/40 px-3 py-2 text-sm text-muted-foreground" role="status">
+              <p
+                className="rounded-md border border-border bg-muted/40 px-4 py-3 text-sm text-muted-foreground"
+                role="status"
+              >
                 This image is already {formatLabel(originalFormat)}. Converting to the same format re-encodes the file.
                 Pick another format if you need a different type.
               </p>
@@ -249,7 +274,15 @@ export function ImageConverter() {
             />
 
             {isProcessing ? <ProcessingState message="Converting your image…" /> : null}
-            {toolState === "auth-required" ? <LoginRequiredNotice nextPath="/tools/image-converter" /> : null}
+            {toolState === "auth-required" ? (
+              <LoginRequiredNotice
+                nextPath="/tools/image-converter"
+                useGoogleSignIn
+                title="Sign In to Use the Image Converter"
+                description="Create or sign in to your free EazyFiles account to convert your images."
+                createAccountLabel="Create Account"
+              />
+            ) : null}
             {error && toolState !== "auth-required" ? <ErrorAlert message={error} /> : null}
             {result ? <ConvertResultCard result={result} onDownload={handleDownload} onReset={handleRemove} /> : null}
 

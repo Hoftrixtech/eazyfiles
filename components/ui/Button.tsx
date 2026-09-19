@@ -4,9 +4,10 @@ import { cn } from "@/lib/utils";
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "inverse";
 type ButtonSize = "sm" | "md" | "lg";
 
+const baseShape = "btn-radius";
+
 const variantClasses: Record<ButtonVariant, string> = {
-  primary:
-    "bg-primary text-primary-foreground hover:bg-primary/88 active:bg-primary disabled:bg-primary/50",
+  primary: "brand-gradient-bg border-0 shadow-sm",
   secondary:
     "border border-border bg-card/80 text-foreground hover:bg-muted active:bg-muted/80",
   ghost: "bg-transparent text-foreground hover:bg-muted",
@@ -37,7 +38,8 @@ export function Button({
     <button
       type={type}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-[background-color,border-color,opacity,transform] duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50",
+        "inline-flex items-center justify-center gap-2 font-medium transition-[filter,background-color,border-color,opacity,transform] duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50",
+        baseShape,
         variantClasses[variant],
         sizeClasses[size],
         className

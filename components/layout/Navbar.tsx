@@ -1,74 +1,9 @@
-import Link from "next/link";
-import { UserMenu } from "@/components/account/UserMenu";
-import { BrandLogo } from "@/components/brand/BrandLogo";
-import { Container } from "@/components/ui/Container";
-import { getSessionUser } from "@/lib/access/identity";
-
-const linkClass =
-  "rounded-sm px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground";
-
-function NavLinks({
-  user,
-}: {
-  user: { name: string; email: string } | null;
-}) {
-  return (
-    <>
-      <Link href="/tools" className={linkClass}>
-        Tools
-      </Link>
-      <Link href="/#how-it-works" className={linkClass}>
-        How It Works
-      </Link>
-      {user ? (
-        <UserMenu user={user} />
-      ) : (
-        <>
-          <Link href="/login" className={linkClass}>
-            Login
-          </Link>
-          <Link
-            href="/signup"
-            className="inline-flex h-9 items-center justify-center rounded-sm bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/88"
-          >
-            Sign Up
-          </Link>
-        </>
-      )}
-    </>
-  );
-}
+import { SiteHeader } from "@/components/layout/SiteHeader";
 
 export async function Navbar() {
-  const user = await getSessionUser();
-
   return (
-    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl">
-      <Container className="flex h-16 items-center justify-between gap-4">
-        <BrandLogo />
-        <nav aria-label="Primary" className="hidden items-center gap-0.5 md:flex">
-          <NavLinks user={user} />
-        </nav>
-        <details className="group relative md:hidden">
-          <summary
-            className="flex size-10 cursor-pointer list-none items-center justify-center rounded-md bg-card/80 text-foreground transition-colors hover:bg-muted"
-            aria-label="Open menu"
-          >
-            <svg viewBox="0 0 16 16" className="size-4 group-open:hidden" aria-hidden="true">
-              <path d="M2.5 4.25h11M2.5 8h11M2.5 11.75h11" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-            <svg viewBox="0 0 16 16" className="hidden size-4 group-open:block" aria-hidden="true">
-              <path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </summary>
-          <nav
-            aria-label="Mobile"
-            className="absolute right-0 mt-2 flex w-56 flex-col gap-0.5 rounded-md border border-border bg-card p-2 shadow-[var(--shadow-elevated)]"
-          >
-            <NavLinks user={user} />
-          </nav>
-        </details>
-      </Container>
+    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
+      <SiteHeader />
     </header>
   );
 }

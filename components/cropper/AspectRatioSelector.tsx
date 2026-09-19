@@ -1,6 +1,7 @@
 "use client";
 
 import { CROP_ASPECT_OPTIONS } from "@/lib/constants";
+import { brandCtaSelectedClass } from "@/lib/brand-styles";
 import { cn } from "@/lib/utils";
 import type { CropAspectId } from "@/types/crop";
 
@@ -13,7 +14,7 @@ interface AspectRatioSelectorProps {
 export function AspectRatioSelector({ value, disabled, onChange }: AspectRatioSelectorProps) {
   return (
     <fieldset disabled={disabled}>
-      <legend className="text-sm font-medium">Crop ratio</legend>
+      <legend className="text-base font-semibold tracking-tight text-foreground">Crop ratio</legend>
       <p className="mt-1 mb-3 text-sm text-muted-foreground">
         Free lets you drag any rectangle. The other options lock the crop box to a common aspect ratio.
       </p>
@@ -27,9 +28,9 @@ export function AspectRatioSelector({ value, disabled, onChange }: AspectRatioSe
               aria-pressed={selected}
               onClick={() => onChange(option.id)}
               className={cn(
-                "h-10 rounded-md border text-sm font-medium transition-colors disabled:opacity-60",
+                "btn-radius h-10 border text-sm font-medium transition-colors disabled:opacity-60",
                 selected
-                  ? "border-foreground bg-foreground text-primary-foreground"
+                  ? cn(brandCtaSelectedClass, "border-transparent")
                   : "border-border bg-card hover:bg-muted"
               )}
             >

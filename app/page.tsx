@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { ImageCompressor } from "@/components/compressor/ImageCompressor";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { FAQ } from "@/components/sections/FAQ";
-import { FinalCta } from "@/components/sections/FinalCta";
 import { Hero } from "@/components/sections/Hero";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { ImageToolsSection } from "@/components/sections/ImageTools";
@@ -42,7 +41,6 @@ export default function HomePage() {
       <WhyUseThisTool />
       <TrustStatement />
       <FAQ />
-      <FinalCta />
     </main>
   );
 }

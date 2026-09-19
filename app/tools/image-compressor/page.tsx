@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import { ImageCompressor } from "@/components/compressor/ImageCompressor";
-import { FAQ } from "@/components/sections/FAQ";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { SupportedFormats } from "@/components/sections/SupportedFormats";
-import { WhyUseThisTool } from "@/components/sections/WhyUseThisTool";
 import { ToolJsonLd } from "@/components/seo/ToolJsonLd";
-import { RelatedTools } from "@/components/tools/RelatedTools";
+import { ToolPageMarketingSections } from "@/components/tools/ToolPageMarketingSections";
 import { ToolPageIntro } from "@/components/tools/ToolPageIntro";
-import { Container } from "@/components/ui/Container";
 import { createToolMetadata } from "@/lib/seo";
 import { getToolBySlug } from "@/lib/tools";
 
@@ -33,18 +28,12 @@ export default function ImageCompressorPage() {
           { label: "Tools", href: "/tools" },
           { label: "Image Compressor" },
         ]}
-        eyebrow="Free online tool"
-        title="Free Image Compressor Online"
-        description="Reduce JPG, PNG or WebP images to a target file size. Upload, choose your settings, and download an optimized file in seconds."
+        eyebrow="Free online image compressor"
+        title="Compress Images Online to Reduce File Size"
+        description="Compress JPG, PNG, and WebP images online to reduce file size. Choose a target size such as 50 KB, 100 KB, 200 KB, 500 KB, or 1 MB, or enter a custom target size."
       />
       <ImageCompressor id="tool-compressor" />
-      <HowItWorks />
-      <WhyUseThisTool />
-      <SupportedFormats />
-      <FAQ id="compressor-faq" />
-      <Container className="section-padding border-t border-border">
-        <RelatedTools slug={compressor.slug} />
-      </Container>
+      <ToolPageMarketingSections toolSlug={compressor.slug} faqId="compressor-faq" />
     </main>
   );
 }

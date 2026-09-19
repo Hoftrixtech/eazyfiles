@@ -21,7 +21,7 @@ export function SupportedFormats() {
     <section className="section-padding bg-card/30">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Supported formats</h2>
+          <h2 className="content-heading">Supported formats</h2>
           <p className="mt-3 text-muted-foreground">
             This version accepts JPG, PNG and WebP. Use the <LiveToolLink slug="image-converter" /> when you need a
             different format rather than a smaller file size.

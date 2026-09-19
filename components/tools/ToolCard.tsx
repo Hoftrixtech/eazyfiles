@@ -42,7 +42,7 @@ export function ToolCard({ tool, authenticated = false }: { tool: Tool; authenti
     </>
   );
 
-  if (href) {
+  if (tool.status === "live" && href) {
     return (
       <Link href={href} className="block rounded-lg focus-visible:outline-none">
         <Card className="h-full p-5 transition-colors hover:bg-muted/60">

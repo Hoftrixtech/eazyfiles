@@ -1,6 +1,7 @@
 "use client";
 
 import type { OutputFormatOption } from "@/types/compression";
+import { brandCtaSelectedClass } from "@/lib/brand-styles";
 import { cn } from "@/lib/utils";
 
 const options: Array<{ value: OutputFormatOption; label: string }> = [
@@ -21,11 +22,11 @@ export function OutputFormatSelector({
   value,
   disabled,
   onChange,
-  description = "Keep the original format, or convert when you need a smaller file.",
+  description = "Keep the original format or convert your image to JPG, WebP, or PNG.",
 }: OutputFormatSelectorProps) {
   return (
     <fieldset disabled={disabled}>
-      <legend className="text-sm font-medium">Output Format</legend>
+      <legend className="text-base font-semibold tracking-tight text-foreground">Output Format</legend>
       <p className="mt-1 mb-3 text-sm text-muted-foreground">{description}</p>
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         {options.map((option) => {

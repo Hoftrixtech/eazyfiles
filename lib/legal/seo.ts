@@ -20,6 +20,12 @@ export const ABOUT_PAGE_SEO = {
     "Learn what EazyFiles is, why we build simple online file and image tools, and where the platform is headed.",
 };
 
+export const HOW_IT_WORKS_PAGE_SEO = {
+  title: "How EazyFiles Works – Upload, Customize & Download",
+  description:
+    "See how EazyFiles image tools work: upload your file, choose your settings, and download the result in a few simple steps.",
+};
+
 export const CONTACT_PAGE_SEO = {
   title: "Contact EazyFiles – Get in Touch",
   description: "Send a message to the EazyFiles team about our online image tools, your account, or general questions.",

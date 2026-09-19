@@ -146,7 +146,10 @@ export function CropStage({
     <div ref={containerRef} className="w-full">
       <div className="flex justify-center overflow-hidden rounded-md bg-muted p-6">
         {scale > 0 ? (
-          <div className="relative touch-none select-none" style={{ width: displayedWidth, height: displayedHeight }}>
+          <div
+            className="relative touch-none isolate select-none overflow-hidden"
+            style={{ width: displayedWidth, height: displayedHeight }}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={previewUrl}
@@ -154,8 +157,20 @@ export function CropStage({
               draggable={false}
               width={displayedWidth}
               height={displayedHeight}
-              className="pointer-events-none block h-full w-full max-w-none"
+              className="pointer-events-none block h-full w-full max-w-none object-contain"
             />
+            <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+              <div className="absolute inset-x-0 top-0 bg-slate-900/45" style={{ height: top }} />
+              <div className="absolute left-0 bg-slate-900/45" style={{ top, width: left, height }} />
+              <div
+                className="absolute right-0 bg-slate-900/45"
+                style={{ top, left: left + width, width: Math.max(0, displayedWidth - left - width), height }}
+              />
+              <div
+                className="absolute inset-x-0 bg-slate-900/45"
+                style={{ top: top + height, height: Math.max(0, displayedHeight - top - height) }}
+              />
+            </div>
             <div
               role="group"
               tabIndex={disabled ? -1 : 0}
@@ -166,7 +181,7 @@ export function CropStage({
               onPointerMove={handlePointerMove}
               onPointerUp={endDrag}
               onPointerCancel={endDrag}
-              className="absolute cursor-move border-2 border-white shadow-[0_0_0_9999px_rgba(15,23,42,0.45)] outline-none focus-visible:border-primary"
+              className="absolute cursor-move border-2 border-white outline-none focus-visible:border-primary"
               style={{ left, top, width, height }}
             >
               {HANDLES.map((handle) => (
@@ -176,7 +191,7 @@ export function CropStage({
                   tabIndex={-1}
                   aria-label={handle.label}
                   disabled={disabled}
-                  className={`absolute size-11 rounded-full disabled:opacity-50 ${handle.className}`}
+                  className={`absolute size-9 rounded-full disabled:opacity-50 ${handle.className}`}
                   onPointerDown={(event) => startDrag(handle.id, event)}
                   onPointerMove={handlePointerMove}
                   onPointerUp={endDrag}

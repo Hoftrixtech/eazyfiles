@@ -61,7 +61,7 @@ export default async function AccountDashboardPage() {
   return (
     <div className="mx-auto w-full max-w-5xl space-y-10">
       <section>
-        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Welcome back, {welcomeName} 👋</h2>
+        <h2 className="content-heading">Welcome back, {welcomeName} 👋</h2>
         <p className="mt-2 text-sm text-muted-foreground sm:text-base">
           Manage your files and access your image tools from one place.
         </p>

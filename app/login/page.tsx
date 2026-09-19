@@ -28,7 +28,12 @@ export default async function LoginPage({
   }
 
   return (
-    <AuthPageShell title="Welcome back" description="Sign in with email or Google to use every Image Tool for free.">
+    <AuthPageShell
+      breadcrumbLabel="Login"
+      eyebrow="Sign in"
+      title="Welcome back"
+      description="Sign in with email or Google to access your dashboard and every image tool for free."
+    >
       <LoginForm nextPath={nextPath} providers={getConfiguredOAuthProviders()} />
     </AuthPageShell>
   );

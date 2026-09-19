@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Footer } from "@/components/layout/Footer";
+import { FinalCta } from "@/components/sections/FinalCta";
 import { Navbar } from "@/components/layout/Navbar";
 import { ShowNavbarExceptHome } from "@/components/layout/ShowNavbarExceptHome";
 import { APP_NAME } from "@/lib/constants";
@@ -52,6 +53,8 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <script dangerouslySetInnerHTML={{ __html: stripExtensionAttrsScript }} />
       </head>
       <body className="site-canvas min-h-screen font-sans text-foreground antialiased" suppressHydrationWarning>
@@ -65,6 +68,7 @@ export default function RootLayout({
           <Navbar />
         </ShowNavbarExceptHome>
         <div id="main">{children}</div>
+        <FinalCta />
         <Footer />
       </body>
     </html>

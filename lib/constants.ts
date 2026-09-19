@@ -8,12 +8,12 @@ export const BRAND_LOGO_PATH = "/brand/logo.svg";
 
 export const APP_NAME = "EazyFiles";
 export const APP_SHORT_NAME = "EazyFiles";
-export const APP_TAGLINE = "Simple Tools. Powerful Results.";
+export const APP_TAGLINE = "Simple Tools. Practical Results.";
 /** Canonical public site URL (no trailing slash). */
 export const SITE_URL = "https://eazyfiles.com";
 
 /** Primary content width — keep pages aligned when switching tabs or routes. */
-export const SITE_CONTENT_MAX_WIDTH_CLASS = "max-w-6xl";
+export const SITE_CONTENT_MAX_WIDTH_CLASS = "max-w-[90rem]";
 
 export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
 /** Maximum images in one batch compress run (each image still uses one compression slot). */

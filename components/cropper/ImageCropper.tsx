@@ -15,11 +15,19 @@ import { CropStage } from "@/components/cropper/CropStage";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { isOversizedImageFile, isSupportedImageFile, readImageDimensions } from "@/lib/client/image-file";
 import { ApiRequestError } from "@/lib/client/api-error";
 import { cropImageRequest, type CropClientResult } from "@/lib/client/crop-request";
 import { MAX_UPLOAD_BYTES } from "@/lib/constants";
-import { defaultCropRegion, getAspectValue, isValidCropRegion, roundRegion, uiMinCropEdge } from "@/lib/crop/region";
+import {
+  clampCropRegion,
+  defaultCropRegion,
+  getAspectValue,
+  isValidCropRegion,
+  roundRegion,
+  uiMinCropEdge,
+} from "@/lib/crop/region";
 import { formatBytes, formatDimensions } from "@/lib/utils";
 import type { OutputFormatOption } from "@/types/compression";
 import type { CropAspectId, CropRegion } from "@/types/crop";
@@ -204,35 +212,51 @@ export function ImageCropper() {
   }
 
   return (
-    <section id="cropper" className="pb-6">
-      <Container>
-        <Card className="mx-auto max-w-3xl p-4 sm:p-6 lg:p-8" aria-busy={isProcessing}>
-          <div className="space-y-6">
-            {!file || !previewUrl ? (
-              <UploadDropzone
-                disabled={isProcessing}
-                onFile={(nextFile) => {
-                  void handleFile(nextFile);
-                }}
-                isDragging={isDragging}
-                onDraggingChange={setIsDragging}
-              />
-            ) : (
-              <SelectedFileCard
-                file={file}
-                previewUrl={previewUrl}
-                disabled={isProcessing}
-                onRemove={handleRemove}
-                meta={
-                  originalSize
-                    ? `Original dimensions ${formatDimensions(originalSize.width, originalSize.height)}`
-                    : undefined
-                }
-              />
-            )}
+    <section id="cropper" className="section-padding section-surface scroll-mt-24 bg-background">
+      <Container className="max-w-5xl">
+        <SectionHeader
+          eyebrow="Free online image cropper"
+          title="Crop Images Online to the Area You Need"
+          description="Upload a JPG, PNG, or WebP image, select the area you want to keep, choose an available aspect ratio or crop freely, and download your cropped image."
+        />
+
+        <Card className="glass-panel mx-auto mt-10 max-w-3xl p-5 sm:p-8 lg:p-10" aria-busy={isProcessing}>
+          <div className="min-w-0 space-y-8">
+            <div>
+              <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Upload your image</p>
+              <p className="mt-1 text-sm text-muted-foreground">JPG, PNG or WebP · Up to {formatBytes(MAX_UPLOAD_BYTES)}</p>
+              <div className="mt-5">
+                {!file || !previewUrl ? (
+                  <UploadDropzone
+                    disabled={isProcessing}
+                    onFile={(nextFile) => {
+                      void handleFile(nextFile);
+                    }}
+                    isDragging={isDragging}
+                    onDraggingChange={setIsDragging}
+                    multiple={false}
+                    dragLabel="Drag & drop your image here"
+                    chooseButtonLabel="Choose an Image"
+                    supportedHint="Supported: JPG · PNG · WebP"
+                  />
+                ) : (
+                  <SelectedFileCard
+                    file={file}
+                    previewUrl={previewUrl}
+                    disabled={isProcessing}
+                    onRemove={handleRemove}
+                    meta={
+                      originalSize
+                        ? `Original dimensions ${formatDimensions(originalSize.width, originalSize.height)}`
+                        : undefined
+                    }
+                  />
+                )}
+              </div>
+            </div>
 
             {file && previewUrl && originalSize && crop ? (
-              <>
+              <div className="space-y-8">
                 <CropStage
                   previewUrl={previewUrl}
                   imageWidth={originalSize.width}
@@ -240,22 +264,40 @@ export function ImageCropper() {
                   crop={crop}
                   aspect={getAspectValue(aspectId)}
                   disabled={isProcessing}
-                  onChange={setCrop}
+                  onChange={(next) => {
+                    setCrop(
+                      clampCropRegion(
+                        next,
+                        originalSize.width,
+                        originalSize.height,
+                        getAspectValue(aspectId),
+                        uiMinCropEdge(originalSize.width, originalSize.height)
+                      )
+                    );
+                  }}
                 />
                 <AspectRatioSelector value={aspectId} disabled={isProcessing} onChange={handleAspectChange} />
                 <CropLivePreview previewUrl={previewUrl} crop={crop} />
-              </>
+              </div>
             ) : null}
 
             <OutputFormatSelector
               value={outputFormat}
               disabled={isProcessing || !file}
               onChange={setOutputFormat}
-              description="Keep the original format, or convert the cropped image to JPG, PNG or WebP."
+              description="Keep the original format, or convert the cropped image to JPG, WebP, or PNG."
             />
 
             {isProcessing ? <ProcessingState message="Cropping your image…" /> : null}
-            {toolState === "auth-required" ? <LoginRequiredNotice nextPath="/tools/image-cropper" /> : null}
+            {toolState === "auth-required" ? (
+              <LoginRequiredNotice
+                nextPath="/tools/image-cropper"
+                useGoogleSignIn
+                title="Sign in to use the Image Cropper"
+                description="Create or sign in to your free EazyFiles account to crop your images."
+                createAccountLabel="Create Account"
+              />
+            ) : null}
             {error && toolState !== "auth-required" ? <ErrorAlert message={error} /> : null}
             {result ? <CropResultCard result={result} onDownload={handleDownload} onReset={handleRemove} /> : null}
 

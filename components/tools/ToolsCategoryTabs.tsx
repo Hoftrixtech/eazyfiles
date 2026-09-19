@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ToolCard } from "@/components/tools/ToolCard";
 import { ToolIcon } from "@/lib/tools";
+import { brandCtaSelectedClass } from "@/lib/brand-styles";
 import { cn } from "@/lib/utils";
 import type { Tool, ToolCategoryId, ToolIconName } from "@/types/tools";
 
@@ -68,11 +69,11 @@ export function ToolsCategoryTabs({
   }
 
   return (
-    <div className="w-full min-w-0 space-y-8">
+    <div className="w-full min-w-0 space-y-10">
       <div
         role="tablist"
         aria-label="Tool categories"
-        className="flex w-full max-w-full gap-1 overflow-x-auto pb-1 [scrollbar-width:thin]"
+        className="flex w-full max-w-full flex-nowrap gap-2.5 overflow-x-auto pb-2 sm:gap-3 [scrollbar-width:thin] [-webkit-overflow-scrolling:touch] scroll-px-1"
       >
         {categories.map((category) => {
           const selected = category.id === activeId;
@@ -87,9 +88,9 @@ export function ToolsCategoryTabs({
               tabIndex={selected ? 0 : -1}
               onClick={() => selectCategory(category)}
               className={cn(
-                "inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition-colors",
+                "inline-flex shrink-0 items-center gap-2 border px-4 py-2.5 text-sm font-medium transition-colors btn-radius",
                 selected
-                  ? "border-primary/20 bg-primary text-primary-foreground shadow-sm"
+                  ? cn(brandCtaSelectedClass, "border-transparent")
                   : "border-border bg-card text-muted-foreground hover:border-primary/15 hover:bg-muted hover:text-foreground"
               )}
             >

@@ -352,8 +352,7 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
 
   const showDropzone = entries.length === 0;
   const hasResults = batchResults.length > 0;
-  const compressLabel =
-    entries.length > 1 ? `Compress ${entries.length} Images` : "Compress Image";
+  const compressLabel = entries.length > 1 ? `Compress ${entries.length} Images` : "Compress Image";
   const canAddMore = !compressorLocked && selectionLimit > entries.length;
 
   return (
@@ -364,16 +363,16 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
     >
       <Container className="max-w-5xl">
         <SectionHeader
-          eyebrow="Free tool"
-          title="Image Compressor"
-          description="Upload one or many images, choose your target size and format, then download optimized files. Each successful compression counts toward your limit."
+          eyebrow="Free online image compressor"
+          title="Compress Images Online to Reduce File Size"
+          description="Compress JPG, PNG, and WebP images online to reduce file size. Choose a target size such as 50 KB, 100 KB, 200 KB, 500 KB, or 1 MB, or enter a custom target size."
         />
 
         <Card className="glass-panel mt-10 overflow-hidden p-0 sm:p-0" aria-busy={isProcessing}>
           <div className="grid gap-0 lg:grid-cols-2 lg:gap-0">
             <div className="border-border p-5 sm:p-8 lg:border-r lg:p-10">
               <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">1. Upload</p>
-              <p className="mt-1 text-sm text-muted-foreground">JPG, PNG or WebP · up to {formatBytes(MAX_UPLOAD_BYTES)} each</p>
+              <p className="mt-1 text-sm text-muted-foreground">JPG, PNG or WebP · Up to {formatBytes(MAX_UPLOAD_BYTES)} each</p>
               <div className="mt-6">
                 {showDropzone ? (
                   <UploadDropzone
@@ -414,7 +413,9 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
 
             <div className="bg-muted/25 p-5 sm:p-8 lg:p-10">
               <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">2. Settings</p>
-              <p className="mt-1 text-sm text-muted-foreground">We compress to your target size or smaller.</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Choose a target file size and output format for your compressed image.
+              </p>
               <div className="mt-6 space-y-8">
                 <TargetSizeSelector
                   presetBytes={presetBytes}
@@ -427,13 +428,18 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
                   onCustomSelect={() => setPresetBytes(null)}
                 />
 
-                <OutputFormatSelector value={outputFormat} disabled={isProcessing} onChange={setOutputFormat} />
+                <OutputFormatSelector
+                  value={outputFormat}
+                  disabled={isProcessing}
+                  onChange={setOutputFormat}
+                  description="Keep the original format or convert the compressed image to JPG, WebP, or PNG."
+                />
 
                 {status?.compressor.mode === "anonymous" ? (
-                  <p className="rounded-md bg-card/60 px-4 py-3 text-sm text-muted-foreground">
+                  <p className="rounded-md bg-card/60 px-4 py-3 text-sm text-muted-foreground" role="status">
                     {status.compressor.allowed
-                      ? `${status.compressor.remaining} of ${status.compressor.limit} free compressions left · each image uses one`
-                      : "No free compressions left — create a free account to continue."}
+                      ? `${status.compressor.remaining}/${status.compressor.limit} free compressions left · each image uses one`
+                      : `0/${status.compressor.limit} free compressions left · create a free account to continue.`}
                   </p>
                 ) : status?.compressor.mode === "authenticated" ? (
                   <p className="text-sm text-muted-foreground">

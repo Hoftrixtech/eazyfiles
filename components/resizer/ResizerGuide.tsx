@@ -40,7 +40,7 @@ export function ResizerGuide() {
     <div className="space-y-16 sm:space-y-20">
       <section className="py-16 sm:py-20">
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">What is an image resizer?</h2>
+          <h2 className="content-heading">What is an image resizer?</h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             An image resizer changes how many pixels an image uses in width and height. That is different from
             compressing a file to a target number of kilobytes. Resize when a photo is too large for a profile picture,
@@ -51,7 +51,7 @@ export function ResizerGuide() {
 
       <section>
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">How to resize an image</h2>
+          <h2 className="content-heading">How to resize an image</h2>
           <ol className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground">
             <li>
               <span className="font-medium text-foreground">1. Upload a JPG, PNG or WebP file.</span> Drop it onto the
@@ -75,7 +75,7 @@ export function ResizerGuide() {
 
       <section className="py-16 sm:py-20">
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">When to resize an image</h2>
+          <h2 className="content-heading">When to resize an image</h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             Resize before you upload to a site that rejects oversized photos, when a banner needs a known pixel size, or
             when a phone image is far larger than the place it will be shown. If the dimensions are already right and
@@ -87,7 +87,7 @@ export function ResizerGuide() {
 
       <section>
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Aspect ratio</h2>
+          <h2 className="content-heading">Aspect ratio</h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             Aspect ratio is the relationship between width and height, such as 16:9 for widescreen or 1:1 for a square.
             Keeping it on means the picture stays the same shape. Turning it off lets you force a size that does not
@@ -98,7 +98,7 @@ export function ResizerGuide() {
 
       <section className="py-16 sm:py-20">
         <Container className="max-w-3xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Supported formats</h2>
+          <h2 className="content-heading">Supported formats</h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             The resizer accepts JPG, PNG and WebP, including files with no extension when the contents are valid. PNG
             transparency is kept when you stay on PNG or WebP. JPEG does not support transparency, so a transparent
@@ -110,7 +110,7 @@ export function ResizerGuide() {
       <section id="faq" className="scroll-mt-24 pb-8">
         <Container className="max-w-3xl">
           <div className="text-center">
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">FAQ</h2>
+            <h2 className="content-heading">FAQ</h2>
             <p className="mt-3 text-muted-foreground">Short answers about resizing, formats and privacy.</p>
           </div>
           <div className="mt-10 divide-y divide-border overflow-hidden rounded-lg border border-border bg-card">

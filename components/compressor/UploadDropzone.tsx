@@ -14,6 +14,9 @@ interface UploadDropzoneProps {
   isDragging: boolean;
   onDraggingChange: (dragging: boolean) => void;
   multiple?: boolean;
+  dragLabel?: string;
+  chooseButtonLabel?: string;
+  supportedHint?: string;
 }
 
 export function UploadDropzone({
@@ -23,6 +26,9 @@ export function UploadDropzone({
   isDragging,
   onDraggingChange,
   multiple = true,
+  dragLabel,
+  chooseButtonLabel,
+  supportedHint,
 }: UploadDropzoneProps) {
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -97,7 +103,7 @@ export function UploadDropzone({
         <Upload className="size-5" aria-hidden="true" />
       </span>
       <p className="text-base font-medium">
-        {multiple ? "Drag & drop your images here" : "Drag & drop your image here"}
+        {dragLabel ?? (multiple ? "Drag & drop your images here" : "Drag & drop your image here")}
       </p>
       <p className="mt-2 text-sm text-muted-foreground">or</p>
       <button
@@ -105,12 +111,12 @@ export function UploadDropzone({
         disabled={disabled}
         onClick={() => inputRef.current?.click()}
         aria-label="Choose JPG, PNG or WebP images"
-        className="mt-4 inline-flex h-11 items-center rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/88 disabled:opacity-60"
+        className="btn-radius brand-gradient-bg mt-4 inline-flex h-11 items-center px-5 text-sm font-medium text-primary-foreground shadow-sm transition-[filter] hover:brightness-[1.06] disabled:opacity-60"
       >
-        {multiple ? "Choose Images" : "Choose an Image"}
+        {chooseButtonLabel ?? (multiple ? "Choose Images" : "Choose an Image")}
       </button>
       <p id={`${inputId}-help`} className="mt-6 text-xs tracking-wide text-muted-foreground uppercase">
-        Supported: JPG • PNG • WebP{multiple ? " · Multiple files OK" : ""}
+        {supportedHint ?? `Supported: JPG · PNG · WebP${multiple ? " · Multiple files OK" : ""}`}
       </p>
       <p className="sr-only">Maximum upload size per file {formatBytes(MAX_UPLOAD_BYTES)}.</p>
     </div>

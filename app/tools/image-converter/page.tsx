@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { ConverterGuide } from "@/components/converter/ConverterGuide";
 import { ImageConverter } from "@/components/converter/ImageConverter";
-import { FAQ } from "@/components/sections/FAQ";
 import { ToolJsonLd } from "@/components/seo/ToolJsonLd";
-import { RelatedTools } from "@/components/tools/RelatedTools";
+import { ToolPageMarketingSections } from "@/components/tools/ToolPageMarketingSections";
 import { ToolPageIntro } from "@/components/tools/ToolPageIntro";
-import { Container } from "@/components/ui/Container";
 import { createToolMetadata } from "@/lib/seo";
 import { getToolBySlug } from "@/lib/tools";
 
@@ -31,16 +28,13 @@ export default function ImageConverterPage() {
           { label: "Tools", href: "/tools" },
           { label: "Image Converter" },
         ]}
-        eyebrow="Free online tool"
-        title="Free Image Converter Online"
-        description={converter.longDescription}
+        eyebrow="Free online image converter"
+        title="Convert Images Online"
+        titleLine2="to JPG, PNG, or WebP"
+        description="Convert JPG, PNG, and WebP images online to another supported format. Choose your output format and quality, then download the converted file."
       />
       <ImageConverter />
-      <ConverterGuide />
-      <FAQ id="converter-faq" />
-      <Container className="section-padding border-t border-border">
-        <RelatedTools slug={converter.slug} />
-      </Container>
+      <ToolPageMarketingSections toolSlug={converter.slug} faqId="converter-faq" />
     </main>
   );
 }
