@@ -1,4 +1,4 @@
-import { APP_NAME, APP_TAGLINE } from "@/lib/constants";
+import { APP_NAME, APP_TAGLINE, BRAND_LOGO_PATH } from "@/lib/constants";
 import { absoluteUrl, getSiteUrl } from "@/lib/seo";
 import type { Tool } from "@/types/tools";
 
@@ -23,7 +23,7 @@ export function organizationJsonLd(): Record<string, unknown> {
     "@type": "Organization",
     name: APP_NAME,
     url: getSiteUrl(),
-    logo: absoluteUrl("/brand/eazyfiles-mark.svg"),
+    logo: absoluteUrl(BRAND_LOGO_PATH),
   };
 }
 

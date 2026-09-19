@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { APP_NAME, SITE_URL } from "@/lib/constants";
+import { APP_NAME, BRAND_LOGO_PATH, SITE_URL } from "@/lib/constants";
 import type { Tool, ToolCategory } from "@/types/tools";
 
-/** Default Open Graph / social preview image (brand mark). */
-export const DEFAULT_OG_IMAGE_PATH = "/brand/eazyfiles-mark.svg";
+/** Default Open Graph / social preview image (brand logo). */
+export const DEFAULT_OG_IMAGE_PATH = BRAND_LOGO_PATH;
 
 export const PUBLIC_SITEMAP_PATHS = [
   "/",

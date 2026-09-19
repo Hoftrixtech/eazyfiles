@@ -3,6 +3,9 @@ import type { ConvertQualityOption } from "@/types/convert";
 import type { CropAspectOption } from "@/types/crop";
 import { LAUNCH_ACCESS } from "@/lib/plans/config";
 
+/** Single brand logo asset (user-provided SVG). */
+export const BRAND_LOGO_PATH = "/brand/logo.svg";
+
 export const APP_NAME = "EazyFiles";
 export const APP_SHORT_NAME = "EazyFiles";
 export const APP_TAGLINE = "Simple Tools. Powerful Results.";

@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" role="img" aria-labelledby="eazyfilesMarkTitle">
-  <title id="eazyfilesMarkTitle">EazyFiles</title>
-  <rect width="40" height="40" rx="10" fill="#0f172a"/>
-  <rect x="10" y="9" width="16" height="20" rx="3" fill="none" stroke="#f8fafc" stroke-width="1.7"/>
-  <path d="M10 14h16" stroke="#f8fafc" stroke-width="1.7"/>
-  <path d="M14 21h8M14 25h5" stroke="#38bdf8" stroke-width="1.7" stroke-linecap="round"/>
-</svg>

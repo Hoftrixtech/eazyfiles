@@ -1,7 +1,6 @@
 import Link from "next/link";
+import { BRAND_LOGO_PATH } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-
-const LOGO_SRC = "/brand/eazyfiles-logo.svg";
 
 export function BrandLogo({
   href = "/",
@@ -16,7 +15,7 @@ export function BrandLogo({
   const image = (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={LOGO_SRC}
+      src={BRAND_LOGO_PATH}
       alt="EazyFiles"
       width={280}
       height={63}
