@@ -29,6 +29,7 @@ export async function POST(request: Request): Promise<Response> {
   const ip = clientIpFromHeaders(request.headers);
 
   if (!isMongoConfigured()) {
+    console.error("[contact] MONGODB_URI is not configured");
     return errorJson(
       "DATABASE_UNAVAILABLE",
       "The service is temporarily unavailable. Please try again shortly.",

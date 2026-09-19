@@ -21,7 +21,7 @@ const cache: MongooseCache = globalForMongoose.mongooseCache ?? {
 globalForMongoose.mongooseCache = cache;
 
 export function isMongoConfigured(): boolean {
-  return Boolean(process.env.MONGODB_URI);
+  return Boolean(process.env.MONGODB_URI?.trim());
 }
 
 async function ensureIndexes(): Promise<void> {
