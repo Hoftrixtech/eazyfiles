@@ -1,13 +1,17 @@
 import Link from "next/link";
+import { UserMenu } from "@/components/account/UserMenu";
 import { BrandLogo } from "@/components/brand/BrandLogo";
 import { Container } from "@/components/ui/Container";
 import { getSessionUser } from "@/lib/access/identity";
-import { logoutAction } from "@/app/auth-actions";
 
 const linkClass =
   "rounded-sm px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground";
 
-function NavLinks({ authenticated }: { authenticated: boolean }) {
+function NavLinks({
+  user,
+}: {
+  user: { name: string; email: string } | null;
+}) {
   return (
     <>
       <Link href="/tools" className={linkClass}>
@@ -16,17 +20,8 @@ function NavLinks({ authenticated }: { authenticated: boolean }) {
       <Link href="/#how-it-works" className={linkClass}>
         How It Works
       </Link>
-      {authenticated ? (
-        <>
-          <Link href="/account" className={linkClass}>
-            Account
-          </Link>
-          <form action={logoutAction}>
-            <button type="submit" className={linkClass}>
-              Logout
-            </button>
-          </form>
-        </>
+      {user ? (
+        <UserMenu user={user} />
       ) : (
         <>
           <Link href="/login" className={linkClass}>
@@ -52,7 +47,7 @@ export async function Navbar() {
       <Container className="flex h-16 items-center justify-between gap-4">
         <BrandLogo />
         <nav aria-label="Primary" className="hidden items-center gap-0.5 md:flex">
-          <NavLinks authenticated={Boolean(user)} />
+          <NavLinks user={user} />
         </nav>
         <details className="group relative md:hidden">
           <summary
@@ -70,7 +65,7 @@ export async function Navbar() {
             aria-label="Mobile"
             className="absolute right-0 mt-2 flex w-56 flex-col gap-0.5 rounded-md border border-border bg-card p-2 shadow-[var(--shadow-elevated)]"
           >
-            <NavLinks authenticated={Boolean(user)} />
+            <NavLinks user={user} />
           </nav>
         </details>
       </Container>

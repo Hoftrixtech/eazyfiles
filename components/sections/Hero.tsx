@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Sparkles } from "lucide-react";
-import { logoutAction } from "@/app/auth-actions";
+import { UserMenu } from "@/components/account/UserMenu";
 import { BrandLogo } from "@/components/brand/BrandLogo";
 import { Container } from "@/components/ui/Container";
 import { getSessionUser } from "@/lib/access/identity";
@@ -29,12 +29,7 @@ export async function Hero() {
           </div>
           <div className="flex items-center justify-end gap-2">
             {user ? (
-              <>
-                <Link href="/account" className={navLinkClass}>Account</Link>
-                <form action={logoutAction}>
-                  <button type="submit" className={navLinkClass}>Logout</button>
-                </form>
-              </>
+              <UserMenu user={user} />
             ) : (
               <>
                 <Link href="/login" className={navLinkClass}>Login</Link>
