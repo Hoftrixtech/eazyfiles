@@ -1,6 +1,7 @@
 import "server-only";
 
 import mongoose from "mongoose";
+import { getMongoDbUri, isMongoDbUriConfigured } from "@/lib/env/mongodb-uri";
 
 interface MongooseCache {
   conn: typeof mongoose | null;
@@ -21,7 +22,7 @@ const cache: MongooseCache = globalForMongoose.mongooseCache ?? {
 globalForMongoose.mongooseCache = cache;
 
 export function isMongoConfigured(): boolean {
-  return Boolean(process.env.MONGODB_URI?.trim());
+  return isMongoDbUriConfigured();
 }
 
 async function ensureIndexes(): Promise<void> {
@@ -69,7 +70,7 @@ export async function connectToDatabase(): Promise<typeof mongoose> {
     cache.indexesEnsured = false;
   }
 
-  const uri = process.env.MONGODB_URI;
+  const uri = getMongoDbUri();
   if (!uri) {
     throw new Error("MONGODB_URI is not configured");
   }

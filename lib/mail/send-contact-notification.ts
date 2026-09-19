@@ -5,6 +5,7 @@ import type { ContactTopicValue } from "@/lib/contact/topics";
 import { contactTopicLabel } from "@/lib/contact/topics";
 import { sanitizeContactField } from "@/lib/contact/sanitize";
 import { CONTACT_SUPPORT_EMAIL, isSmtpConfigured, smtpFromAddress } from "@/lib/mail/config";
+import { resolveSmtpConfig } from "@/lib/mail/smtp-config";
 
 export type ContactEmailPayload = {
   name: string;
@@ -15,21 +16,22 @@ export type ContactEmailPayload = {
 };
 
 function createTransport() {
-  const port = Number(process.env.SMTP_PORT);
-  if (!Number.isFinite(port) || port <= 0) {
-    throw new Error("SMTP_PORT_INVALID");
+  const config = resolveSmtpConfig();
+  if (!config) {
+    throw new Error("SMTP_NOT_CONFIGURED");
   }
 
-  const secure =
-    process.env.SMTP_SECURE === "true" || (process.env.SMTP_SECURE !== "false" && port === 465);
+  if (config.mode === "url") {
+    return nodemailer.createTransport(config.url);
+  }
 
   return nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port,
-    secure,
+    host: config.host,
+    port: config.port,
+    secure: config.secure,
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
+      user: config.user,
+      pass: config.pass,
     },
   });
 }

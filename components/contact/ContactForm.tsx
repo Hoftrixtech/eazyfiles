@@ -78,7 +78,11 @@ export function ContactForm() {
         if (data.error?.fields) {
           setErrors(data.error.fields);
         }
-        setFormError(data.error?.message ?? "Something went wrong. Please try again.");
+        const fallback =
+          response.status === 503
+            ? "We could not send your message right now. Please try again later or email support@eazyfiles.com directly."
+            : "Something went wrong. Please try again.";
+        setFormError(data.error?.message ?? fallback);
         setStatus("error");
         return;
       }

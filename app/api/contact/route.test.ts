@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const connectToDatabase = vi.fn(async () => ({}));
-const isMongoConfigured = vi.fn(() => true);
+const isMongoDbUriConfigured = vi.fn(() => true);
 const isSmtpConfigured = vi.fn(() => true);
 const isContactSubmissionBlocked = vi.fn(async () => false);
 const recordContactSubmission = vi.fn(async () => undefined);
@@ -9,9 +9,12 @@ const sendContactNotificationEmail = vi.fn(async () => undefined);
 
 const contactCreate = vi.fn(async () => ({ _id: "contact-1" }));
 
+vi.mock("@/lib/env/mongodb-uri", () => ({
+  isMongoDbUriConfigured: () => isMongoDbUriConfigured(),
+}));
+
 vi.mock("@/lib/mongodb", () => ({
   connectToDatabase: () => connectToDatabase(),
-  isMongoConfigured: () => isMongoConfigured(),
 }));
 
 vi.mock("@/lib/mail/config", () => ({
@@ -50,7 +53,7 @@ function makeRequest(body: unknown, ip = "203.0.113.10"): Request {
 describe("POST /api/contact", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    isMongoConfigured.mockReturnValue(true);
+    isMongoDbUriConfigured.mockReturnValue(true);
     isSmtpConfigured.mockReturnValue(true);
     isContactSubmissionBlocked.mockResolvedValue(false);
   });

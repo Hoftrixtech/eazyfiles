@@ -5,7 +5,8 @@ import { isContactSubmissionBlocked, recordContactSubmission } from "@/lib/conta
 import { errorJson } from "@/lib/errors";
 import { isSmtpConfigured } from "@/lib/mail/config";
 import { sendContactNotificationEmail } from "@/lib/mail/send-contact-notification";
-import { connectToDatabase, isMongoConfigured } from "@/lib/mongodb";
+import { isMongoDbUriConfigured } from "@/lib/env/mongodb-uri";
+import { connectToDatabase } from "@/lib/mongodb";
 import { Contact } from "@/models/Contact";
 import { contactFieldErrors, contactFormSchema } from "@/lib/validation/contact";
 
@@ -28,8 +29,8 @@ type ContactValidationErrorBody = {
 export async function POST(request: Request): Promise<Response> {
   const ip = clientIpFromHeaders(request.headers);
 
-  if (!isMongoConfigured()) {
-    console.error("[contact] MONGODB_URI is not configured");
+  if (!isMongoDbUriConfigured()) {
+    console.error("[contact] MongoDB URI is not configured (MONGODB_URI / DATABASE_URL)");
     return errorJson(
       "DATABASE_UNAVAILABLE",
       "The service is temporarily unavailable. Please try again shortly.",

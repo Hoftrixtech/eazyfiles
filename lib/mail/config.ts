@@ -1,14 +1,11 @@
 import "server-only";
 
+import { isSmtpEnvConfigured } from "@/lib/mail/smtp-config";
+
 export const CONTACT_SUPPORT_EMAIL = "support@eazyfiles.com";
 
 export function isSmtpConfigured(): boolean {
-  return Boolean(
-    process.env.SMTP_HOST?.trim() &&
-      process.env.SMTP_PORT?.trim() &&
-      process.env.SMTP_USER?.trim() &&
-      process.env.SMTP_PASS?.trim()
-  );
+  return isSmtpEnvConfigured();
 }
 
 export function smtpFromAddress(): string {
