@@ -9,6 +9,9 @@ export const APP_TAGLINE = "Simple Tools. Powerful Results.";
 /** Canonical public site URL (no trailing slash). */
 export const SITE_URL = "https://eazyfiles.com";
 
+/** Primary content width — keep pages aligned when switching tabs or routes. */
+export const SITE_CONTENT_MAX_WIDTH_CLASS = "max-w-6xl";
+
 export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
 /** Maximum images in one batch compress run (each image still uses one compression slot). */
 export const MAX_COMPRESSOR_BATCH_FILES = 20;

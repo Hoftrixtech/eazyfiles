@@ -69,11 +69,11 @@ export function ToolsCategoryTabs({
   }
 
   return (
-    <div className="space-y-8">
+    <div className="w-full min-w-0 space-y-8">
       <div
         role="tablist"
         aria-label="Tool categories"
-        className="-mx-1 flex gap-1 overflow-x-auto pb-1 [scrollbar-width:thin]"
+        className="flex w-full max-w-full gap-1 overflow-x-auto pb-1 [scrollbar-width:thin]"
       >
         {categories.map((category) => {
           const selected = category.id === activeId;
@@ -105,15 +105,17 @@ export function ToolsCategoryTabs({
         role="tabpanel"
         id={tabPanelId(active.id)}
         aria-labelledby={tabButtonId(active.id)}
-        className="space-y-6"
+        className="w-full min-w-0 space-y-6"
       >
-        <div className="max-w-2xl">
+        <div className="w-full">
           <h2 className="text-xl font-semibold tracking-tight">{active.name}</h2>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">{active.shortDescription}</p>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+            {active.shortDescription}
+          </p>
         </div>
 
         {active.tools.length > 0 ? (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {active.tools.map((tool) => (
               <ToolCard key={tool.slug} tool={tool} authenticated={authenticated} />
             ))}

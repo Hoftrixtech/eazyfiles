@@ -32,7 +32,7 @@ export default async function AccountSettingsPage() {
   const providers = profile?.providers ?? [];
 
   return (
-    <div className="space-y-8">
+    <div className="w-full min-w-0 space-y-8">
       <header>
         <p className="text-sm font-medium text-muted-foreground">
           <Link href="/account" className="hover:text-foreground">
@@ -45,7 +45,7 @@ export default async function AccountSettingsPage() {
         </p>
       </header>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
         <Card className="p-6 sm:p-8">
           <h2 className="text-base font-semibold">Profile</h2>
           <dl className="mt-6 space-y-5">

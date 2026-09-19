@@ -40,7 +40,7 @@ export default async function AccountDashboardPage() {
   const tools = getToolsByCategory("image-tools");
 
   return (
-    <div className="space-y-8">
+    <div className="w-full min-w-0 space-y-8">
       <header>
         <p className="text-sm font-medium text-muted-foreground">My account</p>
         <h1 className="mt-1 text-3xl font-semibold tracking-tight">Dashboard</h1>

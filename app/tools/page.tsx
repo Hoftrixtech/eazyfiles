@@ -45,7 +45,7 @@ export default async function ToolsPage({
 
   return (
     <main className="py-12 sm:py-16">
-      <Container className="space-y-10">
+      <Container className="w-full space-y-10">
         <header className="max-w-2xl">
           <p className="mb-3 text-sm font-medium text-muted-foreground">Tool directory</p>
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">All tools</h1>

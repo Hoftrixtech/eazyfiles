@@ -15,7 +15,7 @@ export function AccountNav({ name, email }: { name: string; email: string }) {
   const pathname = usePathname();
 
   return (
-    <aside className="w-full shrink-0 lg:w-56">
+    <aside className="w-full min-w-0 lg:w-[15rem] lg:max-w-[15rem]">
       <div className="flex items-center gap-3 rounded-xl border border-border bg-card p-4">
         <UserAvatar name={name} size="lg" />
         <div className="min-w-0">
