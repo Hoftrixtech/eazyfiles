@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { getAccountProfile } from "@/lib/access/account";
 import { getSessionUser } from "@/lib/access/identity";
@@ -32,29 +31,21 @@ export default async function AccountSettingsPage() {
   const providers = profile?.providers ?? [];
 
   return (
-    <div className="w-full min-w-0 space-y-8">
-      <header>
-        <p className="text-sm font-medium text-muted-foreground">
-          <Link href="/account" className="hover:text-foreground">
-            My account
-          </Link>
-        </p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight">Profile & settings</h1>
-        <p className="mt-2 text-sm text-muted-foreground sm:text-base">
-          Your basic account details and how you sign in to EazyFiles.
-        </p>
-      </header>
+    <div className="mx-auto w-full max-w-5xl space-y-8">
+      <p className="text-sm text-muted-foreground">
+        Your basic account details and how you sign in to EazyFiles.
+      </p>
 
       <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
         <Card className="p-6 sm:p-8">
           <h2 className="text-base font-semibold">Profile</h2>
           <dl className="mt-6 space-y-5">
             <div>
-              <dt className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Display name</dt>
-              <dd className="mt-1.5 font-medium">{user.name}</dd>
+              <dt className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Display name</dt>
+              <dd className="mt-1.5 font-medium">{user.name.trim() || "—"}</dd>
             </div>
             <div>
-              <dt className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Account email</dt>
+              <dt className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Account email</dt>
               <dd className="mt-1.5 font-medium">{user.email}</dd>
             </div>
           </dl>

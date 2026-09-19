@@ -33,6 +33,17 @@ export function memoryGetTodayCompressionCount(sessionId: string, date: string):
   return usageCounts.get(usageKey(sessionId, date)) ?? 0;
 }
 
+export function memoryGetTotalCompressionCount(sessionId: string): number {
+  const prefix = `${sessionId}:`;
+  let total = 0;
+  for (const [key, count] of usageCounts.entries()) {
+    if (key.startsWith(prefix)) {
+      total += count;
+    }
+  }
+  return total;
+}
+
 export function memoryReserveUsageSlot(sessionId: string, date: string, limit: number): boolean {
   const key = usageKey(sessionId, date);
   const used = usageCounts.get(key) ?? 0;

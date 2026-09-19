@@ -4,7 +4,7 @@ import { SignupForm } from "@/components/auth/SignupForm";
 import { AuthPageShell } from "@/components/auth/AuthPageShell";
 import { getConfiguredOAuthProviders } from "@/lib/auth/oauth-users";
 import { getSessionUser } from "@/lib/access/identity";
-import { safeNextPath } from "@/lib/auth/paths";
+import { postAuthRedirectPath } from "@/lib/auth/paths";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -21,7 +21,7 @@ export default async function SignupPage({
 }: {
   searchParams: Promise<{ next?: string }>;
 }) {
-  const nextPath = safeNextPath((await searchParams).next);
+  const nextPath = postAuthRedirectPath((await searchParams).next);
   const user = await getSessionUser();
   if (user) {
     redirect(nextPath);

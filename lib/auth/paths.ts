@@ -10,6 +10,12 @@ export function safeNextPath(value: unknown): string {
   return value;
 }
 
+/** Default landing page after sign-in when no explicit `next` path was provided. */
+export function postAuthRedirectPath(value: unknown): string {
+  const path = safeNextPath(value);
+  return path === "/" ? "/account" : path;
+}
+
 export function withNextParam(pathname: "/login" | "/signup", next?: string): string {
   const path = safeNextPath(next);
   if (path === "/") {

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { LayoutDashboard, Settings, Wrench } from "lucide-react";
+import { LayoutDashboard, Settings, UserRound, Wrench } from "lucide-react";
 import { LogoutMenuItem } from "@/components/account/LogoutMenuItem";
 import { UserAvatar } from "@/components/account/UserAvatar";
 import { cn } from "@/lib/utils";
@@ -87,8 +87,17 @@ export function UserMenu({
               className={menuLinkClass}
               onClick={() => setOpen(false)}
             >
+              <UserRound className="size-4 text-muted-foreground" aria-hidden="true" />
+              Profile
+            </Link>
+            <Link
+              href="/account/settings"
+              role="menuitem"
+              className={menuLinkClass}
+              onClick={() => setOpen(false)}
+            >
               <Settings className="size-4 text-muted-foreground" aria-hidden="true" />
-              Account settings
+              Settings
             </Link>
             <Link href="/tools" role="menuitem" className={menuLinkClass} onClick={() => setOpen(false)}>
               <Wrench className="size-4 text-muted-foreground" aria-hidden="true" />

@@ -11,7 +11,7 @@ import {
 } from "@/lib/auth/attempts";
 import { hashPassword } from "@/lib/auth/password";
 import { connectToDatabase, isMongoConfigured } from "@/lib/mongodb";
-import { safeNextPath } from "@/lib/auth/paths";
+import { postAuthRedirectPath } from "@/lib/auth/paths";
 import { loginFieldsSchema, signupFieldsSchema } from "@/lib/validation/auth";
 import { User } from "@/models/User";
 
@@ -59,7 +59,7 @@ export async function loginAction(
     await signIn("credentials", {
       email: parsed.data.email,
       password: parsed.data.password,
-      redirectTo: safeNextPath(formData.get("next")),
+      redirectTo: postAuthRedirectPath(formData.get("next")),
     });
     await clearAuthAttempts("login", parsed.data.email, ip);
   } catch (error) {
@@ -118,7 +118,7 @@ export async function signupAction(
     await signIn("credentials", {
       email: parsed.data.email,
       password: parsed.data.password,
-      redirectTo: safeNextPath(formData.get("next")),
+      redirectTo: postAuthRedirectPath(formData.get("next")),
     });
     await clearAuthAttempts("register", parsed.data.email, ip);
   } catch (error) {
@@ -132,7 +132,7 @@ export async function signupAction(
 }
 
 export async function oauthSignInAction(provider: "google", nextPath?: string): Promise<void> {
-  await signIn(provider, { redirectTo: safeNextPath(nextPath ?? "/") });
+  await signIn(provider, { redirectTo: postAuthRedirectPath(nextPath ?? "/") });
 }
 
 export async function logoutAction(): Promise<void> {

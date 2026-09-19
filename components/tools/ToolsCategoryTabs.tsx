@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ToolCard } from "@/components/tools/ToolCard";
 import { ToolIcon } from "@/lib/tools";
@@ -37,25 +37,24 @@ export function ToolsCategoryTabs({
   const searchParams = useSearchParams();
   const resolvedInitial =
     categories.find((c) => c.id === initialCategoryId)?.id ?? categories[0]?.id ?? "image-tools";
-  const [activeId, setActiveId] = useState<ToolCategoryId>(resolvedInitial);
-
   const categoryParam = searchParams.get("category");
 
-  useEffect(() => {
+  const activeIdFromUrl = useMemo(() => {
     if (!categoryParam) {
-      return;
+      return resolvedInitial;
     }
     const match = categories.find((c) => c.slug === categoryParam || c.id === categoryParam);
-    if (match) {
-      setActiveId(match.id);
-    }
-  }, [categoryParam, categories]);
+    return match?.id ?? resolvedInitial;
+  }, [categoryParam, categories, resolvedInitial]);
+
+  const [pendingId, setPendingId] = useState<ToolCategoryId | null>(null);
+  const activeId = pendingId ?? activeIdFromUrl;
 
   const active = categories.find((c) => c.id === activeId) ?? categories[0];
 
   const selectCategory = useCallback(
     (category: ToolsTabCategory) => {
-      setActiveId(category.id);
+      setPendingId(category.id);
       const params = new URLSearchParams(searchParams.toString());
       params.set("category", category.slug);
       const query = params.toString();
