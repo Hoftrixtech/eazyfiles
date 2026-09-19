@@ -369,7 +369,7 @@ export function ImageCompressor({ id = "compressor" }: { id?: string }) {
           description="Upload one or many images, choose your target size and format, then download optimized files. Each successful compression counts toward your limit."
         />
 
-        <Card className="glass-panel mt-10 overflow-hidden border-white/[0.06] p-0 sm:p-0" aria-busy={isProcessing}>
+        <Card className="glass-panel mt-10 overflow-hidden p-0 sm:p-0" aria-busy={isProcessing}>
           <div className="grid gap-0 lg:grid-cols-2 lg:gap-0">
             <div className="border-border p-5 sm:p-8 lg:border-r lg:p-10">
               <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">1. Upload</p>

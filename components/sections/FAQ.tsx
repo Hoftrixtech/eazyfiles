@@ -49,7 +49,7 @@ export function FAQ({ id = "faq" }: { id?: string }) {
     <section id={id} className="section-padding section-surface scroll-mt-24 bg-background">
       <Container className="max-w-3xl">
         <SectionHeader title="FAQ" description="Answers about EazyFiles and our image tools." />
-        <div className="mt-12 divide-y divide-border overflow-hidden rounded-xl border border-border/80 bg-card/50 ring-1 ring-white/[0.04] backdrop-blur-sm">
+        <div className="mt-12 divide-y divide-border overflow-hidden rounded-xl border border-border bg-card">
           {faqs.map((item) => (
             <details key={item.question} className="group px-5 py-4 sm:px-6">
               <summary className="flex cursor-pointer items-center justify-between gap-4 py-2 text-left font-medium transition-colors hover:text-foreground">

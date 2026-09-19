@@ -123,12 +123,18 @@ function compressWithProgress(
       reject(new Error("We could not reach the compression service. Check your connection and try again."));
     };
 
+    xhr.ontimeout = () => {
+      stopSimulation();
+      reject(new Error("Compression took too long. Try a smaller image or a higher target size."));
+    };
+
     xhr.onabort = () => {
       stopSimulation();
       reject(new Error("Compression was cancelled."));
     };
 
     xhr.open("POST", "/api/compress");
+    xhr.timeout = 120_000;
     xhr.withCredentials = true;
     xhr.responseType = "blob";
     if (sessionId) {

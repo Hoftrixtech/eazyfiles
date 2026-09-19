@@ -28,7 +28,7 @@ export function HowItWorks() {
           {steps.map((step) => (
             <li
               key={step.number}
-              className="relative rounded-xl border border-border/80 bg-card/50 p-8 ring-1 ring-white/[0.03] transition-colors hover:border-white/10 hover:bg-card/70"
+              className="relative rounded-xl border border-border bg-card p-8 transition-colors hover:border-primary/20 hover:shadow-[var(--shadow-elevated)]"
             >
               <span className="inline-flex size-10 items-center justify-center rounded-lg bg-muted/80 text-xs font-semibold tracking-widest text-muted-foreground">
                 {step.number}

@@ -16,12 +16,21 @@ describe("ensurePersistence", () => {
     delete process.env.ALLOW_LOCAL_MEMORY_FALLBACK;
   });
 
-  it("uses memory when MongoDB connect fails and local fallback is allowed", async () => {
+  it("uses memory immediately when ALLOW_LOCAL_MEMORY_FALLBACK is true", async () => {
     process.env.ALLOW_LOCAL_MEMORY_FALLBACK = "true";
+    const mode = await ensurePersistence();
+    expect(mode).toBe("memory");
+    expect(connectToDatabase).not.toHaveBeenCalled();
+    expect(await ensurePersistence()).toBe("memory");
+  });
+
+  it("uses memory when MongoDB connect fails and fallback is allowed in development", async () => {
+    vi.stubEnv("NODE_ENV", "development");
     connectToDatabase.mockRejectedValue(new Error("network"));
     const mode = await ensurePersistence();
     expect(mode).toBe("memory");
     expect(await ensurePersistence()).toBe("memory");
+    vi.unstubAllEnvs();
   });
 
   it("rejects when MongoDB connect fails and fallback is disabled", async () => {

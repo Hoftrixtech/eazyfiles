@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
+const LOGO_SRC = "/brand/eazyfiles-logo.svg";
+
 export function BrandLogo({
   href = "/",
   size = "md",
@@ -12,14 +14,13 @@ export function BrandLogo({
 }) {
   const height = size === "sm" ? "h-7" : size === "lg" ? "h-10" : "h-8";
   const image = (
-    // Wordmark SVG; height-only sizing keeps the original aspect ratio.
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src="/brand/eazyfiles-logo.svg"
+      src={LOGO_SRC}
       alt="EazyFiles"
-      width={196}
-      height={40}
-      className={cn(height, "w-auto max-w-[min(100%,11rem)] brightness-0 invert", className)}
+      width={280}
+      height={63}
+      className={cn(height, "w-auto max-w-[min(100%,17rem)]", className)}
       decoding="async"
     />
   );

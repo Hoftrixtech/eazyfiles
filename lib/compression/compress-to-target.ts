@@ -34,10 +34,12 @@ interface EncodeCandidate {
 
 const MIN_QUALITY = 1;
 const MAX_QUALITY = 100;
-const MAX_QUALITY_ITERATIONS = 12;
-const MAX_SCALE_ITERATIONS = 8;
+const MAX_QUALITY_ITERATIONS = 9;
+const MAX_SCALE_ITERATIONS = 6;
 const MIN_EDGE = 64;
 const MAX_INPUT_EDGE = 8192;
+/** Cap pixels used during quality search (large uploads are downscaled for speed). */
+const MAX_SEARCH_PIXELS = 4_000_000;
 
 function createPipeline(inputPath: string): Sharp {
   return sharp(inputPath, {
@@ -69,8 +71,6 @@ async function encodeBuffer(
         quality: clampedQuality,
         mozjpeg: true,
         chromaSubsampling: "4:2:0",
-        trellisQuantisation: true,
-        overshootDeringing: true,
       })
       .toBuffer();
   }
@@ -80,7 +80,7 @@ async function encodeBuffer(
       .webp({
         quality: clampedQuality,
         alphaQuality: clampedQuality,
-        effort: 4,
+        effort: 2,
         smartSubsample: true,
       })
       .toBuffer();
@@ -88,11 +88,11 @@ async function encodeBuffer(
 
   return pipeline
     .png({
-      compressionLevel: 9,
+      compressionLevel: pngPalette ? 9 : 6,
       adaptiveFiltering: true,
       palette: pngPalette,
       quality: pngPalette ? clampedQuality : 100,
-      effort: 4,
+      effort: 2,
     })
     .toBuffer();
 }
@@ -159,15 +159,10 @@ async function searchLossyQuality(
     iterations += 1;
   }
 
-  if (best) {
-    const nearby = [best.quality + 1, best.quality + 2, best.quality - 1];
-    for (const quality of nearby) {
-      if (quality < MIN_QUALITY || quality > MAX_QUALITY) {
-        continue;
-      }
-      const buffer = await encodeBuffer(source, format, quality, width, height);
-      best = chooseBetter(best, { buffer, quality, width, height }, targetBytes);
-    }
+  if (best && best.quality < MAX_QUALITY) {
+    const refine = best.quality + 1;
+    const buffer = await encodeBuffer(source, format, refine, width, height);
+    best = chooseBetter(best, { buffer, quality: refine, width, height }, targetBytes);
   }
 
   return best && best.buffer.length <= targetBytes ? best : null;
@@ -383,6 +378,13 @@ export async function compressToTarget(input: CompressToTargetInput): Promise<Co
     const scale = MAX_INPUT_EDGE / longestEdge;
     width = Math.max(1, Math.round(width * scale));
     height = Math.max(1, Math.round(height * scale));
+  }
+
+  const searchPixels = width * height;
+  if (searchPixels > MAX_SEARCH_PIXELS) {
+    const scale = Math.sqrt(MAX_SEARCH_PIXELS / searchPixels);
+    width = Math.max(MIN_EDGE, Math.round(width * scale));
+    height = Math.max(MIN_EDGE, Math.round(height * scale));
   }
 
   let best = await searchQuality(source, input.outputFormat, input.targetBytes, width, height);

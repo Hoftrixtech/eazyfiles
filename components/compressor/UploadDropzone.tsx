@@ -73,8 +73,8 @@ export function UploadDropzone({
       className={cn(
         "min-h-52 rounded-xl border-2 border-dashed px-4 py-12 text-center transition-all duration-200 sm:px-8",
         isDragging
-          ? "border-white/25 bg-muted/80 ring-2 ring-white/10"
-          : "border-border/80 bg-muted/15 hover:border-white/15 hover:bg-muted/30",
+          ? "border-primary/40 bg-muted ring-2 ring-primary/15"
+          : "border-border bg-muted/50 hover:border-primary/25 hover:bg-muted",
         disabled && "pointer-events-none opacity-60"
       )}
     >
@@ -93,7 +93,7 @@ export function UploadDropzone({
           event.currentTarget.value = "";
         }}
       />
-      <span className="mx-auto mb-4 flex size-12 items-center justify-center rounded-xl bg-card/90 text-foreground ring-1 ring-white/[0.06]">
+      <span className="mx-auto mb-4 flex size-12 items-center justify-center rounded-xl bg-card text-primary">
         <Upload className="size-5" aria-hidden="true" />
       </span>
       <p className="text-base font-medium">

@@ -33,7 +33,7 @@ export function WhyUseThisTool() {
           {benefits.map((item) => (
             <article
               key={item.title}
-              className="rounded-xl border border-border/60 bg-card/60 p-6 ring-1 ring-white/[0.03] sm:p-8"
+              className="rounded-xl border border-border bg-card p-6 sm:p-8"
             >
               <h3 className="text-base font-semibold tracking-tight">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>

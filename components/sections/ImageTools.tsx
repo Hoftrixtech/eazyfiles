@@ -44,9 +44,9 @@ export function ImageToolsSection() {
             const available = access?.detail === "Available";
             return (
               <Link key={tool.slug} href={copy?.href ?? "/"} className="group block rounded-xl focus-visible:outline-none">
-                <Card className="h-full border-white/[0.06] p-6 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-white/10 hover:shadow-[0_24px_56px_rgba(0,0,0,0.55)] sm:p-8">
+                <Card className="h-full p-6 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-[var(--shadow-elevated)] sm:p-8">
                   <div className="flex items-start justify-between gap-4">
-                    <span className="flex size-11 items-center justify-center rounded-xl bg-muted/80 text-foreground ring-1 ring-white/[0.05] transition-colors group-hover:bg-muted">
+                    <span className="flex size-11 items-center justify-center rounded-xl bg-muted text-foreground transition-colors group-hover:bg-muted/80">
                       <ToolIcon name={tool.icon} className="size-5" />
                     </span>
                     <span

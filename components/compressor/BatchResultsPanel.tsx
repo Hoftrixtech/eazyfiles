@@ -38,7 +38,7 @@ export function BatchResultsPanel({ items, failedCount = 0, onReset, onCompressA
   const totalSaved = items.reduce((sum, item) => sum + item.result.originalSize - item.result.compressedSize, 0);
 
   return (
-    <div className="animate-fade-up space-y-5 rounded-xl border border-border/60 bg-muted/25 p-6 ring-1 ring-white/[0.03] sm:p-8">
+    <div className="animate-fade-up space-y-5 rounded-xl border border-border bg-muted/60 p-6 sm:p-8">
       <div>
         <h3 className="text-lg font-semibold tracking-tight">
           {items.length === 1 ? "Your image is ready" : `${items.length} images compressed`}

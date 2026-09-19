@@ -35,6 +35,12 @@ export async function ensurePersistence(): Promise<PersistenceMode> {
     return "mongo";
   }
 
+  // Avoid blocking image tools on slow/unreachable Atlas when local fallback is enabled.
+  if (process.env.ALLOW_LOCAL_MEMORY_FALLBACK === "true") {
+    activeMode = "memory";
+    return "memory";
+  }
+
   if (!isMongoConfigured()) {
     if (allowMemoryPersistenceFallback()) {
       activeMode = "memory";
