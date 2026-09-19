@@ -66,6 +66,54 @@ function oauthRejectReason(error: unknown): string {
   return error.name || "upsert_failed";
 }
 
+const SENSITIVE_KEY_VALUE_FIELD = /password|secret|token|uri|hash|credential/i;
+
+function redactMongoErrorMessage(message: string): string {
+  return message
+    .replace(/mongodb(\+srv)?:\/\/[^\s'"]+/gi, "mongodb://[redacted]")
+    .replace(/(password|passwd|pwd)(=|:)\S+/gi, "$1=[redacted]");
+}
+
+/** Safe MongoDB fields for production OAuth upsert diagnostics (no secrets). */
+function safeMongoErrorDiagnostics(error: unknown): Record<string, unknown> {
+  if (!error || typeof error !== "object") {
+    return {};
+  }
+
+  const record = error as Record<string, unknown>;
+  const diagnostics: Record<string, unknown> = {};
+
+  if (typeof record.name === "string") {
+    diagnostics.errorName = record.name;
+  }
+  if (typeof record.code === "number" || typeof record.code === "string") {
+    diagnostics.errorCode = record.code;
+  }
+  if (typeof record.message === "string") {
+    diagnostics.errorMessage = redactMongoErrorMessage(record.message);
+  }
+
+  if (record.keyPattern && typeof record.keyPattern === "object") {
+    diagnostics.keyPattern = record.keyPattern;
+  }
+
+  if (record.keyValue && typeof record.keyValue === "object") {
+    const keyValue = record.keyValue as Record<string, unknown>;
+    const safeKeyValue: Record<string, unknown> = {};
+    for (const [field, value] of Object.entries(keyValue)) {
+      if (SENSITIVE_KEY_VALUE_FIELD.test(field)) {
+        continue;
+      }
+      safeKeyValue[field] = value;
+    }
+    if (Object.keys(safeKeyValue).length > 0) {
+      diagnostics.keyValue = safeKeyValue;
+    }
+  }
+
+  return diagnostics;
+}
+
 export const authConfig = {
   secret: process.env.AUTH_SECRET,
   trustHost: true,
@@ -115,12 +163,14 @@ export const authConfig = {
         });
         return true;
       } catch (error) {
+        const mongoDiagnostics = safeMongoErrorDiagnostics(error);
         console.error("[auth][oauth] signIn rejected", {
           stage: "upsert",
           provider: "google",
           reason: oauthRejectReason(error),
           hasEmail: Boolean(email),
           emailVerified,
+          ...(Object.keys(mongoDiagnostics).length > 0 ? { mongo: mongoDiagnostics } : {}),
         });
         return false;
       }
