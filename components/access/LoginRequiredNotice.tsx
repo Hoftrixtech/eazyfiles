@@ -35,7 +35,7 @@ export function LoginRequiredNotice({
         ) : (
           <Link
             href={withNextParam("/login", nextPath)}
-            className="btn-radius brand-gradient-bg inline-flex h-11 w-full items-center justify-center px-4 text-sm font-medium text-primary-foreground shadow-sm transition-[filter] hover:brightness-[1.06]"
+            className="btn-radius brand-gradient-bg inline-flex h-11 w-full items-center justify-center px-4 text-sm font-medium text-primary-foreground shadow-sm cursor-pointer"
           >
             Log In
           </Link>

@@ -1,7 +1,7 @@
 import "server-only";
 
 import { releaseToolAccess, reserveToolAccess, resolveAccessIdentity } from "@/lib/access";
-import { MAX_IMAGE_TO_PDF_FILES, MAX_REQUEST_BYTES, MAX_UPLOAD_BYTES } from "@/lib/constants";
+import { MAX_UPLOAD_BYTES } from "@/lib/constants";
 import { AppError, errorJson } from "@/lib/errors";
 import { attachmentDisposition } from "@/lib/http";
 import { imagesToPdf } from "@/lib/pdf/images-to-pdf";
@@ -13,7 +13,7 @@ import { assertValidImageContents, validateUpload } from "@/lib/validation/uploa
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-export const maxDuration = 60;
+export const maxDuration = 120;
 
 function withSession(response: Response, sessionId: string): Response {
   applySessionHeaders(response.headers, sessionId);
@@ -56,21 +56,6 @@ export async function POST(request: Request): Promise<Response> {
       );
     }
 
-    const contentLengthHeader = request.headers.get("content-length");
-    if (contentLengthHeader) {
-      const contentLength = Number(contentLengthHeader);
-      if (Number.isFinite(contentLength) && contentLength > MAX_REQUEST_BYTES) {
-        return withSession(
-          errorJson(
-            "FILE_TOO_LARGE",
-            `The total upload must be ${MAX_UPLOAD_BYTES / 1024 / 1024} MB or smaller per file.`,
-            413
-          ),
-          sessionId
-        );
-      }
-    }
-
     const formData = await request.formData();
     const files = collectFiles(formData);
 
@@ -78,18 +63,9 @@ export async function POST(request: Request): Promise<Response> {
       throw new AppError("MISSING_FILE", "Please choose at least one image to convert.", 400);
     }
 
-    if (files.length > MAX_IMAGE_TO_PDF_FILES) {
-      throw new AppError(
-        "INVALID_REQUEST",
-        `You can add up to ${MAX_IMAGE_TO_PDF_FILES} images per PDF.`,
-        400
-      );
-    }
-
     const pageLayout = parsePdfPageLayout(formData.get("pageLayout"));
 
     const buffers: Buffer[] = [];
-    let totalBytes = 0;
     for (const file of files) {
       if (file.size > MAX_UPLOAD_BYTES) {
         throw new AppError(
@@ -97,10 +73,6 @@ export async function POST(request: Request): Promise<Response> {
           `Each image must be ${MAX_UPLOAD_BYTES / 1024 / 1024} MB or smaller.`,
           413
         );
-      }
-      totalBytes += file.size;
-      if (totalBytes > MAX_REQUEST_BYTES) {
-        throw new AppError("FILE_TOO_LARGE", "The combined upload is too large. Try fewer or smaller images.", 413);
       }
 
       const contents = Buffer.from(await file.arrayBuffer());

@@ -17,6 +17,7 @@
   --primary-foreground: #ffffff;
   --btn-radius: 10px;
   --gradient-brand: linear-gradient(135deg, #031130 0%, #185df1 100%);
+  --gradient-brand-hover: linear-gradient(135deg, #185df1 0%, #031130 100%);
   --accent: #185df1;
   --accent-foreground: #ffffff;
   --surface-dark: #0b1220;
@@ -147,19 +148,41 @@ main > section + [data-section-follow] {
   border-radius: var(--btn-radius);
   background: var(--gradient-brand);
   color: var(--primary-foreground);
+  transition:
+    background 0.28s ease,
+    transform 0.15s ease,
+    filter 0.15s ease;
 }
 
-.brand-gradient-bg:hover {
-  filter: brightness(1.06);
+.brand-gradient-bg:hover:not(:disabled) {
+  background: var(--gradient-brand-hover);
+  cursor: pointer;
 }
 
-.brand-gradient-bg:active {
+.brand-gradient-bg:active:not(:disabled) {
+  transform: scale(0.98);
   filter: brightness(0.98);
 }
 
 .brand-gradient-bg:disabled {
   opacity: 0.5;
   filter: none;
+  cursor: not-allowed;
+}
+
+button:not(:disabled),
+input[type="button"]:not(:disabled),
+input[type="submit"]:not(:disabled),
+input[type="reset"]:not(:disabled),
+summary {
+  cursor: pointer;
+}
+
+button:disabled,
+input[type="button"]:disabled,
+input[type="submit"]:disabled,
+input[type="reset"]:disabled {
+  cursor: not-allowed;
 }
 
 .btn-radius {

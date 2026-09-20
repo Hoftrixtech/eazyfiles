@@ -16,7 +16,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ApiRequestError } from "@/lib/client/api-error";
 import { imageToPdfRequest, type ImageToPdfClientResult } from "@/lib/client/image-to-pdf-request";
 import { isOversizedImageFile, isSupportedImageFile } from "@/lib/client/image-file";
-import { MAX_IMAGE_TO_PDF_FILES, MAX_UPLOAD_BYTES } from "@/lib/constants";
+import { MAX_UPLOAD_BYTES } from "@/lib/constants";
 import { formatBytes } from "@/lib/utils";
 import type { PdfPageLayout } from "@/types/pdf";
 
@@ -60,10 +60,6 @@ export function ImageToPdf() {
         }
         if (isOversizedImageFile(file)) {
           setError(`Each image must be ${formatBytes(MAX_UPLOAD_BYTES)} or smaller.`);
-          return;
-        }
-        if (next.length >= MAX_IMAGE_TO_PDF_FILES) {
-          setError(`You can add up to ${MAX_IMAGE_TO_PDF_FILES} images per PDF.`);
           return;
         }
         next.push(file);
@@ -138,11 +134,11 @@ export function ImageToPdf() {
             <div>
               <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Upload images</p>
               <p className="mt-1 text-sm text-muted-foreground">
-                JPG, PNG or WebP · Up to {formatBytes(MAX_UPLOAD_BYTES)} each · Max {MAX_IMAGE_TO_PDF_FILES} images
+                JPG, PNG or WebP · Up to {formatBytes(MAX_UPLOAD_BYTES)} each · Add as many images as you need
               </p>
               <div className="mt-5">
                 <UploadDropzone
-                  disabled={isProcessing || files.length >= MAX_IMAGE_TO_PDF_FILES}
+                  disabled={isProcessing}
                   onFiles={(picked) => {
                     addFiles(picked);
                   }}

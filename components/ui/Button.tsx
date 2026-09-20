@@ -38,7 +38,7 @@ export function Button({
     <button
       type={type}
       className={cn(
-        "inline-flex items-center justify-center gap-2 font-medium transition-[filter,background-color,border-color,opacity,transform] duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50",
+        "inline-flex items-center justify-center gap-2 font-medium transition-[filter,background-color,border-color,opacity,transform] duration-200 active:scale-[0.98] cursor-pointer disabled:cursor-not-allowed disabled:pointer-events-none disabled:opacity-50",
         baseShape,
         variantClasses[variant],
         sizeClasses[size],

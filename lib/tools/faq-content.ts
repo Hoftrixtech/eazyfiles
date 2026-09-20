@@ -204,7 +204,7 @@ const TOOL_FAQ_CONTENT: Partial<Record<string, FaqContent>> = {
       },
       {
         question: "What is the file size limit?",
-        answer: "Each image can be up to 10 MB. You can upload up to 20 images for one PDF conversion.",
+        answer: "Each image can be up to 10 MB. You can add as many images as you need for one PDF — each image becomes its own page.",
       },
       {
         question: "Are my images stored?",
