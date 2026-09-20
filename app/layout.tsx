@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { ShowNavbarExceptHome } from "@/components/layout/ShowNavbarExceptHome";
 import { APP_NAME } from "@/lib/constants";
 import { DEFAULT_OG_IMAGE_PATH, HOME_PAGE_SEO, absoluteUrl, getSiteUrl } from "@/lib/seo";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { stripExtensionAttrsScript } from "@/lib/strip-extension-attrs-script";
 import "./globals.css";
 
@@ -55,7 +56,9 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <script dangerouslySetInnerHTML={{ __html: stripExtensionAttrsScript }} />
+        <GoogleAnalytics />
       </head>
       <body className="site-canvas min-h-screen font-sans text-foreground antialiased" suppressHydrationWarning>
         <a
