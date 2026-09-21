@@ -24,7 +24,7 @@ export function LegalPlaceholder({ title }: { title: string }) {
   return (
     <main className="py-12 sm:py-16">
       <Container className="max-w-2xl">
-        <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
+        <h1 className="page-heading">{title}</h1>
         <p className="mt-4 text-base leading-relaxed text-muted-foreground">
           This page is reserved for launch and does not contain legal or company copy yet.
         </p>

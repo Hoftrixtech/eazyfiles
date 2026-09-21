@@ -61,7 +61,7 @@ function ChooseToolCard({ tool }: { tool: Tool }) {
     >
       <article
         className={cn(
-          "btn-radius flex h-full min-h-[260px] flex-col border border-border bg-card p-6 sm:p-7",
+          "btn-radius flex h-full min-h-0 flex-col border border-border bg-card p-5 sm:min-h-[260px] sm:p-7",
           "transition-[box-shadow,border-color,transform] duration-300",
           "hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-[var(--shadow-elevated)]"
         )}

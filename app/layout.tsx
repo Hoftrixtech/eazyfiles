@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { FinalCta } from "@/components/sections/FinalCta";
-import { Navbar } from "@/components/layout/Navbar";
-import { ShowNavbarExceptHome } from "@/components/layout/ShowNavbarExceptHome";
 import { APP_NAME } from "@/lib/constants";
 import { DEFAULT_OG_IMAGE_PATH, HOME_PAGE_SEO, absoluteUrl, getSiteUrl } from "@/lib/seo";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { siteSansFont } from "@/lib/fonts";
 import { stripExtensionAttrsScript } from "@/lib/strip-extension-attrs-script";
 import "./globals.css";
 
@@ -52,10 +51,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" className={siteSansFont.variable} suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <script dangerouslySetInnerHTML={{ __html: stripExtensionAttrsScript }} />
         <GoogleAnalytics />
@@ -67,9 +64,6 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <ShowNavbarExceptHome>
-          <Navbar />
-        </ShowNavbarExceptHome>
         <div id="main">{children}</div>
         <FinalCta />
         <Footer />

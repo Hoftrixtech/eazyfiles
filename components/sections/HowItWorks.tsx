@@ -9,7 +9,7 @@ function StepCard({ title, body }: { title: string; body: string }) {
   return (
     <article
       className={cn(
-        "btn-radius flex h-full min-h-[180px] flex-col border border-border bg-muted/40 p-7 sm:p-8",
+        "btn-radius flex h-full min-h-0 flex-col border border-border bg-muted/40 p-6 sm:min-h-[180px] sm:p-8",
         "transition-[box-shadow,border-color] hover:border-primary/20 hover:shadow-[var(--shadow-elevated)]"
       )}
     >

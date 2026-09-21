@@ -34,16 +34,16 @@ export function PageHeroBanner({
 }) {
   return (
     <section className="page-hero-banner" aria-labelledby={id}>
-      <Container className="max-w-[90rem] py-16 sm:py-20 lg:py-24">
+      <Container className="max-w-[90rem] py-10 sm:py-16 md:py-20 lg:py-24">
         <div className="page-hero-banner__inner">
           <Breadcrumb className={breadcrumbOnDarkClass} items={breadcrumb} />
 
-          <EyebrowPill variant="onDark" className="mt-8 w-fit">{eyebrow}</EyebrowPill>
+          <EyebrowPill variant="onDark" className="mt-5 w-fit sm:mt-8">{eyebrow}</EyebrowPill>
 
           <h1
             id={id}
             className={cn(
-              "hero-heading mt-8 w-full max-w-5xl text-balance text-white",
+              "hero-heading mt-5 w-full max-w-5xl text-balance text-white sm:mt-8",
               titleClassName
             )}
           >

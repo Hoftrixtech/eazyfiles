@@ -25,7 +25,7 @@ export function WhyUseThisTool({ toolSlug }: { toolSlug?: string } = {}) {
             <article
               key={item.title}
               className={cn(
-                "btn-radius flex min-h-[220px] flex-col border border-border bg-card p-7 sm:p-8",
+                "btn-radius flex min-h-0 flex-col border border-border bg-card p-6 sm:min-h-[220px] sm:p-8",
                 "transition-[box-shadow,border-color] hover:border-primary/20 hover:shadow-[var(--shadow-elevated)]"
               )}
             >

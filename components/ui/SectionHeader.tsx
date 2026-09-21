@@ -28,7 +28,7 @@ export function SectionHeader({
           accent={titleAccent}
         />
       ) : (
-        <h2 className={cn("section-heading", eyebrow ? "mt-5" : "mt-0")}>{title}</h2>
+        <h2 className={cn("section-heading", eyebrow ? "mt-4 sm:mt-5" : "mt-0")}>{title}</h2>
       )}
       {description ? (
         <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-[1.0625rem]">{description}</p>

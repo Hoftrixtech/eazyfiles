@@ -1,3 +1,4 @@
+import type { MouseEventHandler } from "react";
 import Link from "next/link";
 import { BRAND_LOGO_PATH } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -6,10 +7,12 @@ export function BrandLogo({
   href = "/",
   size = "md",
   className,
+  onClick,
 }: {
   href?: string | null;
   size?: "sm" | "md" | "lg";
   className?: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }) {
   const height = size === "sm" ? "h-7" : size === "lg" ? "h-10" : "h-8";
   const image = (
@@ -29,7 +32,12 @@ export function BrandLogo({
   }
 
   return (
-    <Link href={href} className="inline-flex items-center rounded-sm" aria-label="EazyFiles home">
+    <Link
+      href={href}
+      className="inline-flex items-center rounded-sm"
+      aria-label="EazyFiles home"
+      onClick={onClick}
+    >
       {image}
     </Link>
   );

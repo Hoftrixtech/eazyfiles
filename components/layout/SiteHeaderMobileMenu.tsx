@@ -41,7 +41,7 @@ export function SiteHeaderMobileMenu({
       </summary>
       <nav
         aria-label="Mobile"
-        className="absolute right-0 z-50 mt-2 flex max-h-[min(32rem,calc(100vh-6rem))] w-72 flex-col gap-1 overflow-y-auto rounded-xl border border-border bg-card p-2 shadow-[var(--shadow-elevated)]"
+        className="fixed inset-x-0 top-16 z-[70] flex max-h-[calc(100vh-4rem)] w-full flex-col gap-1 overflow-y-auto border-b border-border bg-card px-4 py-3 shadow-[var(--shadow-elevated)] sm:px-6"
       >
         {links.map((link) => (
           <Link key={link.href} href={link.href} className={linkClass}>

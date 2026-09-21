@@ -29,9 +29,7 @@ export function DashboardSidebar({
   return (
     <div className={cn("flex h-full flex-col", className)}>
       <div className="border-b border-border px-4 py-5 lg:px-5">
-        <Link href="/" className="inline-flex" onClick={onNavigate}>
-          <BrandLogo size="md" />
-        </Link>
+        <BrandLogo size="md" onClick={onNavigate} />
       </div>
 
       <nav className="flex-1 overflow-y-auto px-3 py-4 lg:px-4" aria-label="Dashboard">

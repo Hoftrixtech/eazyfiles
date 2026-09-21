@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ImageCompressor } from "@/components/compressor/ImageCompressor";
+import { HomeImageCompressor } from "@/components/compressor/HomeImageCompressor";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { FAQ } from "@/components/sections/FAQ";
 import { Hero } from "@/components/sections/Hero";
@@ -35,7 +35,7 @@ export default function HomePage() {
     <main>
       <JsonLd data={[websiteJsonLd(), organizationJsonLd(), webApplicationJsonLd(compressor)]} />
       <Hero />
-      <ImageCompressor />
+      <HomeImageCompressor />
       <ImageToolsSection />
       <HowItWorks />
       <WhyUseThisTool />

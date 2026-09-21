@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 export function HeroOrbBanner() {
   return (
     <section
-      className="w-full bg-background section-padding !pb-16 !pt-12 sm:!pt-14"
+      className="w-full bg-background section-padding !pb-12 !pt-8 sm:!pb-16 sm:!pt-12 md:!pt-14"
       aria-labelledby="home-hero-title"
     >
       <Container className="flex max-w-[90rem] flex-col items-center text-center">
@@ -19,7 +19,7 @@ export function HeroOrbBanner() {
           as="h1"
           id="home-hero-title"
           size="hero"
-          className="mt-8 w-full max-w-5xl"
+          className="mt-6 w-full max-w-5xl sm:mt-8"
           lead="Free Online Image Tools for Everyday Work"
           accent="Compress, Resize, Crop &amp; Convert."
         />

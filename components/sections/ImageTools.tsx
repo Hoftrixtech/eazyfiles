@@ -72,7 +72,7 @@ export async function ImageToolsSection() {
               >
                 <article
                   className={cn(
-                    "btn-radius flex h-full min-h-[220px] flex-col border border-border bg-card p-7 sm:p-8",
+                    "btn-radius flex h-full min-h-0 flex-col border border-border bg-card p-6 sm:min-h-[220px] sm:p-8",
                     "transition-[box-shadow,border-color,transform] duration-300",
                     "hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[var(--shadow-elevated)]"
                   )}
